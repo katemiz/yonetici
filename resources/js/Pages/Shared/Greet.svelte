@@ -71,13 +71,6 @@
 
 
 
-
-
-
-
-
-
-
     <div class="modal" id="imgModal">
         <div class="modal-background " on:click={closeModal}></div>
         <div class="modal-content has-background-light">
