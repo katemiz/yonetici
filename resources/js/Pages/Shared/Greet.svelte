@@ -27,36 +27,47 @@
 
 <section class="section container">
 
-    <h1 class="title my-6 has-text-weight-light is-size-1 has-text-left">Akıllı Yönetici / Akıllı Uygulama</h1>
-
-    <p class="mb-3">
-    Competency is a set of skills, related knowledge and attributes that allow an individual to perform a task or an activity within a specific function or job. Therefore it is important for the success of the Organization in achieving its strategic goals, as well as the success of individual employee. Any function in the Organization requires a set of essential managerial/generic and technical/functional competencies to be performed effectively.
-    </p>
-
-
-
-
-
-
-
-
-
-
     <div class="columns">
 
-        <div class="column is-half">
+        <div class="column content is-half">
+
+            <h1 class="title my-6 has-text-weight-light is-size-1 has-text-left">Akıllı Yönetici / Akıllı Uygulama</h1>
+            <h1 class="subtitle has-text-weight-light">Tüm İşlemlerinizi Cepten Yönetin</h1>
 
 
+            <p class="mb-3">Bu uygulama ile tüm apartman/site yöneticleri tüm verilerini ve bütçelerini zorlanmadan yönetebilmesi amacıyla hazırlanmıştır.</p>
+        
+            <p class="mb-3">Uğraşmadan :</p>
+        
+            <ul>
+                <li>Aidat Yönetimi
+                    <ul>
+                        <li>Aidatların Formalarının Hazırlanması</li>
+                        <li>Aidatların Ödendi/Ödenmedi Kaydı</li>
+                        <li>Aidatların Bilgilerinin kişilere gönderilmesi</li>
+                    </ul>
+                </li>
 
-            <p class="mb-3">
-            It is crucial to link competencies with the strategic objectives, plans and capabilities of the Organization. Thus, competencies will increasingly be used as a basis for identifying individual and organizational needs and planning for development.</p>
+                <li>Harcama Yönetimi (Fatura)
 
-            <p class="mb-3">
-            Competency or skill management focusing on using the employee potential effectively to develop the necessary competencies and skills in order to run the organization smoothly and optimize the potential for profit and growth.</p>
+                    <ul>
+                        <li>Doğalgaz</li>
+                        <li>Elektrik</li>
+                        <li>Su/Sıcak Su</li>
+                        <li>Bakım/Tamirat vb</li>
+                    </ul>
+                </li>
 
-            <p class="mb-3">
-            With the help of proper skill management techniques, it is possible to combine project management and human resource management in an effective and efficient manner. The active management of competency and skill portfolio ensures the long-term competitiveness of company. </p>
 
+                <li>Karar Yönetimi
+
+                    <ul>
+                        <li>Kararların Takibi/Tutulması</li>
+                        <li>Karararın Bildirimi</li>
+                    </ul>
+                </li>
+            </ul>
+        
         </div>
 
         <div class="column is-half">
@@ -70,15 +81,5 @@
 
 
 
-
-    <div class="modal" id="imgModal">
-        <div class="modal-background " on:click={closeModal}></div>
-        <div class="modal-content has-background-light">
-          <p class="image">
-            <img src="" alt="Greet descriptions" id="modalImg">
-          </p>
-        </div>
-        <button class="modal-close is-large" aria-label="close"  on:click={closeModal}></button>
-      </div>
 
 </section>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    enable-background="new 0 0 24 24"
-   height="340"
-   viewBox="0 0 360 340"
-   width="360"
+   height="220"
+   viewBox="0 0 512 220"
+   width="512"
    version="1.1"
    id="svg26"
-   sodipodi:docname="footer_logo.svg"
+   sodipodi:docname="app_footer_logo.svg"
    style="fill:#000000"
    inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -43,7 +43,7 @@
      id="namedview28"
      showgrid="false"
      inkscape:zoom="1.38"
-     inkscape:cx="82.246377"
+     inkscape:cx="217.75362"
      inkscape:cy="178.62319"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -51,30 +51,41 @@
      inkscape:current-layer="svg26"
      inkscape:pagecheckerboard="0" />
   <path
-     d="M 73.473087,57.677874 39.733633,83.432315 V 74.547607 H 28.487148 v 17.488278 l -16.869734,12.877225 6.804133,8.94096 10.065601,-7.70384 v 52.74606 h 89.971902 v -52.74606 l 10.06558,7.6476 6.80413,-8.88472 z M 107.21255,147.64975 H 79.096344 V 125.15678 H 67.849842 v 22.49297 H 39.733633 V 97.602912 L 73.473087,71.848443 107.21255,97.602912 Z M 62.226599,46.431386 c 0,9.334577 -7.535142,16.869721 -16.869719,16.869721 -3.09279,0 -5.623247,2.530458 -5.623247,5.623255 H 28.487148 c 0,-9.334602 7.53514,-16.869734 16.869732,-16.869734 3.092772,0 5.623229,-2.530467 5.623229,-5.623242 z"
+     d="M 74.146774,36.722231 40.40732,62.476672 V 53.591964 H 29.160835 v 17.488278 l -16.869734,12.877225 6.804133,8.94096 10.065601,-7.70384 V 137.94064 H 119.13274 V 85.194587 l 10.06558,7.6476 6.80413,-8.88472 z M 107.88624,126.6941 H 79.770031 V 104.20114 H 68.523529 V 126.6941 H 40.40732 V 76.647269 L 74.146774,50.8928 107.88624,76.647269 Z M 62.900286,25.475743 c 0,9.334577 -7.535142,16.869721 -16.869719,16.869721 -3.09279,0 -5.623247,2.530458 -5.623247,5.623255 H 29.160835 c 0,-9.334602 7.53514,-16.869734 16.869732,-16.869734 3.092772,0 5.623229,-2.530467 5.623229,-5.623242 z"
      id="path4"
      inkscape:connector-curvature="0"
      style="fill:#0000ff;stroke-width:5.62323" />
-  <g
-     aria-label="Beste"
-     style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-     id="text824"
-     transform="translate(51.421576,227.13428)">
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:114.667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
-       x="303.05695"
-       y="-67.586967"
-       id="text1511"><tspan
-         sodipodi:role="line"
-         id="tspan1509"
-         x="303.05695"
-         y="-67.586967"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:114.667px;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, ';text-align:end;text-anchor:end;fill:#000080">akıllı</tspan><tspan
-         sodipodi:role="line"
-         x="303.05695"
-         y="81.219444"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:114.667px;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, ';text-align:end;text-anchor:end;fill:#000080"
-         id="tspan82058">yönetici</tspan></text>
-  </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:114.667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="501.50208"
+     y="136.38324"
+     id="text1511"><tspan
+       sodipodi:role="line"
+       x="501.50208"
+       y="136.38324"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:114.667px;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, ';text-align:end;text-anchor:end;fill:#000080"
+       id="tspan82058">yönetici</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:42.6667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="496.82214"
+     y="196.31622"
+     id="text1511-0"><tspan
+       sodipodi:role="line"
+       x="496.82211"
+       y="196.31622"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6667px;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, ';text-align:end;text-anchor:end;fill:#808080"
+       id="tspan82058-2">Apartman-Site Yönetim Sistemi</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:114.667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="497.04889"
+     y="36.884224"
+     id="text1511-3"><tspan
+       sodipodi:role="line"
+       x="497.04889"
+       y="36.884224"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32px;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu Bold';text-align:end;text-anchor:end;fill:#808080"
+       id="tspan82058-7">akıllı</tspan></text>
 </svg>

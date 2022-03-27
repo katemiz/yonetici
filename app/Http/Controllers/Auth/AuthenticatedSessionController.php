@@ -8,6 +8,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Inertia\Inertia;
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -17,7 +19,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return view('auth.login');
+        // return view('auth.login');
+        return Inertia::render('Auth/Login');
     }
 
     /**
@@ -29,10 +32,14 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
-
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->route('dashboard');
+
+
+/*         dd(RouteServiceProvider::HOME);
+
+        return redirect()->intended(RouteServiceProvider::HOME); */
     }
 
     /**
@@ -44,11 +51,27 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
-
+        
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
+        //return redirect()->route('homeguest');
+
         return redirect('/');
+
     }
+
+/* 
+    public function greet() {
+        return Inertia::render('Auth/GreetUser');
+    }
+
+
+    public function goverify() {
+        return Inertia::render('Auth/EmailVerify');
+    }
+
+ */
+
+
 }

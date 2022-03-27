@@ -2,6 +2,7 @@ export let params = {
 
     company: {
       name: 'kapkara',
+      link: 'https://kapkara.one',
       logo : 'kapkara.svg',
       motto : 'simplicity in action',
       title : 'web technologies | design house'

@@ -1,12 +1,9 @@
 <script>
 
-    import {params} from '@/config/config.js'
+    import {params,gui} from '@/config/config.js'
 
     import { page, Link } from '@inertiajs/inertia-svelte'
     import Icon from '@/Pages/Shared/Icon.svelte'
-
-    let iconColor = 'link'
-    let iconSize = 'S'
 
     let user = false
 
@@ -15,16 +12,16 @@
         user = $page.props.auth.user
     }
 
-    console.log($page.props)
+    console.log("PAGE PROPS ",$page.props)
 
 </script>
 
-<nav class="navbar is-light is-transparent">
+<nav class="navbar is-info">
 
     <div class="navbar-brand">
 
         <Link href="/" class="navbar-item has-text-white">
-            <img src="/images/{params.app.app_header_logo}" alt="Skill Management Logo" width="112" height="28" >        
+            <img src="/images/{params.app.app_header_logo}" alt="app logo" width="112" height="28" >        
         </Link>
 
         <Link href="/" class="navbar-item has-text-white">
@@ -41,11 +38,11 @@
 
             {#if user }
 
-            <Link class="navbar-item" href="/"><Icon name="home" size="{iconSize}" color="{iconColor}"/></Link>
-            <Link class="navbar-item" href="/roles"><Icon name="role" size="{iconSize}" color="{iconColor}"/>&nbsp;Roles</Link>
-            <Link class="navbar-item" href="/skills"><Icon name="skill" size="{iconSize}" color="{iconColor}"/>&nbsp;Skills</Link>
-            <Link class="navbar-item" href="/"><Icon name="training" size="{iconSize}" color="{iconColor}"/>&nbsp;Trainings</Link>
-            <Link class="navbar-item" href="/"><Icon name="measurement" size="{iconSize}" color="{iconColor}"/>&nbsp;measurement</Link>
+            <Link class="navbar-item" href="/"><Icon name="home" size="{gui.icons.size}" color="{gui.icons.color}"/></Link>
+            <Link class="navbar-item" href="/summary"><Icon name="lira" size="{gui.icons.size}" color="{gui.icons.color}"/>&nbsp;Durum</Link>
+            <Link class="navbar-item" href="/skills"><Icon name="skill" size="{gui.icons.size}" color="{gui.icons.color}"/>&nbsp;Gelirler</Link>
+            <Link class="navbar-item" href="/"><Icon name="training" size="{gui.icons.size}" color="{gui.icons.color}"/>&nbsp;Giderler</Link>
+            <Link class="navbar-item" href="/"><Icon name="measurement" size="{gui.icons.size}" color="{gui.icons.color}"/>&nbsp;Faturalar</Link>
 
             <div class="navbar-item has-dropdown is-hoverable">
 
@@ -53,7 +50,7 @@
 
                 <div class="navbar-dropdown">
 
-                    <Link href="/simpleitem/project" class="navbar-item">Projects</Link>
+                    <Link href="/tesisler" class="navbar-item">Site-Apartman</Link>
 
                     <hr class="navbar-divider">
 
@@ -71,15 +68,7 @@
 
             </div>
 
-            <div class="navbar-item has-dropdown is-hoverable">
 
-                <p class="navbar-link" href="/Admin">About Us</p>
-                <div class="navbar-dropdown">
-
-                    <Link href="/aboutus" class="navbar-item">Who are we?</Link>
-                    <Link href="/services" class="navbar-item">Services we provide</Link>
-                </div>
-            </div>
 
 
             {/if}
@@ -96,7 +85,7 @@
 
                     <div class="navbar-item has-dropdown is-hoverable">
                         <p class="navbar-link">
-                            <Icon name="user" size="{iconSize}" color="{iconColor}"/>&nbsp;{user.lastname.toUpperCase()}
+                            <Icon name="user" size="{gui.icons.size}" color="{gui.icons.color}"/>&nbsp;{user.lastname.toUpperCase()}
                         </p>
                 
                         <div class="navbar-dropdown">
@@ -112,11 +101,11 @@
                 {:else}
 
                     <Link href="/login" class="button is-ghost" as="button" preserveScroll>
-                        <Icon name="user" size="{iconSize}" color="{iconColor}"/>&nbsp;Giriş
+                        <Icon name="user" size="{gui.icons.size}" color="{gui.icons.color}"/>&nbsp;Giriş
                     </Link>
 
                     <Link href="/register" class="button is-ghost" as="button" preserveScroll>
-                        <Icon name="register" size="{iconSize}" color="{iconColor}"/>&nbsp;Kaydolun
+                        <Icon name="register" size="{gui.icons.size}" color="{gui.icons.color}"/>&nbsp;Kaydolun
                     </Link>
 
                 {/if}

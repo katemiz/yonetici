@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
+use Inertia\Inertia;
+
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -20,7 +23,10 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        //return view('auth.register');
+
+        return Inertia::render('Auth/Register');
+
     }
 
     /**
@@ -35,20 +41,31 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
+            'lastname' => $request->lastname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
+        return Inertia::render('Auth/EmailVerify',[
 
-        return redirect(RouteServiceProvider::HOME);
+            "user" => [
+                "fullname" => $request->name.' '.$request->lastname,
+                "email" =>$request->email
+            ]
+
+        ]);
+
+        // return redirect()->route('greet', ['user' => $user]);
+        // Auth::login($user);
+        // return redirect(RouteServiceProvider::HOME);
     }
 }

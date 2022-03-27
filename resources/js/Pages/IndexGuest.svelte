@@ -18,7 +18,7 @@
 
 <Layout>
 
-    <Hero /> 
-    <Greet />
+<!--     <Hero /> 
+ -->    <Greet />
   
 </Layout>
