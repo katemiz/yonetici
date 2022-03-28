@@ -32,13 +32,15 @@
         })
         .then((result) => {
 
-            Inertia.delete('/tesisler', {
-                method:'delete',
-                preserveState:false,
-                data:{
-                    id:id
-                }
-            })
+            if (result.isConfirmed) {
+                Inertia.delete('/tesisler', {
+                    method:'delete',
+                    preserveState:false,
+                    data:{
+                        id:id
+                    }
+                })
+            } 
         })
     }
 
@@ -56,7 +58,7 @@
     <div class="section container">
 
         <h1 class="title has-text-weight-light">{pageprops.headers.show}</h1>
-        <h2 class="subtitle">View Properties</h2>
+        <h2 class="subtitle">Özellikler</h2>
 
         {#if notification}
             <Notification {notification} />
@@ -69,16 +71,32 @@
                 <aside class="menu">
                     <p class="menu-label">MENU</p>
                     <ul class="menu-list">
+
                       <li>
-                        <Link href="/tesisler" class="navbar-item">
-                            <!-- <Icon name="list" size="{gui.icons.size}" color="{gui.icons.color}"/> --> List All
+                        <Link href="/tesisler" >
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <Icon name="list" size="{gui.icons.size}" color="{gui.icons.color}"/> 
+                                </span>
+
+                                <span>Listele</span>
+                            </span>
                         </Link> 
                       </li>
+
+
                       <li>
-                        <Link href="/tesisler-form" class="navbar-item">
-                            <!-- <Icon name="add" size="{gui.icons.size}" color="{gui.icons.color}"/> --> {pageprops.addcommand.label}
-                        </Link>
+                        <Link href="/tesisler-form" >
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <Icon name="add" size="{gui.icons.size}" color="{gui.icons.color}"/>
+                                </span>
+
+                                <span>{pageprops.addcommand.label}</span>
+                            </span>
+                        </Link> 
                       </li>
+
                     </ul>
                 </aside>
 
@@ -102,10 +120,10 @@
                     <footer class="card-footer">
         
                         <a href="/tesisler-form/{item.id}" class="card-footer-item">
-                            <Icon name="edit" size="{gui.icons.size}" color="{gui.icons.color}"/>&nbsp;Edit
+                            <Icon name="edit" size="{gui.icons.size}" color="{gui.icons.color}"/>&nbsp;Değiştir
                         </a>
                         <a href="{"#"}" class="card-footer-item" on:click="{confirmDelete(item.id)}">
-                            <Icon name="delete" size="{gui.icons.size}" color="danger"/>&nbsp;Delete
+                            <Icon name="delete" size="{gui.icons.size}" color="danger"/>&nbsp;Sil
                         </a>
         
                     </footer>

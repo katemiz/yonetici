@@ -8,7 +8,10 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 
 use App\Observers\BuildingObserver;
+use App\Observers\SakinObserver;
+
 use App\Models\Building;
+use App\Models\Sakin;
 
 
 class EventServiceProvider extends ServiceProvider
@@ -32,6 +35,8 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Building::observe(BuildingObserver::class);
+        Sakin::observe(SakinObserver::class);
+
     }
 
     /**

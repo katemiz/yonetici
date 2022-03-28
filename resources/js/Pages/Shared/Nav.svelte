@@ -54,7 +54,7 @@
 
                     <hr class="navbar-divider">
 
-                    <Link href="/bcategory" class="navbar-item">Business Categories</Link>
+                    <Link href="/sakinler" class="navbar-item">Sakinler</Link>
                     <Link href="/" class="navbar-item">Training Categories</Link>
                     <Link href="/simpleitem/profession" class="navbar-item">Professions</Link>
                     <Link href="/simpleitem/diploma" class="navbar-item">Diploma</Link>

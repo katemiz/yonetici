@@ -16,9 +16,6 @@
     export let filters
     export let notification
 
-    //let page = sabitler[pagetype]
-
-
     let filterquery = filters.search
     let userid
     let sortcolumn
@@ -26,7 +23,7 @@
 
     let sortstatus = {
 
-      title:{
+      name:{
         order:'asc',
         hidden:false
       },
@@ -69,14 +66,14 @@
         params.userid = userid
       }
 
-      Inertia.get("/simpleitem/",params, {
+      Inertia.get("/tesisler/",params, {
         preserveState:true
       })
     }
   
     function handleReset () {
       filterquery = ''
-      Inertia.get("/simpleitem/")
+      Inertia.get("/tesisler/")
     }
 
 </script> 
@@ -119,6 +116,8 @@
 
         <div class="columns is-mobile">
 
+        {#if tabledata.last_page > 1}
+
         <div class="column">
 
             <!-- Filter Tree Search Box -->
@@ -139,7 +138,11 @@
 
             </div>
         </div>
+
+        {/if}
+
         </div>
+
 
 
         {#if tabledata.data.length > 0}
@@ -155,9 +158,9 @@
             <thead>
             <tr>
                 <th>
-                <span class="icon-text" on:click="{() => handleSort("title",false)}">
-                    <span class="icon" class:is-hidden="{sortstatus['title'].hidden}"><Icon name="arrow_up" size="{gui.icons.size}" color="{gui.icons.color}"/></span>
-                    <span class="icon" class:is-hidden="{!sortstatus['title'].hidden}"><Icon name="arrow_down" size="{gui.icons.size}" color="{gui.icons.color}"/></span>
+                <span class="icon-text" on:click="{() => handleSort("name",false)}">
+                    <span class="icon" class:is-hidden="{sortstatus['name'].hidden}"><Icon name="arrow_up" size="{gui.icons.size}" color="{gui.icons.color}"/></span>
+                    <span class="icon" class:is-hidden="{!sortstatus['name'].hidden}"><Icon name="arrow_down" size="{gui.icons.size}" color="{gui.icons.color}"/></span>
                     <span>{page.form.input.label}</span>
                 </span>
                 </th>
@@ -223,7 +226,7 @@
         <!-- NO ITEM IN DB            -->
         <!-- ************************ -->
 
-        <div class="notification is-warning is-light">Eklenmiş bina/apartman yok.</div>
+        <div class="notification is-warning is-light">Eklenmiş bina sakini yok.</div>
 
         {/if}
 

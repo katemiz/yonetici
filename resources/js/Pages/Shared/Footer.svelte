@@ -8,10 +8,10 @@
     <div class="tile is-ancestor">
 
         <article class="tile is-child notification has-text-centered-mobile">
-            <img src="/images/{params.company.logo}" width="28px" alt="Company Icon">
+            <img src="/images/{params.company.logo}" width="28px" alt="Company Icon"><br>
 
-            <p class="has-text-weight-light">{params.company.name}</p>
-            <p class="has-text-weight-light">{params.company.motto}</p>
+            <a href="{params.company.url}" class="has-text-weight-light">{params.company.name}</a>
+            <p class="has-text-weight-light is-size-7">{params.company.motto}</p>
         </article>
 
         <article class="tile is-child notification has-text-centered my-6">
@@ -21,7 +21,7 @@
 
         <article class="tile is-child notification">
             <p class="has-text-weight-light has-text-right has-text-centered-mobile">{params.app.copyright}</p>
-            <p class="has-text-weight-light has-text-right has-text-centered-mobile">{params.app.version}</p>
+            <p class="has-text-weight-light has-text-right has-text-centered-mobile is-size-7">{params.app.version}</p>
         </article>
 
     </div>

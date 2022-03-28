@@ -154,31 +154,10 @@ class BuildingController extends Controller
 
     public function destroy(Request $request)
     {
-        if ($request->has('id')) {
+        Building::find($request->id)->delete();
+        $msg = 'Bina/aprtman başarıyla silinmiştir.';
 
-            if ($request->type == 'language') {
-                Language::find($request->id)->delete();
-                $msg = 'Language has been deleted successfully.';
-            }
-    
-            if ($request->type == 'diploma') {
-                Diploma::find($request->id)->delete();
-                $msg = 'Diploma has been deleted successfully.';
-            }
-    
-            if ($request->type == 'profession') {
-                Profession::find($request->id)->delete();
-                $msg = 'Profession has been deleted successfully.';
-            }
-
-            if ($request->type == 'project') {
-                Project::find($request->id)->delete();
-                $msg = 'Project has been deleted successfully.';
-            }
-        }
-
-        return Inertia::render('SimpleItem/List',[
-            "pagetype" => $request->type,
+        return Inertia::render('Building/List',[
             "tabledata" => $this->getdata($request),
             "filters" => $request->only(["search"]),
             "notification" =>  [

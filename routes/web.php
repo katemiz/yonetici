@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\SakinController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,11 +57,14 @@ Route::middleware(['auth'])->group(function () {
     Route::put('tesisler-upsert',[BuildingController::class,'update']);
     Route::delete('tesisler',[BuildingController::class,'destroy']);
 
-
-
-
     // SAKINLER
     Route::get('sakinler',[SakinController::class,'list']);
+    Route::get('sakinler/{id}',[SakinController::class,'show']);
+    Route::get('sakinler-form/{id}',[SakinController::class,'form']);
+    Route::post('sakinler-upsert',[SakinController::class,'create']);
+    Route::put('sakinler-upsert',[SakinController::class,'update']);
+    Route::delete('sakinler',[SakinController::class,'destroy']);
+
 
 
 
