@@ -187,7 +187,7 @@
                 {#each tabledata.data as item}
                 <tr>
                     <td>                      
-                    <a href="/tesisler/{item.id}">
+                    <a href="/sakinler/{item.id}">
                         {@html item.name}
                     </a>
                     </td>
@@ -201,10 +201,10 @@
                     <td>{parseDateTime(item.created_at)}</td>
 
                     <td class="has-text-right">
-                    <a href="/tesisler/{item.id}" class="icon">
+                    <a href="/sakinler/{item.id}" class="icon">
                         <Icon name="eye" size="{gui.icons.size}" color="{gui.icons.color}"/>
                     </a>
-                    <a href="/tesisler-form/{item.id}" class="icon">
+                    <a href="/sakinler-form/{item.id}" class="icon">
                         <Icon name="edit" size="{gui.icons.size}" color="{gui.icons.color}"/>
                     </a>
                     </td>

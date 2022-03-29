@@ -95,19 +95,29 @@ class SakinController extends Controller
     {
         // validate
         $attributes = $request->validate([
-            'title'=>'required'
+            'name'=>'required',
+            'lastname'=>'required',
+            'bina'=>'required',
+            'door_no'=>'required'
         ]);
+
 
         // Add new record
-        Building::create([
-            'name' => ucfirst($attributes['title']),
-            'adress' => $request['adress']['html'],
+        Sakin::create([
+            'name' => ucfirst($attributes['name']),
+            'lastname' => ucfirst($attributes['lastname']),
+            'bina' => $attributes['bina'],
+            'door_no' => $attributes['door_no'],
+            'phone' => $request['phone'],
+            'is_evsahibi' => $request['is_evsahibi'],
+            'giris_tarihi' => $request['giris_tarihi'],
+            'remarks' => $request['remarks']['html'],
         ]);
 
-        $item = Building::getLatestItem();
-        $msg = 'Yeni bina/apartman başarıyla eklendi.';
+        $item = Sakin::getLatestItem();
+        $msg = 'Yeni sakin başarıyla eklendi.';
 
-        return Inertia::render('Building/Show',[
+        return Inertia::render('Sakin/Show',[
             "item" => $item,
             "notification" =>  [
                 "type" =>'success',
@@ -122,20 +132,29 @@ class SakinController extends Controller
         // validate
         $attributes = $request->validate([
             'id'=>'required',
-            'title'=>'required'
+            'name'=>'required',
+            'lastname'=>'required',
+            'bina'=>'required',
+            'door_no'=>'required'
         ]);
 
         $params = [
-            'name' => ucfirst($attributes['title']),
-            'adress' => $request['adress']['html'],
+            'name' => ucfirst($attributes['name']),
+            'lastname' => ucfirst($attributes['lastname']),
+            'bina' => $attributes['bina'],
+            'door_no' => $attributes['door_no'],
+            'phone' => $request['phone'],
+            'is_evsahibi' => $request['is_evsahibi'],
+            'giris_tarihi' => $request['giris_tarihi'],
+            'remarks' => $request['remarks']['html'],
         ];
 
         // Update record
-        Building::find($attributes['id'])->update($params);
-        $item = Building::getItemById($attributes['id']);
-        $msg = 'Bina/apartman verileri başarıyla güncellenmiştir.';
+        Sakin::find($attributes['id'])->update($params);
+        $item = Sakin::getItemById($attributes['id']);
+        $msg = 'Bina sakini verileri başarıyla güncellenmiştir.';
 
-        return Inertia::render('Building/Show',[
+        return Inertia::render('Sakin/Show',[
             "item" => $item,
             "notification" =>  [
                 "type" =>'success',
@@ -148,9 +167,9 @@ class SakinController extends Controller
 
     public function show(Request $request)
     {
-        $item = Building::getItemById($request->id);
+        $item = Sakin::getItemById($request->id);
 
-        return Inertia::render('Building/Show',[
+        return Inertia::render('Sakin/Show',[
             "item" => $item,
             "notification" => false
         ]);

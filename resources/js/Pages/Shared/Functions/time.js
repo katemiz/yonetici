@@ -4,3 +4,5 @@ export function parseDateTime(d) {
     return zaman.toLocaleString('tr-TR', { timeZone: 'UTC' })
     //return zaman.getDay()+' '+zaman.getMonth()+' '+zaman.getFullYear()
 }
+
+

@@ -17,12 +17,13 @@
     let editorProps
     let isim
     let soyisim
+    let bina
     let door_no
     let giris_tarihi
     let selected_bina_id
     let selectedIsEvsahibi
     let phone
-    let adress
+    let remarks
     let processing = false
     let submitbutton
     let header
@@ -34,14 +35,22 @@
     // IF THIS IS EDIT
     if (item) {
 
-        title = item.name
-        adress = {
-            html:item.adress,
+        isim = item.name
+        soyisim = item.lastname
+        door_no = item.door_no
+        bina = item.bina
+        selected_bina_id = item.bina
+        giris_tarihi = item.giris_tarihi
+        selectedIsEvsahibi = item.is_evsahibi
+        phone = item.phone
+        remarks = {
+            html:item.remarks,
         }
-        editorProps.content = item.adress
+        editorProps.content = item.remarks
 
         header = pageprops.headers.update
         submitbutton = pageprops.form.submit.update.label
+
     } else {
 
         header = pageprops.headers.new
@@ -50,7 +59,7 @@
 
 
     function readContent(event) {
-		adress = event.detail.icerik
+		remarks = event.detail.icerik
     }
 
 
@@ -59,10 +68,12 @@
         let values = {
             name:isim,
             lastname:soyisim,
+            door_no:door_no,
             bina:selected_bina_id,
             phone:phone,
             is_evsahibi:selectedIsEvsahibi,
-
+            giris_tarihi:giris_tarihi,
+            remarks:remarks
         }
 
         console.log("values",values)
@@ -106,7 +117,7 @@
     <h1 class="title my-6 has-text-weight-light is-size-1 has-text-left">{header}</h1>
 
     <div class="column has-text-right">
-        <Link href="/tesisler" class="navbar-item">
+        <Link href="/sakinler" class="navbar-item">
           <Icon name="list" size="{gui.icons.size}" color="link"/> Listeye Geri Dön
         </Link> 
     </div>
@@ -173,12 +184,12 @@
 
                     <div class="control" id="evsahibi">
                         <label class="radio">
-                          <input type="radio" name="evsahibimi" on:change={onRadioChange} checked={selectedIsEvsahibi==="1"} value="1">
+                          <input type="radio" on:change={onRadioChange} checked={selectedIsEvsahibi===1} value="1">
                           Ev Sahibi
                         </label>
                         <br>
                         <label class="radio">
-                          <input type="radio" name="evsahibimi" on:change={onRadioChange} checked={selectedIsEvsahibi==="0"} value="0">
+                          <input type="radio" on:change={onRadioChange} checked={selectedIsEvsahibi===0} value="0">
                           Kiracı
                         </label>
                     </div>
