@@ -6839,9 +6839,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function get_each_context(ctx, list, i) {
   var child_ctx = ctx.slice();
-  child_ctx[12] = list[i];
+  child_ctx[13] = list[i];
   return child_ctx;
-} // (120:8) <Link href="/sakinler" class="navbar-item">
+} // (119:8) <Link href="/sakinler" class="navbar-item">
 
 
 function create_default_slot_1(ctx) {
@@ -6880,7 +6880,7 @@ function create_default_slot_1(ctx) {
       if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
     }
   };
-} // (139:32) {#if binalar.length >0}
+} // (138:32) {#if binalar.length >0}
 
 
 function create_if_block(ctx) {
@@ -6945,14 +6945,14 @@ function create_if_block(ctx) {
       if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(each_1_anchor);
     }
   };
-} // (140:32) {#each binalar as bina}
+} // (139:32) {#each binalar as bina}
 
 
 function create_each_block(ctx) {
   var option;
   var t0_value =
   /*bina*/
-  ctx[12].name + "";
+  ctx[13].name + "";
   var t0;
   var t1;
   var option_value_value;
@@ -6963,7 +6963,7 @@ function create_each_block(ctx) {
       t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
       option.__value = option_value_value =
       /*bina*/
-      ctx[12].id;
+      ctx[13].id;
       option.value = option.__value;
     },
     m: function m(target, anchor) {
@@ -6976,13 +6976,13 @@ function create_each_block(ctx) {
       /*binalar*/
       1 && t0_value !== (t0_value =
       /*bina*/
-      ctx[12].name + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t0, t0_value);
+      ctx[13].name + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t0, t0_value);
 
       if (dirty &
       /*binalar*/
       1 && option_value_value !== (option_value_value =
       /*bina*/
-      ctx[12].id)) {
+      ctx[13].id)) {
         option.__value = option_value_value;
         option.value = option.__value;
       }
@@ -6991,11 +6991,11 @@ function create_each_block(ctx) {
       if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(option);
     }
   };
-} // (113:0) <Layout>
+} // (112:0) <Layout>
 
 
 function create_default_slot(ctx) {
-  var div22;
+  var div26;
   var h1;
   var t0;
   var t1;
@@ -7003,7 +7003,7 @@ function create_default_slot(ctx) {
   var link;
   var t2;
   var form;
-  var div21;
+  var div25;
   var div4;
   var div3;
   var label0;
@@ -7052,25 +7052,43 @@ function create_default_slot(ctx) {
   var input4_checked_value;
   var t21;
   var t22;
-  var div19;
+  var div18;
   var div16;
   var label7;
   var t24;
   var div15;
   var input5;
+  var input5_min_value;
+  var input5_max_value;
   var input5_placeholder_value;
   var t25;
-  var div18;
-  var label8;
-  var t27;
   var div17;
-  var input6;
-  var t28;
-  var editor;
-  var t29;
+  var html_tag;
+  var raw_value =
+  /*pageprops*/
+  ctx[14].form.payratio.note + "";
+  var t26;
+  var p;
+  var t32;
+  var div23;
   var div20;
+  var label8;
+  var t34;
+  var div19;
+  var input6;
+  var input6_placeholder_value;
+  var t35;
+  var div22;
+  var label9;
+  var t37;
+  var div21;
+  var input7;
+  var t38;
+  var editor;
+  var t39;
+  var div24;
   var button;
-  var t30;
+  var t40;
   var current;
   var mounted;
   var dispose;
@@ -7098,26 +7116,26 @@ function create_default_slot(ctx) {
   });
   editor.$on("editordata",
   /*readContent*/
-  ctx[14]);
+  ctx[15]);
   return {
     c: function c() {
-      div22 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+      div26 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       h1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h1");
       t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(
       /*header*/
-      ctx[11]);
+      ctx[12]);
       t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
       div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(link.$$.fragment);
       t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
       form = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("form");
-      div21 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+      div25 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       div4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       div3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       label0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("label");
       label0.textContent = "".concat(
       /*pageprops*/
-      ctx[13].form.bina.label);
+      ctx[14].form.bina.label);
       t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
       div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
@@ -7131,7 +7149,7 @@ function create_default_slot(ctx) {
       label1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("label");
       label1.textContent = "".concat(
       /*pageprops*/
-      ctx[13].form.input.label);
+      ctx[14].form.input.label);
       t8 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
       div5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       input0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("input");
@@ -7140,7 +7158,7 @@ function create_default_slot(ctx) {
       label2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("label");
       label2.textContent = "".concat(
       /*pageprops*/
-      ctx[13].form.input2.label);
+      ctx[14].form.input2.label);
       t11 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
       div7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       input1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("input");
@@ -7150,7 +7168,7 @@ function create_default_slot(ctx) {
       label3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("label");
       label3.textContent = "".concat(
       /*pageprops*/
-      ctx[13].form.input3.label);
+      ctx[14].form.input3.label);
       t14 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
       div10 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       input2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("input");
@@ -7159,7 +7177,7 @@ function create_default_slot(ctx) {
       label4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("label");
       label4.textContent = "".concat(
       /*pageprops*/
-      ctx[13].form.evsahibi.label);
+      ctx[14].form.evsahibi.label);
       t17 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
       div12 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       label5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("label");
@@ -7172,32 +7190,52 @@ function create_default_slot(ctx) {
       input4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("input");
       t21 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("\n                          Kiracı");
       t22 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-      div19 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+      div18 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       div16 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       label7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("label");
       label7.textContent = "".concat(
       /*pageprops*/
-      ctx[13].form.phone.label);
+      ctx[14].form.payratio.label);
       t24 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
       div15 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       input5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("input");
       t25 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-      div18 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+      div17 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+      html_tag = new svelte_internal__WEBPACK_IMPORTED_MODULE_0__.HtmlTag();
+      t26 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+      p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+      p.textContent = "[%".concat(
+      /*pageprops*/
+      ctx[14].form.payratio.min, "-%").concat(
+      /*pageprops*/
+      ctx[14].form.payratio.max, " aras\u0131nda olmal\u0131d\u0131r]");
+      t32 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+      div23 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+      div20 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       label8 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("label");
       label8.textContent = "".concat(
       /*pageprops*/
-      ctx[13].form.date.label);
-      t27 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-      div17 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+      ctx[14].form.phone.label);
+      t34 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+      div19 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       input6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("input");
-      t28 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+      t35 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+      div22 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+      label9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("label");
+      label9.textContent = "".concat(
+      /*pageprops*/
+      ctx[14].form.date.label);
+      t37 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+      div21 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+      input7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("input");
+      t38 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(editor.$$.fragment);
-      t29 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-      div20 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+      t39 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+      div24 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       button = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("button");
-      t30 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(
+      t40 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(
       /*submitbutton*/
-      ctx[10]);
+      ctx[11]);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h1, "class", "title my-6 has-text-weight-light is-size-1 has-text-left");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "column has-text-right");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(label0, "class", "label");
@@ -7206,10 +7244,10 @@ function create_default_slot(ctx) {
       option.value = option.__value;
       if (
       /*selected_bina_id*/
-      ctx[6] === void 0) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_render_callback)(function () {
+      ctx[7] === void 0) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_render_callback)(function () {
         return (
           /*select_change_handler*/
-          ctx[18].call(select)
+          ctx[19].call(select)
         );
       });
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "select is-fullwidth");
@@ -7223,7 +7261,7 @@ function create_default_slot(ctx) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input0, "type", "text");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input0, "placeholder", input0_placeholder_value =
       /*pageprops*/
-      ctx[13].form.input.placeholder);
+      ctx[14].form.input.placeholder);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div5, "class", "control");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div5, "id", "name");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div6, "class", "column field is-half");
@@ -7233,7 +7271,7 @@ function create_default_slot(ctx) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input1, "type", "text");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input1, "placeholder", input1_placeholder_value =
       /*pageprops*/
-      ctx[13].form.input2.placeholder);
+      ctx[14].form.input2.placeholder);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div7, "class", "control");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div7, "id", "surname");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div8, "class", "column field");
@@ -7244,7 +7282,7 @@ function create_default_slot(ctx) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input2, "type", "number");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input2, "placeholder", input2_placeholder_value =
       /*pageprops*/
-      ctx[13].form.input3.placeholder);
+      ctx[14].form.input3.placeholder);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div10, "class", "control");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div10, "id", "door");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div11, "class", "column field is-half");
@@ -7253,13 +7291,13 @@ function create_default_slot(ctx) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input3, "type", "radio");
       input3.checked = input3_checked_value =
       /*selectedIsEvsahibi*/
-      ctx[7] === 1;
+      ctx[8] === 1;
       input3.value = "1";
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(label5, "class", "radio");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input4, "type", "radio");
       input4.checked = input4_checked_value =
       /*selectedIsEvsahibi*/
-      ctx[7] === 0;
+      ctx[8] === 0;
       input4.value = "0";
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(label6, "class", "radio");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div12, "class", "control");
@@ -7267,42 +7305,62 @@ function create_default_slot(ctx) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div13, "class", "column field");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div14, "class", "columns");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(label7, "class", "label");
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(label7, "for", "phone");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(label7, "for", "payratio");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input5, "class", "input");
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input5, "type", "tel");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input5, "type", "number");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input5, "min", input5_min_value =
+      /*pageprops*/
+      ctx[14].form.payratio.min);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input5, "max", input5_max_value =
+      /*pageprops*/
+      ctx[14].form.payratio.max);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input5, "placeholder", input5_placeholder_value =
       /*pageprops*/
-      ctx[13].form.input3.placeholder);
+      ctx[14].form.payratio.placeholder);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div15, "class", "control");
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div15, "id", "phone");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div15, "id", "payratio");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div16, "class", "column field is-half");
+      html_tag.a = t26;
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p, "class", "subtitle");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div17, "class", "column notification is-warning is-light");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div18, "class", "columns");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(label8, "class", "label");
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(label8, "for", "giris");
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input6, "type", "date");
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div17, "class", "control");
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div17, "id", "giris");
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div18, "class", "column field");
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div19, "class", "columns");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(label8, "for", "phone");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input6, "class", "input");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input6, "type", "tel");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input6, "placeholder", input6_placeholder_value =
+      /*pageprops*/
+      ctx[14].form.input3.placeholder);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div19, "class", "control");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div19, "id", "phone");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div20, "class", "column field is-half");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(label9, "class", "label");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(label9, "for", "giris");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input7, "type", "date");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div21, "class", "control");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div21, "id", "giris");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div22, "class", "column field");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div23, "class", "columns");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(button, "class", "button is-info");
       button.disabled =
       /*processing*/
-      ctx[9];
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div20, "class", "buttons is-right");
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div21, "class", "box");
+      ctx[10];
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div24, "class", "buttons is-right");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div25, "class", "box");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(form, "class", "mx-4");
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div22, "class", "section container");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div26, "class", "section container");
     },
     m: function m(target, anchor) {
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div22, anchor);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div22, h1);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div26, anchor);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div26, h1);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(h1, t0);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div22, t1);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div22, div0);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div26, t1);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div26, div0);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(link, div0, null);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div22, t2);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div22, form);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form, div21);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, div4);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div26, t2);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div26, form);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form, div25);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div25, div4);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div4, div3);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div3, label0);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div3, t4);
@@ -7313,9 +7371,9 @@ function create_default_slot(ctx) {
       if (if_block) if_block.m(select, null);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.select_option)(select,
       /*selected_bina_id*/
-      ctx[6]);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, t6);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, div9);
+      ctx[7]);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div25, t6);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div25, div9);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div9, div6);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div6, label1);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div6, t8);
@@ -7333,8 +7391,8 @@ function create_default_slot(ctx) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_input_value)(input1,
       /*soyisim*/
       ctx[3]);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, t12);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, div14);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div25, t12);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div25, div14);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div14, div11);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div11, label3);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div11, t14);
@@ -7357,67 +7415,84 @@ function create_default_slot(ctx) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div12, label6);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(label6, input4);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(label6, t21);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, t22);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, div19);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div19, div16);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div25, t22);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div25, div18);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div18, div16);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div16, label7);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div16, t24);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div16, div15);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div15, input5);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_input_value)(input5,
-      /*phone*/
-      ctx[8]);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div19, t25);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div19, div18);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div18, label8);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div18, t27);
+      /*payratio*/
+      ctx[6]);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div18, t25);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div18, div17);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div17, input6);
+      html_tag.m(raw_value, div17);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div17, t26);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div17, p);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div25, t32);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div25, div23);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div23, div20);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div20, label8);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div20, t34);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div20, div19);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div19, input6);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_input_value)(input6,
+      /*phone*/
+      ctx[9]);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div23, t35);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div23, div22);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div22, label9);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div22, t37);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div22, div21);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, input7);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_input_value)(input7,
       /*giris_tarihi*/
       ctx[5]);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, t28);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(editor, div21, null);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, t29);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, div20);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div20, button);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(button, t30);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div25, t38);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(editor, div25, null);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div25, t39);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div25, div24);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div24, button);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(button, t40);
       current = true;
 
       if (!mounted) {
         dispose = [(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(select, "change",
         /*select_change_handler*/
-        ctx[18]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input0, "input",
+        ctx[19]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input0, "input",
         /*input0_input_handler*/
-        ctx[19]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input1, "input",
+        ctx[20]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input1, "input",
         /*input1_input_handler*/
-        ctx[20]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input2, "input",
+        ctx[21]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input2, "input",
         /*input2_input_handler*/
-        ctx[21]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input3, "change",
+        ctx[22]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input3, "change",
         /*onRadioChange*/
-        ctx[16]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input4, "change",
+        ctx[17]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input4, "change",
         /*onRadioChange*/
-        ctx[16]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input5, "input",
+        ctx[17]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input5, "input",
         /*input5_input_handler*/
-        ctx[22]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input6, "input",
+        ctx[23]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input6, "input",
         /*input6_input_handler*/
-        ctx[23]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(form, "submit", (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.prevent_default)(
+        ctx[24]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input7, "input",
+        /*input7_input_handler*/
+        ctx[25]), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(form, "submit", (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.prevent_default)(
         /*handleSubmit*/
-        ctx[15]))];
+        ctx[16]))];
         mounted = true;
       }
     },
     p: function p(ctx, dirty) {
       if (!current || dirty &
       /*header*/
-      2048) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t0,
+      4096) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t0,
       /*header*/
-      ctx[11]);
+      ctx[12]);
       var link_changes = {};
 
       if (dirty &
       /*$$scope*/
-      134217728) {
+      536870912) {
         link_changes.$$scope = {
           dirty: dirty,
           ctx: ctx
@@ -7443,10 +7518,10 @@ function create_default_slot(ctx) {
 
       if (dirty &
       /*selected_bina_id, binalar*/
-      65) {
+      129) {
         (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.select_option)(select,
         /*selected_bina_id*/
-        ctx[6]);
+        ctx[7]);
       }
 
       if (dirty &
@@ -7481,32 +7556,42 @@ function create_default_slot(ctx) {
 
       if (!current || dirty &
       /*selectedIsEvsahibi*/
-      128 && input3_checked_value !== (input3_checked_value =
+      256 && input3_checked_value !== (input3_checked_value =
       /*selectedIsEvsahibi*/
-      ctx[7] === 1)) {
+      ctx[8] === 1)) {
         input3.checked = input3_checked_value;
       }
 
       if (!current || dirty &
       /*selectedIsEvsahibi*/
-      128 && input4_checked_value !== (input4_checked_value =
+      256 && input4_checked_value !== (input4_checked_value =
       /*selectedIsEvsahibi*/
-      ctx[7] === 0)) {
+      ctx[8] === 0)) {
         input4.checked = input4_checked_value;
       }
 
       if (dirty &
-      /*phone*/
-      256) {
+      /*payratio*/
+      64 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.to_number)(input5.value) !==
+      /*payratio*/
+      ctx[6]) {
         (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_input_value)(input5,
+        /*payratio*/
+        ctx[6]);
+      }
+
+      if (dirty &
+      /*phone*/
+      512) {
+        (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_input_value)(input6,
         /*phone*/
-        ctx[8]);
+        ctx[9]);
       }
 
       if (dirty &
       /*giris_tarihi*/
       32) {
-        (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_input_value)(input6,
+        (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_input_value)(input7,
         /*giris_tarihi*/
         ctx[5]);
       }
@@ -7520,16 +7605,16 @@ function create_default_slot(ctx) {
       editor.$set(editor_changes);
       if (!current || dirty &
       /*submitbutton*/
-      1024) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t30,
+      2048) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t40,
       /*submitbutton*/
-      ctx[10]);
+      ctx[11]);
 
       if (!current || dirty &
       /*processing*/
-      512) {
+      1024) {
         button.disabled =
         /*processing*/
-        ctx[9];
+        ctx[10];
       }
     },
     i: function i(local) {
@@ -7544,7 +7629,7 @@ function create_default_slot(ctx) {
       current = false;
     },
     d: function d(detaching) {
-      if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div22);
+      if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div26);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(link);
       if (if_block) if_block.d();
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(editor);
@@ -7562,7 +7647,7 @@ function create_fragment(ctx) {
   var current;
   document.title = title_value = "" + (_config_config_js__WEBPACK_IMPORTED_MODULE_1__.params.app.name + " - " +
   /*header*/
-  ctx[11]);
+  ctx[12]);
   layout = new _Pages_Shared_Layout_svelte__WEBPACK_IMPORTED_MODULE_5__["default"]({
     props: {
       $$slots: {
@@ -7593,17 +7678,17 @@ function create_fragment(ctx) {
 
       if ((!current || dirty &
       /*params, header*/
-      2048) && title_value !== (title_value = "" + (_config_config_js__WEBPACK_IMPORTED_MODULE_1__.params.app.name + " - " +
+      4096) && title_value !== (title_value = "" + (_config_config_js__WEBPACK_IMPORTED_MODULE_1__.params.app.name + " - " +
       /*header*/
-      ctx[11]))) {
+      ctx[12]))) {
         document.title = title_value;
       }
 
       var layout_changes = {};
 
       if (dirty &
-      /*$$scope, processing, submitbutton, editorProps, giris_tarihi, phone, selectedIsEvsahibi, door_no, soyisim, isim, selected_bina_id, binalar, header*/
-      134221823) {
+      /*$$scope, processing, submitbutton, editorProps, giris_tarihi, phone, payratio, selectedIsEvsahibi, door_no, soyisim, isim, selected_bina_id, binalar, header*/
+      536879103) {
         layout_changes.$$scope = {
           dirty: dirty,
           ctx: ctx
@@ -7639,6 +7724,7 @@ function instance($$self, $$props, $$invalidate) {
   var bina;
   var door_no;
   var giris_tarihi;
+  var payratio;
   var selected_bina_id;
   var selectedIsEvsahibi;
   var phone;
@@ -7654,6 +7740,7 @@ function instance($$self, $$props, $$invalidate) {
     soyisim = item.lastname;
     door_no = item.door_no;
     bina = item.bina;
+    payratio = item.payratio;
     selected_bina_id = item.bina;
     giris_tarihi = item.giris_tarihi;
     selectedIsEvsahibi = item.is_evsahibi;
@@ -7679,43 +7766,42 @@ function instance($$self, $$props, $$invalidate) {
       lastname: soyisim,
       door_no: door_no,
       bina: selected_bina_id,
+      payratio: payratio,
       phone: phone,
       is_evsahibi: selectedIsEvsahibi,
       giris_tarihi: giris_tarihi,
       remarks: remarks
     };
-    console.log("values", values);
 
     if (item) {
       values.id = item.id;
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.put('/sakinler-upsert', values, {
         onStart: function onStart() {
-          $$invalidate(9, processing = true);
+          $$invalidate(10, processing = true);
         },
         onFinish: function onFinish() {
-          $$invalidate(9, processing = false);
+          $$invalidate(10, processing = false);
         }
       });
     } else {
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.post('/sakinler-upsert', values, {
         onStart: function onStart() {
-          $$invalidate(9, processing = true);
+          $$invalidate(10, processing = true);
         },
         onFinish: function onFinish() {
-          $$invalidate(9, processing = false);
+          $$invalidate(10, processing = false);
         }
       });
     }
   }
 
   function onRadioChange(event) {
-    $$invalidate(7, selectedIsEvsahibi = event.currentTarget.value);
-    console.log("ddd", selectedIsEvsahibi);
+    $$invalidate(8, selectedIsEvsahibi = event.currentTarget.value);
   }
 
   function select_change_handler() {
     selected_bina_id = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.select_value)(this);
-    $$invalidate(6, selected_bina_id);
+    $$invalidate(7, selected_bina_id);
     $$invalidate(0, binalar);
   }
 
@@ -7735,21 +7821,26 @@ function instance($$self, $$props, $$invalidate) {
   }
 
   function input5_input_handler() {
-    phone = this.value;
-    $$invalidate(8, phone);
+    payratio = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.to_number)(this.value);
+    $$invalidate(6, payratio);
   }
 
   function input6_input_handler() {
+    phone = this.value;
+    $$invalidate(9, phone);
+  }
+
+  function input7_input_handler() {
     giris_tarihi = this.value;
     $$invalidate(5, giris_tarihi);
   }
 
   $$self.$$set = function ($$props) {
-    if ('item' in $$props) $$invalidate(17, item = $$props.item);
+    if ('item' in $$props) $$invalidate(18, item = $$props.item);
     if ('binalar' in $$props) $$invalidate(0, binalar = $$props.binalar);
   };
 
-  return [binalar, editorProps, isim, soyisim, door_no, giris_tarihi, selected_bina_id, selectedIsEvsahibi, phone, processing, submitbutton, header, bina, pageprops, readContent, handleSubmit, onRadioChange, item, select_change_handler, input0_input_handler, input1_input_handler, input2_input_handler, input5_input_handler, input6_input_handler];
+  return [binalar, editorProps, isim, soyisim, door_no, giris_tarihi, payratio, selected_bina_id, selectedIsEvsahibi, phone, processing, submitbutton, header, bina, pageprops, readContent, handleSubmit, onRadioChange, item, select_change_handler, input0_input_handler, input1_input_handler, input2_input_handler, input5_input_handler, input6_input_handler, input7_input_handler];
 }
 
 var Form = /*#__PURE__*/function (_SvelteComponent) {
@@ -7764,7 +7855,7 @@ var Form = /*#__PURE__*/function (_SvelteComponent) {
 
     _this = _super.call(this);
     (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(_assertThisInitialized(_this), options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {
-      item: 17,
+      item: 18,
       binalar: 0
     });
     return _this;
@@ -10919,7 +11010,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function create_default_slot_17(ctx) {
+function create_default_slot_13(ctx) {
   var img;
   var img_src_value;
   return {
@@ -10941,7 +11032,7 @@ function create_default_slot_17(ctx) {
 } // (27:8) <Link href="/" class="navbar-item has-text-white">
 
 
-function create_default_slot_16(ctx) {
+function create_default_slot_12(ctx) {
   var span0;
   var t0;
   var span1;
@@ -10993,71 +11084,13 @@ function create_if_block_1(ctx) {
   var div0;
   var link5;
   var t7;
-  var hr0;
-  var t8;
   var link6;
+  var t8;
+  var hr;
   var t9;
   var link7;
-  var t10;
-  var link8;
-  var t11;
-  var link9;
-  var t12;
-  var link10;
-  var t13;
-  var hr1;
-  var t14;
-  var link11;
   var current;
   link0 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
-    props: {
-      "class": "navbar-item",
-      href: "/",
-      $$slots: {
-        "default": [create_default_slot_15]
-      },
-      $$scope: {
-        ctx: ctx
-      }
-    }
-  });
-  link1 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
-    props: {
-      "class": "navbar-item",
-      href: "/summary",
-      $$slots: {
-        "default": [create_default_slot_14]
-      },
-      $$scope: {
-        ctx: ctx
-      }
-    }
-  });
-  link2 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
-    props: {
-      "class": "navbar-item",
-      href: "/skills",
-      $$slots: {
-        "default": [create_default_slot_13]
-      },
-      $$scope: {
-        ctx: ctx
-      }
-    }
-  });
-  link3 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
-    props: {
-      "class": "navbar-item",
-      href: "/",
-      $$slots: {
-        "default": [create_default_slot_12]
-      },
-      $$scope: {
-        ctx: ctx
-      }
-    }
-  });
-  link4 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
     props: {
       "class": "navbar-item",
       href: "/",
@@ -11069,12 +11102,60 @@ function create_if_block_1(ctx) {
       }
     }
   });
+  link1 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
+    props: {
+      "class": "navbar-item",
+      href: "/summary",
+      $$slots: {
+        "default": [create_default_slot_10]
+      },
+      $$scope: {
+        ctx: ctx
+      }
+    }
+  });
+  link2 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
+    props: {
+      "class": "navbar-item",
+      href: "/skills",
+      $$slots: {
+        "default": [create_default_slot_9]
+      },
+      $$scope: {
+        ctx: ctx
+      }
+    }
+  });
+  link3 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
+    props: {
+      "class": "navbar-item",
+      href: "/",
+      $$slots: {
+        "default": [create_default_slot_8]
+      },
+      $$scope: {
+        ctx: ctx
+      }
+    }
+  });
+  link4 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
+    props: {
+      "class": "navbar-item",
+      href: "/",
+      $$slots: {
+        "default": [create_default_slot_7]
+      },
+      $$scope: {
+        ctx: ctx
+      }
+    }
+  });
   link5 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
     props: {
       href: "/tesisler",
       "class": "navbar-item",
       $$slots: {
-        "default": [create_default_slot_10]
+        "default": [create_default_slot_6]
       },
       $$scope: {
         ctx: ctx
@@ -11086,7 +11167,7 @@ function create_if_block_1(ctx) {
       href: "/sakinler",
       "class": "navbar-item",
       $$slots: {
-        "default": [create_default_slot_9]
+        "default": [create_default_slot_5]
       },
       $$scope: {
         ctx: ctx
@@ -11095,55 +11176,7 @@ function create_if_block_1(ctx) {
   });
   link7 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
     props: {
-      href: "/",
-      "class": "navbar-item",
-      $$slots: {
-        "default": [create_default_slot_8]
-      },
-      $$scope: {
-        ctx: ctx
-      }
-    }
-  });
-  link8 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
-    props: {
-      href: "/simpleitem/profession",
-      "class": "navbar-item",
-      $$slots: {
-        "default": [create_default_slot_7]
-      },
-      $$scope: {
-        ctx: ctx
-      }
-    }
-  });
-  link9 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
-    props: {
-      href: "/simpleitem/diploma",
-      "class": "navbar-item",
-      $$slots: {
-        "default": [create_default_slot_6]
-      },
-      $$scope: {
-        ctx: ctx
-      }
-    }
-  });
-  link10 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
-    props: {
-      href: "/simpleitem/language",
-      "class": "navbar-item",
-      $$slots: {
-        "default": [create_default_slot_5]
-      },
-      $$scope: {
-        ctx: ctx
-      }
-    }
-  });
-  link11 = new _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.Link({
-    props: {
-      href: "/slevels",
+      href: "/ayarlar",
       "class": "navbar-item",
       $$slots: {
         "default": [create_default_slot_4]
@@ -11172,25 +11205,14 @@ function create_if_block_1(ctx) {
       div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(link5.$$.fragment);
       t7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-      hr0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("hr");
-      t8 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(link6.$$.fragment);
+      t8 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+      hr = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("hr");
       t9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(link7.$$.fragment);
-      t10 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(link8.$$.fragment);
-      t11 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(link9.$$.fragment);
-      t12 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(link10.$$.fragment);
-      t13 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-      hr1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("hr");
-      t14 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(link11.$$.fragment);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p, "class", "navbar-link");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p, "href", "/Admin");
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(hr0, "class", "navbar-divider");
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(hr1, "class", "navbar-divider");
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(hr, "class", "navbar-divider");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "navbar-dropdown");
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "navbar-item has-dropdown is-hoverable");
     },
@@ -11211,21 +11233,11 @@ function create_if_block_1(ctx) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, div0);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(link5, div0, null);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t7);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, hr0);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t8);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(link6, div0, null);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t8);
+      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, hr);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t9);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(link7, div0, null);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t10);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(link8, div0, null);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t11);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(link9, div0, null);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t12);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(link10, div0, null);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t13);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, hr1);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t14);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(link11, div0, null);
       current = true;
     },
     p: function p(ctx, dirty) {
@@ -11325,54 +11337,6 @@ function create_if_block_1(ctx) {
       }
 
       link7.$set(link7_changes);
-      var link8_changes = {};
-
-      if (dirty &
-      /*$$scope*/
-      4) {
-        link8_changes.$$scope = {
-          dirty: dirty,
-          ctx: ctx
-        };
-      }
-
-      link8.$set(link8_changes);
-      var link9_changes = {};
-
-      if (dirty &
-      /*$$scope*/
-      4) {
-        link9_changes.$$scope = {
-          dirty: dirty,
-          ctx: ctx
-        };
-      }
-
-      link9.$set(link9_changes);
-      var link10_changes = {};
-
-      if (dirty &
-      /*$$scope*/
-      4) {
-        link10_changes.$$scope = {
-          dirty: dirty,
-          ctx: ctx
-        };
-      }
-
-      link10.$set(link10_changes);
-      var link11_changes = {};
-
-      if (dirty &
-      /*$$scope*/
-      4) {
-        link11_changes.$$scope = {
-          dirty: dirty,
-          ctx: ctx
-        };
-      }
-
-      link11.$set(link11_changes);
     },
     i: function i(local) {
       if (current) return;
@@ -11384,10 +11348,6 @@ function create_if_block_1(ctx) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(link5.$$.fragment, local);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(link6.$$.fragment, local);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(link7.$$.fragment, local);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(link8.$$.fragment, local);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(link9.$$.fragment, local);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(link10.$$.fragment, local);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(link11.$$.fragment, local);
       current = true;
     },
     o: function o(local) {
@@ -11399,10 +11359,6 @@ function create_if_block_1(ctx) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(link5.$$.fragment, local);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(link6.$$.fragment, local);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(link7.$$.fragment, local);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(link8.$$.fragment, local);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(link9.$$.fragment, local);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(link10.$$.fragment, local);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(link11.$$.fragment, local);
       current = false;
     },
     d: function d(detaching) {
@@ -11420,16 +11376,12 @@ function create_if_block_1(ctx) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(link5);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(link6);
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(link7);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(link8);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(link9);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(link10);
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(link11);
     }
   };
 } // (41:12) <Link class="navbar-item" href="/">
 
 
-function create_default_slot_15(ctx) {
+function create_default_slot_11(ctx) {
   var icon;
   var current;
   icon = new _Pages_Shared_Icon_svelte__WEBPACK_IMPORTED_MODULE_3__["default"]({
@@ -11464,7 +11416,7 @@ function create_default_slot_15(ctx) {
 } // (42:12) <Link class="navbar-item" href="/summary">
 
 
-function create_default_slot_14(ctx) {
+function create_default_slot_10(ctx) {
   var icon;
   var t;
   var current;
@@ -11503,7 +11455,7 @@ function create_default_slot_14(ctx) {
 } // (43:12) <Link class="navbar-item" href="/skills">
 
 
-function create_default_slot_13(ctx) {
+function create_default_slot_9(ctx) {
   var icon;
   var t;
   var current;
@@ -11542,7 +11494,7 @@ function create_default_slot_13(ctx) {
 } // (44:12) <Link class="navbar-item" href="/">
 
 
-function create_default_slot_12(ctx) {
+function create_default_slot_8(ctx) {
   var icon;
   var t;
   var current;
@@ -11581,7 +11533,7 @@ function create_default_slot_12(ctx) {
 } // (45:12) <Link class="navbar-item" href="/">
 
 
-function create_default_slot_11(ctx) {
+function create_default_slot_7(ctx) {
   var icon;
   var t;
   var current;
@@ -11620,7 +11572,7 @@ function create_default_slot_11(ctx) {
 } // (53:20) <Link href="/tesisler" class="navbar-item">
 
 
-function create_default_slot_10(ctx) {
+function create_default_slot_6(ctx) {
   var t;
   return {
     c: function c() {
@@ -11633,10 +11585,10 @@ function create_default_slot_10(ctx) {
       if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
     }
   };
-} // (57:20) <Link href="/sakinler" class="navbar-item">
+} // (54:20) <Link href="/sakinler" class="navbar-item">
 
 
-function create_default_slot_9(ctx) {
+function create_default_slot_5(ctx) {
   var t;
   return {
     c: function c() {
@@ -11649,78 +11601,14 @@ function create_default_slot_9(ctx) {
       if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
     }
   };
-} // (58:20) <Link href="/" class="navbar-item">
-
-
-function create_default_slot_8(ctx) {
-  var t;
-  return {
-    c: function c() {
-      t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Training Categories");
-    },
-    m: function m(target, anchor) {
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
-    },
-    d: function d(detaching) {
-      if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
-    }
-  };
-} // (59:20) <Link href="/simpleitem/profession" class="navbar-item">
-
-
-function create_default_slot_7(ctx) {
-  var t;
-  return {
-    c: function c() {
-      t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Professions");
-    },
-    m: function m(target, anchor) {
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
-    },
-    d: function d(detaching) {
-      if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
-    }
-  };
-} // (60:20) <Link href="/simpleitem/diploma" class="navbar-item">
-
-
-function create_default_slot_6(ctx) {
-  var t;
-  return {
-    c: function c() {
-      t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Diploma");
-    },
-    m: function m(target, anchor) {
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
-    },
-    d: function d(detaching) {
-      if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
-    }
-  };
-} // (61:20) <Link href="/simpleitem/language" class="navbar-item">
-
-
-function create_default_slot_5(ctx) {
-  var t;
-  return {
-    c: function c() {
-      t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Language");
-    },
-    m: function m(target, anchor) {
-      (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
-    },
-    d: function d(detaching) {
-      if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
-    }
-  };
-} // (65:20) <Link href="/slevels" class="navbar-item">
+} // (58:20) <Link href="/ayarlar" class="navbar-item">
 
 
 function create_default_slot_4(ctx) {
   var t;
   return {
     c: function c() {
-      t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Skill Levels");
+      t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Ayarlar");
     },
     m: function m(target, anchor) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
@@ -11729,7 +11617,7 @@ function create_default_slot_4(ctx) {
       if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
     }
   };
-} // (101:16) {:else}
+} // (94:16) {:else}
 
 
 function create_else_block(ctx) {
@@ -11820,7 +11708,7 @@ function create_else_block(ctx) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(link1, detaching);
     }
   };
-} // (84:16) {#if user}
+} // (77:16) {#if user}
 
 
 function create_if_block(ctx) {
@@ -11982,7 +11870,7 @@ function create_if_block(ctx) {
       (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(link1);
     }
   };
-} // (103:20) <Link href="/login" class="button is-ghost" as="button" preserveScroll>
+} // (96:20) <Link href="/login" class="button is-ghost" as="button" preserveScroll>
 
 
 function create_default_slot_3(ctx) {
@@ -12021,7 +11909,7 @@ function create_default_slot_3(ctx) {
       if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
     }
   };
-} // (107:20) <Link href="/register" class="button is-ghost" as="button" preserveScroll>
+} // (100:20) <Link href="/register" class="button is-ghost" as="button" preserveScroll>
 
 
 function create_default_slot_2(ctx) {
@@ -12060,7 +11948,7 @@ function create_default_slot_2(ctx) {
       if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
     }
   };
-} // (95:28) <Link href="/projects" class="navbar-item">
+} // (88:28) <Link href="/projects" class="navbar-item">
 
 
 function create_default_slot_1(ctx) {
@@ -12076,7 +11964,7 @@ function create_default_slot_1(ctx) {
       if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
     }
   };
-} // (96:28) <Link href="/logout" class="navbar-item" method="post">
+} // (89:28) <Link href="/logout" class="navbar-item" method="post">
 
 
 function create_default_slot(ctx) {
@@ -12115,7 +12003,7 @@ function create_fragment(ctx) {
       href: "/",
       "class": "navbar-item has-text-white",
       $$slots: {
-        "default": [create_default_slot_17]
+        "default": [create_default_slot_13]
       },
       $$scope: {
         ctx: ctx
@@ -12127,7 +12015,7 @@ function create_fragment(ctx) {
       href: "/",
       "class": "navbar-item has-text-white",
       $$slots: {
-        "default": [create_default_slot_16]
+        "default": [create_default_slot_12]
       },
       $$scope: {
         ctx: ctx
@@ -13929,6 +13817,13 @@ var page = {
     phone: {
       label: "Telefon Numarası",
       placeholder: ""
+    },
+    payratio: {
+      label: "Genel Ödeme Oranı (%)",
+      placeholder: "",
+      min: 50,
+      max: 100,
+      note: "Bu değer diğer sakinlere oranla aidat gibi genel ödemelere katılma oranını gösterir. m<sup>2</sup> veya kişi sayısına bağlı olarak değişebilir."
     },
     textarea: {
       id: "edAdress",

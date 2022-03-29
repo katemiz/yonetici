@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('door_no');
             $table->boolean('is_evsahibi')->default(1);
             $table->string('phone', 16)->nullable();
+            $table->integer('payratio')->default(100);
             $table->integer('giris_tarihi')->nullable();
             $table->integer('remarks')->nullable();
             $table->integer('created_by')->nullable();

@@ -20,8 +20,6 @@ export const page = {
             placeholder:""
         },
 
-
-
         input:{
             label:"Adı",
             placeholder:""
@@ -52,6 +50,14 @@ export const page = {
         phone:{
             label:"Telefon Numarası",
             placeholder:""
+        },
+
+        payratio:{
+            label:"Genel Ödeme Oranı (%)",
+            placeholder:"",
+            min:50,
+            max:100,
+            note:"Bu değer diğer sakinlere oranla aidat gibi genel ödemelere katılma oranını gösterir. m<sup>2</sup> veya kişi sayısına bağlı olarak değişebilir."
         },
 
         textarea:{

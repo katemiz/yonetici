@@ -51,18 +51,11 @@
                 <div class="navbar-dropdown">
 
                     <Link href="/tesisler" class="navbar-item">Site-Apartman</Link>
-
-                    <hr class="navbar-divider">
-
                     <Link href="/sakinler" class="navbar-item">Sakinler</Link>
-                    <Link href="/" class="navbar-item">Training Categories</Link>
-                    <Link href="/simpleitem/profession" class="navbar-item">Professions</Link>
-                    <Link href="/simpleitem/diploma" class="navbar-item">Diploma</Link>
-                    <Link href="/simpleitem/language" class="navbar-item">Language</Link>
 
                     <hr class="navbar-divider">
 
-                    <Link href="/slevels" class="navbar-item">Skill Levels</Link>
+                    <Link href="/ayarlar" class="navbar-item">Ayarlar</Link>
 
                 </div>
 

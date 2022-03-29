@@ -20,6 +20,7 @@
     let bina
     let door_no
     let giris_tarihi
+    let payratio
     let selected_bina_id
     let selectedIsEvsahibi
     let phone
@@ -39,6 +40,7 @@
         soyisim = item.lastname
         door_no = item.door_no
         bina = item.bina
+        payratio = item.payratio
         selected_bina_id = item.bina
         giris_tarihi = item.giris_tarihi
         selectedIsEvsahibi = item.is_evsahibi
@@ -70,13 +72,12 @@
             lastname:soyisim,
             door_no:door_no,
             bina:selected_bina_id,
+            payratio:payratio,
             phone:phone,
             is_evsahibi:selectedIsEvsahibi,
             giris_tarihi:giris_tarihi,
             remarks:remarks
         }
-
-        console.log("values",values)
 
         if (item) {
 
@@ -97,8 +98,6 @@
 
     function onRadioChange(event) {
 		selectedIsEvsahibi = event.currentTarget.value;
-
-        console.log("ddd",selectedIsEvsahibi)
 	}
 
 </script>
@@ -197,6 +196,29 @@
                 </div>
 
             </div>
+
+
+
+            <div class="columns">
+
+                <div class="column field is-half">
+
+                    <label class="label" for="payratio">{pageprops.form.payratio.label}</label>
+                    <div class="control" id="payratio">
+                        <input class="input" bind:value={payratio} type="number" min="{pageprops.form.payratio.min}" max="{pageprops.form.payratio.max}" placeholder="{pageprops.form.payratio.placeholder}" >
+                    </div>
+                </div>
+
+
+                <div class="column notification is-warning is-light">
+                    {@html pageprops.form.payratio.note}
+                    <p class="subtitle">[%{pageprops.form.payratio.min}-%{pageprops.form.payratio.max} arasında olmalıdır]</p>
+                </div>
+
+            </div>
+
+
+
 
 
 
