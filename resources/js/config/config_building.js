@@ -2,7 +2,7 @@ export const page = {
  
     headers: {
         general:"Bina/Apartmanlar",
-        list:"Bina/Apartmanlar Listesi",
+        list:"Bina Listesi",
         new:"Yeni Bina/Apartman",
         show:"Bina/Apartman Bilgileri",
         update:"Bina/Apartman Bilgileri Güncelle"

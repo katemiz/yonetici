@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->integer('bina',4);
+            $table->float('aidat', 12, 2);
+            $table->float('water', 12, 2)->default(0);
+            $table->float('hotwater', 12, 2)->default(0);
             $table->timestamps();
         });
     }

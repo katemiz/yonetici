@@ -10,14 +10,11 @@
     import Icon from '@/Pages/Shared/Icon.svelte'
 
     export let item
-    export let binalar
-
-    console.log("binalar",binalar)
+    export let bina
 
     let editorProps
     let isim
     let soyisim
-    let bina
     let door_no
     let giris_tarihi
     let payratio
@@ -39,7 +36,6 @@
         isim = item.name
         soyisim = item.lastname
         door_no = item.door_no
-        bina = item.bina
         payratio = item.payratio
         selected_bina_id = item.bina
         giris_tarihi = item.giris_tarihi
@@ -71,7 +67,6 @@
             name:isim,
             lastname:soyisim,
             door_no:door_no,
-            bina:selected_bina_id,
             payratio:payratio,
             phone:phone,
             is_evsahibi:selectedIsEvsahibi,
@@ -82,13 +77,13 @@
         if (item) {
 
             values.id = item.id
-            Inertia.put('/sakinler-upsert', values,{
+            Inertia.put('/sakinler-upsert/'+bina.id, values,{
                 onStart: () => {processing = true},
                 onFinish: () => {processing = false},
             })
 
         } else {
-            Inertia.post('/sakinler-upsert', values,{
+            Inertia.post('/sakinler-upsert/'+bina.id, values,{
                 onStart: () => {processing = true},
                 onFinish: () => {processing = false},
             })
@@ -113,42 +108,27 @@
 
 <div class="section container">
 
-    <h1 class="title my-6 has-text-weight-light is-size-1 has-text-left">{header}</h1>
+    <h1 class="title mt-6 has-text-weight-light is-size-1 has-text-left">{header}</h1>
+    <h2 class="subtitle">{bina.name} Sakini</h2>
 
-    <div class="column has-text-right">
-        <Link href="/sakinler" class="navbar-item">
-          <Icon name="list" size="{gui.icons.size}" color="link"/> Listeye Geri Dön
+
+    <div class="column">
+
+        <Link href="/sakinler/{bina.id}{item ? '/'+item.id : ''}" >
+            <span class="icon-text">
+                <span class="icon">
+                    <Icon name="arrow_back" size="{gui.icons.size}" color="{gui.icons.color}"/> 
+                </span>
+
+                <span> Geri</span>
+            </span>
         </Link> 
+
     </div>
 
     <form on:submit|preventDefault={handleSubmit} class="mx-4">
 
         <div class="box">
-
-            <div class="columns">
-                <div class="column field">
-
-                    <label class="label" for="bina">{pageprops.form.bina.label}</label>
-                    <div class="control" id="bina">
-        
-                        <div class="select is-fullwidth">
-                            <select bind:value={selected_bina_id}>
-                                <option value="NotSelected">Bina ...</option>
-        
-                                {#if binalar.length >0}
-                                {#each binalar as bina}
-                                    <option value="{bina.id}">                                   
-                                        {bina.name}
-                                    </option>
-                                {/each}
-                                {/if}
-                            </select>
-                        </div>
-        
-                    </div>
-                </div>
-            </div>
-
 
             <div class="columns">
                          
@@ -166,7 +146,6 @@
                     </div>
                 </div>
             </div>
-
 
             <div class="columns">
 
@@ -197,8 +176,6 @@
 
             </div>
 
-
-
             <div class="columns">
 
                 <div class="column field is-half">
@@ -216,11 +193,6 @@
                 </div>
 
             </div>
-
-
-
-
-
 
             <div class="columns">
 
@@ -242,7 +214,6 @@
 
             </div>
 
-                
             <Editor props={editorProps} on:editordata={readContent}/>
 
             <div class="buttons is-right">

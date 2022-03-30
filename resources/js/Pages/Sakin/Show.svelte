@@ -14,6 +14,7 @@
     import Swal from "sweetalert2"
 
     export let item
+    export let bina
     export let notification
 
     let pageprops = page
@@ -57,116 +58,88 @@
     <div class="section container">
 
         <h1 class="title has-text-weight-light">{pageprops.headers.show}</h1>
-        <h2 class="subtitle">Özellikler</h2>
+        <h2 class="subtitle">{bina.name}</h2>
 
         {#if notification}
             <Notification {notification} />
         {/if}
 
-        <div class="columns mt-6">
+        <div class="column">
 
-            <div class="column is-3">
+            <Link href="/sakinler/{bina.id}" >
+                <span class="icon-text">
+                    <span class="icon">
+                        <Icon name="arrow_back" size="{gui.icons.size}" color="{gui.icons.color}"/> 
+                    </span>
+    
+                    <span> Geri</span>
+                </span>
+            </Link> 
+            
+            <div class="card">
+    
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <p class="title is-4">{item.name} {item.lastname}</p>
 
-                <aside class="menu">
-                    <p class="menu-label">MENU</p>
-                    <ul class="menu-list">
+                            <table class="table is-fullwidth">
 
-                      <li>
-                        <Link href="/sakinler" >
-                            <span class="icon-text">
-                                <span class="icon">
-                                    <Icon name="list" size="{gui.icons.size}" color="{gui.icons.color}"/> 
-                                </span>
+                                <tr>
+                                    <td class="has-text-grey has-text-right">Kapı Numarası</td>
+                                    <td>{item.door_no}</td>
+                                </tr>
 
-                                <span>Listele</span>
-                            </span>
-                        </Link> 
-                      </li>
+                                <tr>
+                                    <td class="has-text-grey has-text-right">Ev Sahipliği Durumu</td>
+                                    <td>{item.is_evsahibi == 1 ? "Ev Sahibi": "Kiracı"}</td>
+                                </tr>
 
+                                <tr>
+                                    <td class="has-text-grey has-text-right">Telefon</td>
+                                    <td>{item.phone}</td>
+                                </tr>
 
-                      <li>
-                        <Link href="/sakinler-form/{false}" >
-                            <span class="icon-text">
-                                <span class="icon">
-                                    <Icon name="add" size="{gui.icons.size}" color="{gui.icons.color}"/>
-                                </span>
+                                <tr>
+                                    <td class="has-text-grey has-text-right">Giriş Tarihi</td>
+                                    <td>{item.giris_tarihi}</td>
+                                </tr>
 
-                                <span>{pageprops.addcommand.label}</span>
-                            </span>
-                        </Link> 
-                      </li>
+                                <tr>
+                                    <td class="has-text-grey has-text-right">Ödeme Oranı</td>
+                                    <td>%{item.payratio}</td>
+                                </tr>
 
-                    </ul>
-                </aside>
+                                <tr>
+                                    <td class="has-text-grey has-text-right">Notlar/Diğer Bilgiler</td>
+                                    <td>{@html item.remarks != null ? item.remarks:''}</td>
+                                </tr>
 
-            </div>
-
-            <div class="column">
-                
-                <div class="card">
-        
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-content">
-                                <p class="title is-4">{item.name} {item.lastname}</p>
-
-                                <table class="table is-fullwidth">
-
-                                    <tr>
-                                        <td class="has-text-grey has-text-right">Kapı Numarası</td>
-                                        <td>{item.door_no}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="has-text-grey has-text-right">Ev Sahipliği Durumu</td>
-                                        <td>{item.is_evsahibi == 1 ? "Ev Sahibi": "Kiracı"}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="has-text-grey has-text-right">Telefon</td>
-                                        <td>{item.phone}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="has-text-grey has-text-right">Giriş Tarihi</td>
-                                        <td>{item.giris_tarihi}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="has-text-grey has-text-right">Notlar/Diğer Bilgiler</td>
-                                        <td>{@html item.remarks != null ? item.remarks:''}</td>
-                                    </tr>
-
-                                </table>
+                            </table>
 
 
-                            </div>
                         </div>
-                    
                     </div>
-        
-        
-                    <footer class="card-footer">
-        
-                        <a href="/sakinler-form/{item.id}" class="card-footer-item">
-                            <Icon name="edit" size="{gui.icons.size}" color="{gui.icons.color}"/>&nbsp;Değiştir
-                        </a>
-                        <a href="{"#"}" class="card-footer-item" on:click="{confirmDelete(item.id)}">
-                            <Icon name="delete" size="{gui.icons.size}" color="danger"/>&nbsp;Sil
-                        </a>
-        
-                    </footer>
-                    
+                
                 </div>
-
-                <ItemInfo {item} />
-
+    
+    
+                <footer class="card-footer">
+    
+                    <a href="/sakinler-form/{bina.id}/{item.id}" class="card-footer-item">
+                        <Icon name="edit" size="{gui.icons.size}" color="{gui.icons.color}"/>&nbsp;Değiştir
+                    </a>
+                    <a href="{"#"}" class="card-footer-item" on:click="{confirmDelete(item.id)}">
+                        <Icon name="delete" size="{gui.icons.size}" color="danger"/>&nbsp;Sil
+                    </a>
+    
+                </footer>
+                
             </div>
+
+            <ItemInfo {item} />
 
         </div>
-
-
-
 
     </div>
 

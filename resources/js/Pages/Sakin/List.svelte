@@ -4,6 +4,7 @@
     import { page } from '@/config/config_sakinler.js'
     import { parseDateTime } from '@/Pages/Shared/Functions/time.js'
 
+    import { Link } from '@inertiajs/inertia-svelte'
     import { Inertia } from '@inertiajs/inertia'
 
     import Layout from '@/Pages/Shared/Layout.svelte'
@@ -14,6 +15,7 @@
     export let id
     export let tabledata
     export let filters
+    export let bina
     export let notification
 
     let filterquery = filters.search
@@ -86,28 +88,40 @@
 
     <div class="section container">
 
-        <h1 class="title my-6 has-text-weight-light is-size-1 has-text-left">{page.headers.list}</h1>
+        <h1 class="title my-6 has-text-weight-light is-size-1 has-text-left">{bina.name} Sakinleri</h1>
 
         {#if notification}
         <Notification {notification} />
         {/if}
 
+
         <!-- ***************** -->
         <!-- ADD BUTTON        -->
         <!-- ***************** -->
 
-        <div class="column">
+        <div class="columns">
 
-        <div class="buttons has-addons is-left">
+            <div class="column">
+                <Link href="/tesisler/{bina.id}">
+                    <span class="icon-text">
+                        <span class="icon"><Icon name="arrow_back" size="{gui.icons.size}" color="link"/></span>
+                        </span>Geri<span>
+                    </span>
+                </Link> 
 
-            <a href="/sakinler-form/{id}" class="button is-light">
-                <span class="icon is-small">
-                    <Icon name="add" size="{gui.icons.size}" color="link"/>
-                </span>
-                <span>{page.addcommand.label}</span>
-            </a>
-        
-        </div>
+            </div>
+
+
+            <div class="column has-text-right">
+
+                <a href="/sakinler-form/{bina.id}/{id}" class="button is-light">
+                    <span class="icon is-small">
+                        <Icon name="add" size="{gui.icons.size}" color="link"/>
+                    </span>
+                    <span>{page.addcommand.label}</span>
+                </a>
+                
+            </div>
         </div>
 
         <!-- ************************ -->
@@ -187,7 +201,7 @@
                 {#each tabledata.data as item}
                 <tr>
                     <td>                      
-                    <a href="/sakinler/{item.id}">
+                    <a href="/sakinler/{bina.id}/{item.id}">
                         {@html item.name}
                     </a>
                     </td>
@@ -201,10 +215,10 @@
                     <td>{parseDateTime(item.created_at)}</td>
 
                     <td class="has-text-right">
-                    <a href="/sakinler/{item.id}" class="icon">
+                    <a href="/sakinler/{bina.id}/{item.id}" class="icon">
                         <Icon name="eye" size="{gui.icons.size}" color="{gui.icons.color}"/>
                     </a>
-                    <a href="/sakinler-form/{item.id}" class="icon">
+                    <a href="/sakinler-form/{bina.id}/{item.id}" class="icon">
                         <Icon name="edit" size="{gui.icons.size}" color="{gui.icons.color}"/>
                     </a>
                     </td>

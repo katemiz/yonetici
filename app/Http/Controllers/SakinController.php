@@ -16,6 +16,11 @@ class SakinController extends Controller
 {
     public function getdata($request) {
 
+        // Sadece bir konuta ait veriler döndürülmeli   : $request["konutid"]
+        if (!is_numeric($request["konutid"]) || $request["konutid"] < 1 ) {
+            return false;
+        }
+
         $sortcolumn = 'name';
         $sortorder = 'asc';
 
@@ -42,6 +47,8 @@ class SakinController extends Controller
                 ->orderBy($sortcolumn,$sortorder)
                 ->when($params,function($query,$params) {
 
+                    $query->where('bina','=',$request["konutid"]);
+
                     if (isset($params['search']) && !empty($params['search'])) {
                         $query->where('name','like','%'.$params['search'].'%');
                     }
@@ -64,7 +71,7 @@ class SakinController extends Controller
         return Inertia::render('Sakin/List',[
             "id" => false,
             "tabledata" => $this->getdata($request),
-            "binalar" => [],
+            "bina" => Building::getItemById($request["konutid"]),
             "filters" => $request->only(["search"]),
             "notification" => false
         ]);
@@ -84,8 +91,7 @@ class SakinController extends Controller
 
         return Inertia::render('Sakin/Form',[
             "item" => $item,
-            "binalar" => Building::all(),
-
+            "bina" => Building::getItemById($request["konutid"]),
         ]);
     }
 
@@ -93,38 +99,45 @@ class SakinController extends Controller
 
     public function create(Request $request)
     {
-        // validate
-        $attributes = $request->validate([
-            'name'=>'required',
-            'lastname'=>'required',
-            'bina'=>'required',
-            'door_no'=>'required'
-        ]);
 
 
-        // Add new record
-        Sakin::create([
-            'name' => ucfirst($attributes['name']),
-            'lastname' => ucfirst($attributes['lastname']),
-            'bina' => $attributes['bina'],
-            'door_no' => $attributes['door_no'],
-            'phone' => $request['phone'],
-            'payratio' => $request['payratio'],
-            'is_evsahibi' => $request['is_evsahibi'],
-            'giris_tarihi' => $request['giris_tarihi'],
-            'remarks' => $request['remarks']['html'],
-        ]);
+        if ($request->konutid) {
 
-        $item = Sakin::getLatestItem();
-        $msg = 'Yeni sakin başarıyla eklendi.';
+            // validate
+            $attributes = $request->validate([
+                'name'=>'required',
+                'lastname'=>'required',
+                'door_no'=>'required'
+            ]);
 
-        return Inertia::render('Sakin/Show',[
-            "item" => $item,
-            "notification" =>  [
-                "type" =>'success',
-                "message" => $msg
-            ]
-        ]); 
+            // Add new record
+            Sakin::create([
+                'name' => ucfirst($attributes['name']),
+                'lastname' => ucfirst($attributes['lastname']),
+                'bina' => $request->konutid,
+                'door_no' => $attributes['door_no'],
+                'phone' => $request['phone'],
+                'payratio' => $request['payratio'],
+                'is_evsahibi' => $request['is_evsahibi'],
+                'giris_tarihi' => $request['giris_tarihi'],
+                'remarks' => $request['remarks']['html'],
+            ]);
+
+            $item = Sakin::getLatestItem();
+            $msg = 'Yeni sakin başarıyla eklendi.';
+
+            return Inertia::render('Sakin/Show',[
+                "item" => $item,
+                "bina" => Building::getItemById($request["konutid"]),
+                "notification" =>  [
+                    "type" =>'success',
+                    "message" => $msg
+                ]
+            ]); 
+
+        } else {
+            dd($request);
+        }
     }
 
 
@@ -135,14 +148,12 @@ class SakinController extends Controller
             'id'=>'required',
             'name'=>'required',
             'lastname'=>'required',
-            'bina'=>'required',
             'door_no'=>'required'
         ]);
 
         $params = [
             'name' => ucfirst($attributes['name']),
             'lastname' => ucfirst($attributes['lastname']),
-            'bina' => $attributes['bina'],
             'door_no' => $attributes['door_no'],
             'phone' => $request['phone'],
             'payratio' => $request['payratio'],
@@ -158,6 +169,7 @@ class SakinController extends Controller
 
         return Inertia::render('Sakin/Show',[
             "item" => $item,
+            "bina" => Building::getItemById($request["konutid"]),
             "notification" =>  [
                 "type" =>'success',
                 "message" => $msg
@@ -173,6 +185,7 @@ class SakinController extends Controller
 
         return Inertia::render('Sakin/Show',[
             "item" => $item,
+            "bina" => Building::getItemById($request["konutid"]),
             "notification" => false
         ]);
     }

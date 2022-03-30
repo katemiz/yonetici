@@ -155,7 +155,7 @@ class BuildingController extends Controller
     public function destroy(Request $request)
     {
         Building::find($request->id)->delete();
-        $msg = 'Bina/aprtman başarıyla silinmiştir.';
+        $msg = 'Bina/apartman başarıyla silinmiştir.';
 
         return Inertia::render('Building/List',[
             "tabledata" => $this->getdata($request),

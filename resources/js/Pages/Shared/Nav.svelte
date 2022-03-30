@@ -50,20 +50,16 @@
 
                 <div class="navbar-dropdown">
 
-                    <Link href="/tesisler" class="navbar-item">Site-Apartman</Link>
-                    <Link href="/sakinler" class="navbar-item">Sakinler</Link>
+                    <Link href="/tesisler" class="navbar-item">Bina ve Siteler</Link>
 
                     <hr class="navbar-divider">
 
-                    <Link href="/ayarlar" class="navbar-item">Ayarlar</Link>
+                    <Link href="/" class="navbar-item">Reserved</Link>
 
                 </div>
 
             </div>
-
-
-
-
+            
             {/if}
 
         </div>

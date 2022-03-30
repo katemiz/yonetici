@@ -5,6 +5,8 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\SakinController;
+use App\Http\Controllers\SettingController;
+
 
 
 /*
@@ -58,14 +60,20 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('tesisler',[BuildingController::class,'destroy']);
 
     // SAKINLER
-    Route::get('sakinler',[SakinController::class,'list']);
-    Route::get('sakinler/{id}',[SakinController::class,'show']);
-    Route::get('sakinler-form/{id}',[SakinController::class,'form']);
-    Route::post('sakinler-upsert',[SakinController::class,'create']);
-    Route::put('sakinler-upsert',[SakinController::class,'update']);
+    Route::get('sakinler/{konutid}',[SakinController::class,'list']);
+    Route::get('sakinler/{konutid}/{id}',[SakinController::class,'show']);
+    Route::get('sakinler-form/{konutid}/{id}',[SakinController::class,'form']);
+    Route::post('sakinler-upsert/{konutid}',[SakinController::class,'create']);
+    Route::put('sakinler-upsert/{konutid}',[SakinController::class,'update']);
     Route::delete('sakinler',[SakinController::class,'destroy']);
 
+    // SETTINGS
+    Route::get('settings/{konutid}',[SettingController::class,'view']);
+    Route::get('settings-form/{konutid}',[SettingController::class,'form']);
+    Route::post('settings-create/{konutid}',[SettingController::class,'create']);
+    Route::put('settings-update/{konutid}',[SettingController::class,'update']);
 
+    
 
 
 

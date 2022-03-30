@@ -6,3 +6,13 @@ export function parseDateTime(d) {
 }
 
 
+export function checkSettingTime(d) {
+
+    let zaman = new Date(d)
+
+
+    return zaman.getTime()
+    //return zaman.toLocaleString('tr-TR', { timeZone: 'UTC' })
+}
+
+

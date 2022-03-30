@@ -60,6 +60,14 @@
         <h1 class="title has-text-weight-light">{pageprops.headers.show}</h1>
         <h2 class="subtitle">Özellikler</h2>
 
+        <Link href="/tesisler">
+            <span class="icon-text">
+                <span class="icon"><Icon name="arrow_back" size="{gui.icons.size}" color="link"/></span>
+                </span>Geri<span>
+            </span>
+        </Link> 
+
+
         {#if notification}
             <Notification {notification} />
         {/if}
@@ -69,35 +77,28 @@
             <div class="column is-3">
 
                 <aside class="menu">
-                    <p class="menu-label">MENU</p>
+
+                    <p class="menu-label">Menu</p>
                     <ul class="menu-list">
-
-                      <li>
-                        <Link href="/tesisler" >
-                            <span class="icon-text">
-                                <span class="icon">
-                                    <Icon name="list" size="{gui.icons.size}" color="{gui.icons.color}"/> 
+                        <li>
+                            <Link href="/sakinler/{item.id}">
+                                <span class="icon-text">
+                                    <span class="icon"><Icon name="person_pin" size="{gui.icons.size}" color="link"/></span>
+                                    </span> Bina Sakinleri <span>
                                 </span>
+                            </Link> 
+                        </li>
 
-                                <span>Listele</span>
-                            </span>
-                        </Link> 
-                      </li>
-
-
-                      <li>
-                        <Link href="/tesisler-form" >
-                            <span class="icon-text">
-                                <span class="icon">
-                                    <Icon name="add" size="{gui.icons.size}" color="{gui.icons.color}"/>
+                        <li>
+                            <Link href="/settings/{item.id}">
+                                <span class="icon-text">
+                                    <span class="icon"><Icon name="settings" size="{gui.icons.size}" color="link"/></span>
+                                    </span> Ayarlar <span>
                                 </span>
-
-                                <span>{pageprops.addcommand.label}</span>
-                            </span>
-                        </Link> 
-                      </li>
-
+                            </Link> 
+                        </li>
                     </ul>
+
                 </aside>
 
             </div>

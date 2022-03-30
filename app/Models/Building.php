@@ -12,13 +12,11 @@ class Building extends Model
 {
     use HasFactory;
 
-
     protected $guarded = ['id'];
 
     public static function getItemById($id) {
         return Building::processItem(Building::find($id));
     }
-
 
     public static function getLatestItem() {
         return Building::processItem(Building::latest()->first());
@@ -28,8 +26,6 @@ class Building extends Model
     {
         return $this->belongsToMany(Sakin::class)->withTimestamps();
     }
-
-
 
     public static function processItem($item) {
 
@@ -41,8 +37,4 @@ class Building extends Model
 
         return $item;
     }
-
-
-
-
 }

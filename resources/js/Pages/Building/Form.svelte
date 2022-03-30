@@ -84,8 +84,8 @@
     <h1 class="title my-6 has-text-weight-light is-size-1 has-text-left">{header}</h1>
 
     <div class="column has-text-right">
-        <Link href="/tsisler" class="navbar-item">
-          <Icon name="list" size="{gui.icons.size}" color="link"/> Listeye Geri Dön
+        <Link href="/tesisler{item ? "/"+item.id : ''}" class="navbar-item">
+          <Icon name="arrow_back" size="{gui.icons.size}" color="link"/> Geri
         </Link> 
     </div>
 
