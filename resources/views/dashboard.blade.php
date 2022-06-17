@@ -1,17 +1,19 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+    <section class="section container">
+
+
+        <header class="my-6">
+            <h1 class="title has-text-weight-light is-size-1">Yönettiğim Binalarım</h1>
+            <h2 class="subtitle has-text-weight-light">{{config('constants.app.welcome_subtitle')}}</h2>
+        </header>
+
+
+
+
+        <h1 class="title">{{ __('Dashboard') }}</h1>
+        <div class="notification is-success">
                     You're logged in!
-                </div>
-            </div>
         </div>
-    </div>
+    </section>
 </x-app-layout>

@@ -1,13 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-
-use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\BinaController;
+use App\Http\Controllers\KayitController;
 use App\Http\Controllers\SakinController;
-use App\Http\Controllers\SettingController;
-
-
+use App\Http\Livewire\BinaList;
+use App\Http\Livewire\BinaView;
+use App\Http\Livewire\SakinList;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,79 +19,54 @@ use App\Http\Controllers\SettingController;
 |
 */
 
-/* Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('lang/{lang}', [
+    'as' => 'lang.switch',
+    'uses' => 'App\Http\Controllers\LanguageController@switchLang',
+]);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard'); */
+})
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-
-Route::get('/', function () {
-    return Inertia::render('IndexGuest',["logout"=>false]);
-});
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Index');
-})->middleware(['auth','verified'])->name('dashboard');
-
-
-require __DIR__.'/auth.php';
-
-
-
-
-
-
-
-
+require __DIR__ . '/auth.php';
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/bina-list', BinaList::class);
+    Route::get('/bina-view/{id}', BinaView::class)->name('binaview');
+    Route::get('/bina-form', [BinaController::class, 'formBina']);
+    Route::get('/bina-form/{id}', [BinaController::class, 'formBina']);
+    Route::post('/bina-add', [BinaController::class, 'addBina']);
+    Route::post('/bina-update/{id}', [BinaController::class, 'updateBina']);
+    Route::get('/bina-ayar/{id}', [BinaController::class, 'ayarView']);
+    Route::get('/bina-ayar-form/{id}', [BinaController::class, 'ayarForm']);
+    Route::post('/bina-ayar-add/{id}', [BinaController::class, 'ayarAdd']);
+    Route::post('/bina-ayar-update/{id}/{ayarid}', [
+        BinaController::class,
+        'ayarUpdate',
+    ]);
 
+    Route::get('/sakin-list/{id}', SakinList::class);
+    Route::get('/sakin-form/{id}', [SakinController::class, 'formSakin']);
+    Route::get('/sakin-form/{id}/{sakinid}', [
+        SakinController::class,
+        'formSakin',
+    ]);
+    Route::post('/sakin-add/{id}', [SakinController::class, 'addSakin']);
+    Route::post('/sakin-update/{id}/{sakinid}', [
+        SakinController::class,
+        'updateSakin',
+    ]);
+    Route::get('/sakin-view/{id}/{sakinid}', [
+        SakinController::class,
+        'viewSakin',
+    ])->name('sakinview');
 
-    // BUILDING
-    Route::get('tesisler',[BuildingController::class,'list']);
-    Route::get('tesisler/{id}',[BuildingController::class,'show']);
-    Route::get('tesisler-form/{id}',[BuildingController::class,'form']);
-    Route::post('tesisler-upsert',[BuildingController::class,'create']);
-    Route::put('tesisler-upsert',[BuildingController::class,'update']);
-    Route::delete('tesisler',[BuildingController::class,'destroy']);
-
-    // SAKINLER
-    Route::get('sakinler/{konutid}',[SakinController::class,'list']);
-    Route::get('sakinler/{konutid}/{id}',[SakinController::class,'show']);
-    Route::get('sakinler-form/{konutid}/{id}',[SakinController::class,'form']);
-    Route::post('sakinler-upsert/{konutid}',[SakinController::class,'create']);
-    Route::put('sakinler-upsert/{konutid}',[SakinController::class,'update']);
-    Route::delete('sakinler',[SakinController::class,'destroy']);
-
-    // SETTINGS
-    Route::get('settings/{konutid}',[SettingController::class,'view']);
-    Route::get('settings-form/{konutid}',[SettingController::class,'form']);
-    Route::post('settings-create/{konutid}',[SettingController::class,'create']);
-    Route::put('settings-update/{konutid}',[SettingController::class,'update']);
-
-    
-
-
-
-
-
-    // GELIR-GIDER-FATURA
-
-/* 
-
-    Route::get('record/{type}',[SimpleItemController::class,'list']);
-    Route::get('record-form/{type}',[SimpleItemController::class,'form']);
-    Route::get('record-form/{type}/{id}',[SimpleItemController::class,'form']);
-    Route::get('record/{type}/{id}',[SimpleItemController::class,'show']);
-    Route::post('record-upsert/{type}',[SimpleItemController::class,'create']);
-    Route::put('record-upsert/{type}',[SimpleItemController::class,'update']);
-    Route::delete('record/{type}',[SimpleItemController::class,'destroy']);
-
-
-
- */
-
+    Route::get('/kayit-form/{type}', [KayitController::class, 'kayitForm']);
+    Route::post('/kayit-add/{type}', [KayitController::class, 'kayitAdd']);
 });

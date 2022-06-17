@@ -1,0 +1,51 @@
+<x-app-layout>
+
+    <div class="section container">
+
+        <header class="my-6">
+            <h1 class="title has-text-weight-light is-size-1">{{ $bina ? 'Bina Güncelle' : 'Yeni Bina Ekle' }}</h1>
+        </header>
+
+        <div class="column box mt-6">
+
+            <form action="{{ $bina ? '/bina-update/'.$bina->id : '/bina-add' }}" method="{{ $bina ? 'POST' : 'POST' }}" enctype="multipart/form-data">
+            @csrf
+
+            <div class="field">
+                <label class="label">Bina İsmi</label>
+                <div class="control">
+                <input class="input" type="text" name="binaname"
+                    placeholder="Pembeköşk Apartmanı"
+                    value="{{$bina ? $bina->name : ''}}">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Adres</label>
+                <div class="control">
+                <input class="input" type="text" name="binaaddress"
+                    placeholder="Yalıkavak Sok"
+                    value="{{$bina ? $bina->address : ''}}">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Şehir</label>
+                <div class="control">
+                    <div class="select" >
+                        <select name="binacity">
+                          <option value="6">Ankara</option>
+                          <option value="34">İstanbul</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="button is-link is-light">{{$bina ? 'Güncelle' : 'Kaydet'}}</button>
+
+            </form>
+
+        </div>
+    </div>
+
+</x-app-layout>
