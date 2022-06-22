@@ -13,7 +13,7 @@ return [
         'name' => 'eYönetici',
         'title' => 'Bina Yönetim Sistemi',
         'welcome_header' => 'constants.welcome_header',
-        'welcome_subtitle' => 'constants.welcome_subtitle',
+        'welcome_subtitle' => 'Akıllı Yönetici/Akıllı Uygulama',
         'description' => 'Description here',
         'app_header_logo' => 'app_header_logo.svg',
         'app_footer_logo' => 'app_footer_logo.svg',

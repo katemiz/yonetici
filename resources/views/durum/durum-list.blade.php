@@ -42,7 +42,7 @@
         <div class="notification {{$notification["type"]}} is-light">{!! $notification["message"] !!}</div>
     @endif
 
-    <x-table-filter add="{{$html->addcommand}}" addlink="{{$html->addlink}}"/>
+    <x-table-filter add="{{$html->addcommand}}" addlink="{{$html->addlink}}" showsearch="{{$kayitlar->total() > 0 ? true:false}}"/>
 
     @if ($kayitlar->total() > 0)
 
@@ -179,7 +179,7 @@
         {{ $kayitlar->links()}}
 
     @else
-        <div class="notification is-warning is-light">Alacak kaydı bulunmamaktadır.</div>
+        <div class="notification is-warning is-light">{{$html->noitem}}</div>
     @endif
 
 </div>

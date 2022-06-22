@@ -85,13 +85,13 @@
                 </div>
 
 
-                <div class="navbar-item has-dropdown is-hoverable">
+                {{-- <div class="navbar-item has-dropdown is-hoverable">
                     <p class="navbar-link" href="/Admin">Admin</p>
                     <div class="navbar-dropdown">
                         <a href="/bina-list" class="navbar-item">Binalarım</a>
                         <a href="/" class="navbar-item">Reserved</a>
                     </div>
-                </div>
+                </div> --}}
 
             @endif
 
@@ -117,6 +117,8 @@
                 </p>
 
                 <div class="navbar-dropdown">
+
+                    <a href="/bina-list" class="navbar-item">Binalarım</a>
 
                     <a  href="/projects" class="navbar-item">Settings</a>
                     <!-- Authentication -->

@@ -10,14 +10,13 @@
         <div class="notification {{$notification["type"]}} is-light">{!! $notification["message"] !!}</div>
     @endif
 
-    <x-table-filter add="Bina Ekle" addlink="/bina-form"/>
+    <x-table-filter add="Bina Ekle" addlink="/bina-form" showsearch="{{$binalar->total() > 0 ? true:false}}"/>
 
     @if ($binalar->total() > 0)
 
     <!-- ************************ -->
     <!-- TABLE                    -->
     <!-- ************************ -->
-
     <table class="table is-fullwidth">
 
         <caption>Yönettiğiniz <b>{{ $binalar->total() }}</b> bina vardır</caption>

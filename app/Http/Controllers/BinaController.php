@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Ayarlar;
 use App\Models\Bina;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
 class BinaController extends Controller
 {
@@ -24,31 +26,29 @@ class BinaController extends Controller
         ]);
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         $binalarim = $this->getBinalar();
 
         $is_bina_selected = false;
 
         if (count($binalarim) == 0) {
-            $this->setSelectedBina();
-
-            $is_bina_selected = true;
-
             return view('dashboard', [
                 'is_bina_selected' => $is_bina_selected,
-                'binalar' => 0,
+                'bina_sayisi' => 0,
             ]);
         }
 
         if (count($binalarim) == 1) {
-            $this->setSelectedBina();
+            //dd($binalarim->first()->id);
+            $this->selectActive($binalarim->first()->id);
 
             $is_bina_selected = true;
 
             return view('dashboard', [
                 'is_bina_selected' => $is_bina_selected,
-                'binalar' => $this->getBinalar(),
+                'bina_sayisi' => 1,
+                'bina' => $binalarim->first(),
             ]);
         }
 
@@ -83,8 +83,16 @@ class BinaController extends Controller
 
         Bina::create($props);
 
+        $q = $this->getBinalar();
+
         return view('bina.bina-list', [
-            'binalar' => $this->getBinalar(),
+            'notification' => [
+                'type' => 'is-success',
+                'message' => 'Bina tanımlaması yapılmıştır',
+            ],
+            'binalar' => $q->paginate(
+                Config::get('constants.table.no_of_results')
+            ),
         ]);
     }
 
@@ -173,12 +181,12 @@ class BinaController extends Controller
         ]);
     }
 
-    public function selectActive(Request $req)
+    public function selectActive($id)
     {
-        $bina = Bina::find($req->id);
+        $bina = Bina::find($id);
 
-        session(['selected_bina' => $bina->name, 'bina_id' => $req->id]);
+        session(['selected_bina' => $bina->name, 'bina_id' => $bina->id]);
 
-        return redirect()->route('durum', ['id' => $req->id]);
+        //return redirect()->route('durum', ['id' => $bina->id]);
     }
 }

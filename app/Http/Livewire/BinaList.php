@@ -50,6 +50,8 @@ class BinaList extends Component
     {
         $q = $this->getBinalar();
 
+        // dd(Auth::user()->custom);
+
         return view('bina.bina-list', [
             'notification' => false,
             'binalar' => $q->paginate(

@@ -12,6 +12,7 @@
         </div>
     </div>
 
+    @if ($showsearch)
     <!-- Right side -->
     <div class="level-right">
 
@@ -33,5 +34,7 @@
             </div>
         </div>
     </div>
+    @endif
+
 
 </nav>

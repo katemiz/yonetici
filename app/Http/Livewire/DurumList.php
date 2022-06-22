@@ -46,10 +46,11 @@ class DurumList extends Component
 
         switch ($request->tur) {
             case 'alacaklar':
-                $html['h1'] = 'Alacaklar 22222';
+                $html['h1'] = 'Alacaklar';
                 $html['h2'] = $bina->name . ': Alacak Kayıtları';
-                $html['addcommand'] = 'Alacak Ekle 3333';
+                $html['addcommand'] = 'Alacak Ekle';
                 $html['addlink'] = '/bina-form';
+                $html['noitem'] = 'Alacak Kaydı Yoktur';
 
                 $table['door_no'] = true;
                 $table['sakin_id'] = true;
@@ -69,6 +70,7 @@ class DurumList extends Component
                 $html['h2'] = $bina->name . ': Verecek Kayıtları';
                 $html['addcommand'] = 'Fatura Ekle';
                 $html['addlink'] = '/bina-form';
+                $html['noitem'] = 'Ödenecek Fatura ve Borç Kaydı Yoktur';
 
                 $table['door_no'] = false;
                 $table['sakin_id'] = false;
@@ -89,6 +91,7 @@ class DurumList extends Component
                 $html['h2'] = $bina->name . ': Gelir Kayıtları';
                 $html['addcommand'] = 'Gelir Ekle';
                 $html['addlink'] = '/bina-form';
+                $html['noitem'] = 'Gelir kaydı yoktur';
 
                 $table['door_no'] = false;
                 $table['sakin_id'] = false;
@@ -108,6 +111,7 @@ class DurumList extends Component
                 $html['h2'] = $bina->name . ': Gider Kayıtları';
                 $html['addcommand'] = 'Gider Ekle';
                 $html['addlink'] = '/bina-form';
+                $html['noitem'] = 'Gider kaydı yoktur';
 
                 $table['door_no'] = false;
                 $table['sakin_id'] = false;
