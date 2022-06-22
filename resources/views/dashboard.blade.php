@@ -9,11 +9,19 @@
         </header>
 
 
+        @if (session('selected_bina'))
 
+        <p>Selected</p>
+
+        @else
 
         <h1 class="title">{{ __('Dashboard') }}</h1>
         <div class="notification is-success">
                     You're logged in!
         </div>
+
+        @endif
+
+
     </section>
 </x-app-layout>

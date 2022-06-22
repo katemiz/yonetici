@@ -46,10 +46,30 @@
                                 <span class="icon">
                                     <x-icon icon="settings" fill="{{config('constants.icons.color.active')}}"/>
                                 </span>
-                                </span> Ayarlar <span>
+                                </span>Ayarlar <span>
                             </span>
                         </a>
                     </li>
+
+
+
+                    <li>
+                        <a href="/kalem-list/{{ $bina->id }}">
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <x-icon icon="settings" fill="{{config('constants.icons.color.active')}}"/>
+                                </span>
+                                </span>Harcama Kalemleri<span>
+                            </span>
+                        </a>
+                    </li>
+
+
+
+
+
+
+
                 </ul>
 
             </aside>

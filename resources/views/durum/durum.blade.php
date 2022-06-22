@@ -1,99 +1,47 @@
 <div class="section container">
 
     <header class="my-6">
-        <h1 class="title has-text-weight-light is-size-1">Binalarım</h1>
-        <h2 class="subtitle has-text-weight-light">Yöneticiliğini yaptığım binalar</h2>
+        <h1 class="title has-text-weight-light is-size-1">Genel Durum</h1>
+        <h2 class="subtitle has-text-weight-light">{{session('selected_bina')}}</h2>
     </header>
 
-    {{-- NOTIFICATION --}}
-    @if ($notification)
-        <div class="notification {{$notification["type"]}} is-light">{!! $notification["message"] !!}</div>
-    @endif
+    <nav class="level mt-6 box">
 
-    <x-table-filter add="Bina Ekle" addlink="/bina-form"/>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">TOPLAM ALACAKLAR</p>
+                <p class="title">{{$alacaklar}}</p>
+            </div>
+        </div>
 
-    @if ($binalar->total() > 0)
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">TOPLAM BORÇLAR</p>
+                <p class="title">{{$verecekler}}</p>
+            </div>
+        </div>
 
-    <!-- ************************ -->
-    <!-- TABLE                    -->
-    <!-- ************************ -->
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">TOPLAM GELİR</p>
+                <p class="title">{{$gelirler}}</p>
+            </div>
+        </div>
 
-    <table class="table is-fullwidth">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">TOPLAM GİDER</p>
+                <p class="title">{{$giderler}}</p>
+            </div>
+        </div>
 
-        <caption>Yönettiğiniz <b>{{ $binalar->total() }}</b> bina vardır</caption>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">TOPLAM NAKİT</p>
+                <p class="title">{{$nakit}}</p>
+            </div>
+        </div>
 
-        <thead>
-            <tr>
-
-                <th>
-                    <span class="icon-text" wire:click="sortBy('title')">
-                        <span class="icon {{ $sortDirection === 'asc' ? 'is-hidden' : ''}}">
-                            <x-icon icon="arrow-up" fill="{{config('constants.icons.color.active')}}"/>
-                        </span>
-                        <span class="icon {{ $sortDirection === 'desc' ? 'is-hidden' : ''}}">
-                            <x-icon icon="arrow-down" fill="{{config('constants.icons.color.active')}}"/>
-                        </span>
-                        <span>İsim</span>
-                    </span>
-                </th>
-
-                <th class="is-2">
-                    <span class="icon-text" wire:click="sortBy('created_at')">
-                        <span class="icon {{ $sortTimeDirection === 'asc' ? 'is-hidden' : ''}}">
-                            <x-icon icon="arrow-up" fill="{{config('constants.icons.color.active')}}"/>
-                        </span>
-                        <span class="icon {{ $sortTimeDirection === 'desc' ? 'is-hidden' : ''}}">
-                            <x-icon icon="arrow-down" fill="{{config('constants.icons.color.active')}}"/>
-                        </span>
-                        <span>Eklenme Zamanı</span>
-                    </span>
-                </th>
-
-                <th class="has-text-right is-2">İşlemler</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            @foreach ($binalar as $bina)
-
-            <tr>
-                <td>
-                <a href="/bina-view/{{$bina->id}}">
-                    {{ $bina->name }}
-                </a>
-                </td>
-
-                <td>
-                    {{ $bina->created_at }}
-                </td>
-
-
-                <td class="has-text-right">
-                <a href="/bina-view/{{$bina->id}}" class="icon">
-                    <x-icon icon="eye" fill="{{config('constants.icons.color.active')}}"/>
-
-                </a>
-                <a href="/sakinler-form/{bina.id}/{item.id}" class="icon">
-                    <x-icon icon="edit" fill="{{config('constants.icons.color.active')}}"/>
-                </a>
-                </td>
-            </tr>
-
-            @endforeach
-
-        </tbody>
-
-    </table>
-
-
-    {{ $binalar->links()}}
-
-
-
-    @else
-        <div class="notification is-warning is-light">Yönettiğiniz bina bulunmamaktadır.</div>
-    @endif
+    </nav>
 
 </div>
-

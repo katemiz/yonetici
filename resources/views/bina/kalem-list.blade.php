@@ -1,8 +1,11 @@
 <div class="section container">
 
+    <script src="{{ asset('/js/delete.js') }}"></script>
+
+
     <header class="my-6">
-        <h1 class="title has-text-weight-light is-size-1">Binalarım</h1>
-        <h2 class="subtitle has-text-weight-light">Yöneticiliğini yaptığım binalar</h2>
+        <h1 class="title has-text-weight-light is-size-1">Harcama Kalemleri</h1>
+        <h2 class="subtitle has-text-weight-light">{{$bina->name}} için harcama/fatura kalemleri</h2>
     </header>
 
     {{-- NOTIFICATION --}}
@@ -10,9 +13,9 @@
         <div class="notification {{$notification["type"]}} is-light">{!! $notification["message"] !!}</div>
     @endif
 
-    <x-table-filter add="Bina Ekle" addlink="/bina-form"/>
+    <x-table-filter add="Kalem Ekle" addlink="/kalem-form/{{ $bina->id }}"/>
 
-    @if ($binalar->total() > 0)
+    @if ($kalemler->total() > 0)
 
     <!-- ************************ -->
     <!-- TABLE                    -->
@@ -20,13 +23,10 @@
 
     <table class="table is-fullwidth">
 
-        <caption>Yönettiğiniz <b>{{ $binalar->total() }}</b> bina vardır</caption>
+        <caption>Bu yerleşke için <b>{{ $kalemler->total() }}</b> harcama kalem tanımı bulunmaktadır</caption>
 
         <thead>
             <tr>
-
-                <th>&nbsp;</th>
-
                 <th>
                     <span class="icon-text" wire:click="sortBy('title')">
                         <span class="icon {{ $sortDirection === 'asc' ? 'is-hidden' : ''}}">
@@ -57,51 +57,36 @@
 
         <tbody>
 
-            @foreach ($binalar as $bina)
+            @foreach ($kalemler as $kalem)
+                <tr>
+                    <td>{{ $kalem->title }}</td>
 
-            <tr class="{{ $selected_bina && $selected_bina == $bina->id ? 'is-selected' :''}}">
+                    <td>{{ $kalem->created_at }}</td>
 
-                <td>
-                    <a href="/select-active/{{$bina->id}}">
-                        Seç
-                    </a>
-                </td>
+                    <td class="has-text-right">
 
-                <td>
-                <a href="/bina-view/{{$bina->id}}">
-                    {{ $bina->name }}
-                </a>
-                </td>
-
-                <td>
-                    {{ $bina->created_at }}
-                </td>
+                        <a href="/kalem-form/{{$bina->id}}/{{$kalem->id}}" class="icon">
+                            <x-icon icon="edit" fill="{{config('constants.icons.color.active')}}"/>
+                        </a>
 
 
-                <td class="has-text-right">
-                <a href="/bina-view/{{$bina->id}}" class="icon">
-                    <x-icon icon="eye" fill="{{config('constants.icons.color.active')}}"/>
+                        <a onclick="swalConfirm('kalem','{{$bina->id}}','{{ $kalem->id }}')" class="icon">
+                            <x-icon icon="delete" fill="{{config('constants.icons.color.danger')}}"/>
+                        </a>
 
-                </a>
-                <a href="/sakinler-form/{bina.id}/{item.id}" class="icon">
-                    <x-icon icon="edit" fill="{{config('constants.icons.color.active')}}"/>
-                </a>
-                </td>
-            </tr>
-
+                    </td>
+                </tr>
             @endforeach
 
         </tbody>
 
     </table>
 
-
-    {{ $binalar->links()}}
-
-
+    {{ $kalemler->links()}}
 
     @else
-        <div class="notification is-warning is-light">Yönettiğiniz bina bulunmamaktadır.</div>
+        <div class="notification is-warning is-light">Bu bina için harcama kalem tanımı yapılmamıştır.</div>
     @endif
 
 </div>
+

@@ -11,7 +11,11 @@ class Gelir extends Model
 {
     use HasFactory;
 
+
+    protected $guarded = [];
+
     protected $table = 'gelirler';
+
 
 
     public function sakinler()

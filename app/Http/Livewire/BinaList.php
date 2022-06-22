@@ -15,6 +15,8 @@ class BinaList extends Component
 {
     use WithPagination;
 
+    public $selectedbina = false;
+
     public $search = '';
     public $type = false;
 
@@ -53,6 +55,7 @@ class BinaList extends Component
             'binalar' => $q->paginate(
                 Config::get('constants.table.no_of_results')
             ),
+            'selected_bina' => $this->selectedbina,
         ]);
     }
 
@@ -81,5 +84,18 @@ class BinaList extends Component
         }
 
         return $q;
+    }
+
+    public function selectActive($id)
+    {
+        $bina = Bina::find($id);
+
+        session(['selected_bina' => $bina->name, 'bina_id' => $id]);
+
+        $this->selectedbina = $id;
+
+        // dd('selected');
+
+        // return redirect()->route('dashboard');
     }
 }

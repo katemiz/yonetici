@@ -24,6 +24,39 @@ class BinaController extends Controller
         ]);
     }
 
+    public function dashboard()
+    {
+        $binalarim = $this->getBinalar();
+
+        $is_bina_selected = false;
+
+        if (count($binalarim) == 0) {
+            $this->setSelectedBina();
+
+            $is_bina_selected = true;
+
+            return view('dashboard', [
+                'is_bina_selected' => $is_bina_selected,
+                'binalar' => 0,
+            ]);
+        }
+
+        if (count($binalarim) == 1) {
+            $this->setSelectedBina();
+
+            $is_bina_selected = true;
+
+            return view('dashboard', [
+                'is_bina_selected' => $is_bina_selected,
+                'binalar' => $this->getBinalar(),
+            ]);
+        }
+
+        if (count($binalarim) > 1) {
+            return redirect()->route('binalar');
+        }
+    }
+
     public function formBina(Request $request)
     {
         $bina = false;
@@ -138,5 +171,14 @@ class BinaController extends Controller
             ],
             'bina' => Bina::find($req->id),
         ]);
+    }
+
+    public function selectActive(Request $req)
+    {
+        $bina = Bina::find($req->id);
+
+        session(['selected_bina' => $bina->name, 'bina_id' => $req->id]);
+
+        return redirect()->route('durum', ['id' => $req->id]);
     }
 }

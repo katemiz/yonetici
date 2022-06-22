@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Alacak;
+use App\Models\Kayit;
 use App\Models\Ayarlar;
 use App\Models\Bina;
 use Illuminate\Http\Request;
@@ -13,6 +13,7 @@ class KayitController extends Controller
     public function kayitForm(Request $request)
     {
         $kayit = false;
+        $tutarlar = false;
 
         $this->setSelectedBina();
         $bina = Bina::find(session('bina_id'));
@@ -21,32 +22,30 @@ class KayitController extends Controller
             abort('403');
         }
 
-        if ($request->type == 'aidat') {
+        if ($request->tur == 'aidat') {
+            $tutarlar = $this->calculateAidatlar($bina);
         }
+
+        // return redirect()->route('durum', [
+        //     'tur' => $request->tur,
+        // ]);
 
         return view('kayit.kayit-form', [
             'bina' => $bina,
             'kayit' => $kayit,
-            'type' => $request->type,
-            'tutarlar' => $this->calculateAidatlar($bina),
+            'tur' => $request->tur,
+            'tutarlar' => $tutarlar,
         ]);
     }
 
     public function kayitAdd(Request $req)
     {
-        // $props['user_id'] = Auth::id();
-        // $props['bina_id'] = session('bina_id');
-        // $props['sakin_id'] = $req->input('borclu');
-        // $props['aciklama'] = $req->input('aciklama');
-        // $props['due_date'] = $req->input('due_date');
-        // $props['tutar'] = $req->input('tutar');
-        // $props['remarks'] = $req->input('editor_data');
+        $props['user_id'] = Auth::id();
+        $props['bina_id'] = session('bina_id');
+        $props['sakin_id'] = '';
+        $props['remarks'] = $req->input('editor_data');
 
-        // if ($req->type == 'alacak') {
-        //     $kayit = Alacak::create($props);
-        // }
-
-        if ($req->type == 'aidat') {
+        if ($req->tur == 'aidat') {
             $bina = Bina::find(session('bina_id'));
 
             $donem_exp = explode('-', $req->input('donem'));
@@ -70,28 +69,43 @@ class KayitController extends Controller
                 $donem_exp['0'] .
                 ' dönemi aidatı';
 
-            $props['user_id'] = Auth::id();
-            $props['bina_id'] = session('bina_id');
+            $props['tur'] = 'alacak';
             $props['aciklama'] = $aciklama;
             $props['donem'] = $req->input('donem');
-            $props['remarks'] = $req->input('editor_data');
+            $props['son_odeme'] = '';
 
             foreach ($bina->sakinler as $sakin) {
                 $props['sakin_id'] = $sakin->id;
                 $props['tutar'] =
                     ($sakin->payratio / 100) * $this->calculateAidat();
 
-                Alacak::create($props);
+                Kayit::create($props);
             }
 
-            return view('kayit.kayit-view', [
-                'notification' => [
-                    'type' => 'is-success',
-                    'message' => 'Kayıt eklenmiştir',
-                ],
-                'bina' => $bina,
-                'sakin' => $sakin,
-            ]);
+            return redirect()->route('durum', ['tur' => 'alacaklar']);
+
+            // return view('kayit.kayit-list', [
+            //     'notification' => [
+            //         'type' => 'is-success',
+            //         'message' => 'Dönem aidat kaydı eklenmiştir',
+            //     ],
+            //     'bina' => $bina,
+            //     'sakin' => $sakin,
+            // ]);
+        }
+
+        if ($req->tur == 'fatura') {
+            $props['tur'] = 'verecek';
+            $props['aciklama'] = $req->input('aciklama');
+            $props['donem'] = '';
+            $props['tutar'] = $req->input('tutar');
+            $props['son_odeme'] = $req->input('sonodeme');
+
+            // dd($props);
+
+            Kayit::create($props);
+
+            return redirect()->route('durum', ['tur' => 'verecekler']);
         }
 
         // $sakin = Alacak::create($props);

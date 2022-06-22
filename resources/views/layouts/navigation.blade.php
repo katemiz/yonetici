@@ -47,21 +47,15 @@
 
 
 
-                <a href="/durum" class="navbar-item icon-text">
-                    <span class="icon">
-                        <x-icon icon="lira" fill="{{config('constants.icons.color.dark')}}"/>
-                    </span>
-                    <span>Durum</span>
-                </a>
 
-                <a href="/gelir" class="navbar-item icon-text">
+                <a href="/durum/gelirler" class="navbar-item icon-text">
                     <span class="icon">
                         <x-icon icon="lira" fill="{{config('constants.icons.color.dark')}}"/>
                     </span>
                     <span>Gelir</span>
                 </a>
 
-                <a href="/gelir" class="navbar-item icon-text">
+                <a href="/durum/giderler" class="navbar-item icon-text">
                     <span class="icon">
                         <x-icon icon="lira" fill="{{config('constants.icons.color.dark')}}"/>
                     </span>
@@ -81,13 +75,12 @@
                     <div class="navbar-dropdown">
 
                         <a href="/kayit-form/aidat" class="navbar-item">Toplu Aidat Kaydı</a>
+                        <a href="/kayit-form/fatura" class="navbar-item">Fatura Kaydı</a>
+                        <a href="/kayit-form/gelir" class="navbar-item">Gelir Kaydı</a>
+                        <a href="/kayit-form/gider" class="navbar-item">Gider Kaydı</a>
 
-                        <a href="/kayit-form/alacak" class="navbar-item">Alacak Kaydı</a>
-                        <a href="/kayit-form/verecek" class="navbar-item">Verecek Kaydı</a>
 
 
-
-                        <a href="/" class="navbar-item">Reserved</a>
                     </div>
                 </div>
 
