@@ -252,7 +252,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
             'bina_id' => 1,
             'sakin_id' => 3,
-            'tur' => 'gelir',
+            'tur' => 'alacak',
             'aciklama' => 'Ekim 2021 dönemi aidatı',
             'donem' => '2021-10-20',
             'son_odeme' => '',
@@ -1155,7 +1155,7 @@ class DatabaseSeeder extends Seeder
             'aciklama' => 'Elektrik - EnerjiSA. (Kasım) 15.11.2021 [ÖDENDİ]',
             'donem' => '',
             'son_odeme' => '',
-            'tutar' => 291.5,
+            'tutar' => 291.05,
         ]);
 
         Kayit::create([
@@ -1268,7 +1268,7 @@ class DatabaseSeeder extends Seeder
             'aciklama' => 'EnerjiSA Elektrik (14.02.2022) 15048kW',
             'donem' => '',
             'son_odeme' => '',
-            'tutar' => 785.8,
+            'tutar' => 785.08,
         ]);
 
         Kayit::create([
