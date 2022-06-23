@@ -1,5 +1,8 @@
 <x-app-layout>
 
+
+    {{session('selected_bina')}}
+
     <div class="section container">
 
         <h1 class="title has-text-weight-light">Ayarlar</h1>
@@ -28,9 +31,9 @@
                         <div class="control">
                             <div class="select" >
                                 <select name="parabirimi">
-                                    <option value="TL" {{$bina->ayarlar->para_birimi == 'TL' ? 'selected' : ''}}>TL</option>
-                                    <option value="USD" {{$bina->ayarlar->para_birimi == 'USD' ? 'selected' : ''}}>USD</option>
-                                    <option value="EUR" {{$bina->ayarlar->para_birimi == 'EUR' ? 'selected' : ''}}>EUR</option>
+                                    <option value="TL" {{$bina->ayarlar !== null && $bina->ayarlar->para_birimi == 'TL' ? 'selected' : ''}}>TL</option>
+                                    <option value="USD" {{$bina->ayarlar !== null && $bina->ayarlar->para_birimi == 'USD' ? 'selected' : ''}}>USD</option>
+                                    <option value="EUR" {{$bina->ayarlar !== null && $bina->ayarlar->para_birimi == 'EUR' ? 'selected' : ''}}>EUR</option>
                                 </select>
                             </div>
                         </div>
@@ -60,7 +63,7 @@
                         <div class="field">
                         <p class="control">
                             <input class="input" type="number" placeholder="100" name="su"
-                                value="{{ $bina->ayarlar ? $bina->ayarlar['su'] : ''}}">
+                                value="{{ $bina->ayarlar ? $bina->ayarlar['su'] : 0}}">
                         </p>
                         </div>
                     </div>
@@ -75,7 +78,7 @@
                         <div class="field">
                         <p class="control">
                             <input class="input" type="number" placeholder="100" name="sicaksu"
-                                value="{{ $bina->ayarlar ? $bina->ayarlar['sicak_su'] : ''}}">
+                                value="{{ $bina->ayarlar ? $bina->ayarlar['sicak_su'] : 0}}">
                         </p>
                         </div>
                     </div>
@@ -89,7 +92,7 @@
                         <div class="field">
                         <p class="control">
                             <input class="input" type="number" placeholder="100" name="elektrik"
-                                value="{{ $bina->ayarlar ? $bina->ayarlar['elektrik'] : ''}}">
+                                value="{{ $bina->ayarlar ? $bina->ayarlar['elektrik'] : 0}}">
                         </p>
                         </div>
                     </div>
@@ -104,7 +107,7 @@
                         <div class="field">
                         <p class="control">
                             <input class="input" type="number" placeholder="100" name="asansor"
-                                value="{{ $bina->ayarlar ? $bina->ayarlar['asansor'] : ''}}">
+                                value="{{ $bina->ayarlar ? $bina->ayarlar['asansor'] : 0}}">
                         </p>
                         </div>
                     </div>
@@ -118,7 +121,7 @@
                         <div class="field">
                         <p class="control">
                             <input class="input" type="number" placeholder="100" name="hizmetli"
-                                value="{{ $bina->ayarlar ? $bina->ayarlar['hizmetli'] : ''}}">
+                                value="{{ $bina->ayarlar ? $bina->ayarlar['hizmetli'] : 0}}">
                         </p>
                         </div>
                     </div>
@@ -132,7 +135,7 @@
                         <div class="field">
                         <p class="control">
                             <input class="input" type="number" placeholder="100" name="vergi"
-                                value="{{ $bina->ayarlar ? $bina->ayarlar['vergi'] : ''}}">
+                                value="{{ $bina->ayarlar ? $bina->ayarlar['vergi'] : 0}}">
                         </p>
                         </div>
                     </div>
@@ -146,7 +149,7 @@
                         <div class="field">
                         <p class="control">
                             <input class="input" type="number" placeholder="100" name="bakim"
-                                value="{{ $bina->ayarlar ? $bina->ayarlar['bakim'] : ''}}">
+                                value="{{ $bina->ayarlar ? $bina->ayarlar['bakim'] : 0}}">
                         </p>
                         </div>
                     </div>
@@ -161,7 +164,7 @@
                         <div class="field">
                         <p class="control">
                             <input class="input" type="number" placeholder="100" name="onarim"
-                                value="{{ $bina->ayarlar ? $bina->ayarlar['onarim'] : ''}}">
+                                value="{{ $bina->ayarlar ? $bina->ayarlar['onarim'] : 0}}">
                         </p>
                         </div>
                     </div>
@@ -175,7 +178,7 @@
                         <div class="field">
                         <p class="control">
                             <input class="input" type="number" placeholder="100" name="aidat"
-                                value="{{ $bina->ayarlar ? $bina->ayarlar['aidat'] : ''}}">
+                                value="{{ $bina->ayarlar ? $bina->ayarlar['aidat'] : 0}}">
                         </p>
                         </div>
                     </div>

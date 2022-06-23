@@ -10,6 +10,7 @@ use App\Http\Livewire\DurumList;
 use App\Http\Livewire\KalemList;
 use App\Http\Livewire\SakinList;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,4 +92,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/select-active/{id}', [BinaController::class, 'selectActive']);
 
     Route::get('/durum/{tur}', DurumList::class)->name('durum');
+
+    Route::get('/help', function () {
+        return View::make('help');
+    });
 });

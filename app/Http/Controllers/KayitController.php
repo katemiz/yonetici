@@ -15,8 +15,10 @@ class KayitController extends Controller
         $kayit = false;
         $tutarlar = false;
 
-        $this->setSelectedBina();
+        // $this->setSelectedBina();
         $bina = Bina::find(session('bina_id'));
+
+        // dd(['aa' => $bina, 'ses' => session('bina_id')]);
 
         if ($bina->user_id !== Auth::id()) {
             abort('403');
@@ -157,8 +159,8 @@ class KayitController extends Controller
         return $tutarlar;
     }
 
-    public function setSelectedBina()
-    {
-        session(['selected_bina' => 'Deneme Apt', 'bina_id' => 3]);
-    }
+    // public function setSelectedBina()
+    // {
+    //     session(['selected_bina' => 'Deneme Apt', 'bina_id' => 3]);
+    // }
 }

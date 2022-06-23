@@ -10,7 +10,7 @@
         <div class="notification {{$notification["type"]}} is-light">{!! $notification["message"] !!}</div>
     @endif
 
-    <x-table-filter add="Bina Sakini Ekle" addlink="/sakin-form/{{ $bina->id }}"/>
+    <x-table-filter add="Bina Sakini Ekle" addlink="/sakin-form/{{ $bina->id }}" showsearch="{{$sakinler->total() > 0 ? true:false}}"/>
 
     @if ($sakinler->total() > 0)
 

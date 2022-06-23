@@ -62,7 +62,7 @@
                     <span>Gider</span>
                 </a>
 
-                <a href="/gelir" class="navbar-item icon-text">
+                <a href="/durum/verecekler" class="navbar-item icon-text">
                     <span class="icon">
                         <x-icon icon="lira" fill="{{config('constants.icons.color.dark')}}"/>
                     </span>
@@ -113,14 +113,14 @@
                     <span class="icon">
                         <x-icon icon="user" fill="{{config('constants.icons.color.dark')}}"/>
                     </span>
-                    <span class="ml-1">{{ Auth::user()->name }}</span>
+                    <span class="mx-1">{{ Auth::user()->name }} {{ Auth::user()->lastname }}</span>
                 </p>
 
                 <div class="navbar-dropdown">
 
                     <a href="/bina-list" class="navbar-item">Binalarım</a>
 
-                    <a  href="/projects" class="navbar-item">Settings</a>
+                    <a  href="/help" class="navbar-item">Yardım</a>
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

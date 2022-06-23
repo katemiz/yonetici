@@ -2,9 +2,8 @@
 
     <section class="section container">
 
-
-
-
+        {{session('selected_bina')}}
+        {{session('bina_id')}}
 
 
         @if ($bina_sayisi == 0)
@@ -14,19 +13,17 @@
                 <h2 class="subtitle has-text-weight-light">{{config('constants.app.welcome_subtitle')}}</h2>
             </header>
 
-
             <div class="notification is-warning is-light">Tanımlı bir bina bulunmamaktadır.</div>
 
             <p>Yapmanız gereken ilk şey, yöneteceğiniz binayı oluşturmak; aşağıdaki bağlantıyı kullanarak ilk binanızın tanımını yapabilirsiniz</p>
 
             <div class="content">
-            <ol>
-            <li>Bina Tanımını Yapınız</li>
-            <li>Bina Sakinlerini Ekleyiniz</li>
-            <li>Bina Parametrelerini belirleyiniz</li>
-            <li>Harcama Kalemlerini Tanımlayınız</li>
-
-            </ol>
+                <ol>
+                    <li>Bina Tanımını Yapınız</li>
+                    <li>Bina Sakinlerini Ekleyiniz</li>
+                    <li>Bina Parametrelerini belirleyiniz</li>
+                    <li>Harcama Kalemlerini Tanımlayınız</li>
+                </ol>
             </div>
 
             <a href="/bina-form" class="button is-link">
@@ -38,8 +35,6 @@
 
         @endif
 
-
-
         @if ($bina_sayisi == 1)
 
             <header class="my-6">
@@ -47,31 +42,39 @@
                 <h2 class="subtitle has-text-weight-light">{{config('constants.app.welcome_subtitle')}}</h2>
             </header>
 
-
             <div class="notification is-success is-light">{{$bina->name}}</div>
 
-            <div class="content">
-            <ol>
 
-                @if (count($bina->sakinler) < 1)
-                    <li>Bu bina için tanımlı bina sakini bulunmamaktadır. Buradan Ekleyebilirsiniz</li>
-                @endif
+            @if (count($bina->sakinler) < 1 || !$bina->ayarlar || count($bina->kalemler) < 1)
 
+                <div class="content">
+                    <ol>
 
-                @if (!$bina->ayarlar)
-                <li>Bina ayarları (aidat ve hizmet bedelleri gibi) henüz belirlenmemiştir. Ekleyebilirsiniz</li>
-                @endif
+                        @if (count($bina->sakinler) < 1)
+                            <li>Bu bina için tanımlı bina sakini bulunmamaktadır. Buradan Ekleyebilirsiniz</li>
+                        @endif
 
 
-                @if (count($bina->kalemler) < 1)
-                <li>Harcama Kalemlerini Tanımlayınız</li>
-                @endif
+                        @if (!$bina->ayarlar)
+                            <li>Bina ayarları (aidat ve hizmet bedelleri gibi) henüz belirlenmemiştir. Ekleyebilirsiniz</li>
+                        @endif
 
 
+                        @if (count($bina->kalemler) < 1)
+                            <li>Harcama Kalemlerini Tanımlayınız</li>
+                        @endif
 
-            </ol>
-            </div>
+                    </ol>
+                </div>
 
+            @else
+
+                <div class="content">
+                    Bina ile ilgili, bina sakini, temel bedeller ve harcama türler girilmiştir. Diğer (gelir-gider-fatura) kayıtları girebilirsiniz
+                </div>
+
+
+            @endif
 
         @endif
 

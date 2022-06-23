@@ -79,7 +79,7 @@
                     @endif
 
                     @if ($table->tutar)
-                    <th>Tutar</th>
+                    <th class="has-text-right">Tutar</th>
                     @endif
 
                     @if ($table->son_odeme)
@@ -109,43 +109,47 @@
 
             <tbody>
 
-                @foreach ($kayitlar as $alacak)
+                @foreach ($kayitlar as $kayit)
 
                 <tr>
                     @if ($table->door_no)
+                    <td>
                         @foreach ($bina->sakinler as $sakin)
-                            @if ($sakin->id == $alacak->sakin_id )
-                                <td>{{ $sakin->door_no }} </td>
+                            @if ($sakin->id == $kayit->sakin_id )
+                                {{ $sakin->door_no }}
                             @endif
                         @endforeach
+                    </td>
                     @endif
 
                     @if ($table->sakin_id)
+                    <td>
                         @foreach ($bina->sakinler as $sakin)
-                            @if ($sakin->id == $alacak->sakin_id )
-                                <td>{{ $sakin->name }} {{ $sakin->lastname }}</td>
+                            @if ($sakin->id == $kayit->sakin_id )
+                                {{ $sakin->name }} {{ $sakin->lastname }}
                             @endif
                         @endforeach
+                    </td>
                     @endif
 
                     @if ($table->aciklama)
                         <td>
-                            <a href="/bina-view/{{$alacak->id}}">
-                                {{ $alacak->aciklama }}
+                            <a href="/bina-view/{{$kayit->id}}">
+                                {{ $kayit->aciklama }}
                             </a>
                         </td>
                     @endif
 
                     @if ($table->tutar)
-                        <td>
-                            {{ number_format($alacak->tutar, 2, ',', ' ') }}
+                        <td class="has-text-right">
+                            {{ number_format($kayit->tutar, 2, ',', ' ') }}
                         </td>
                     @endif
 
 
                     @if ($table->son_odeme)
                         <td>
-                            {{ $alacak->son_odeme }}
+                            {{ $kayit->son_odeme }}
                         </td>
                     @endif
 
@@ -153,14 +157,14 @@
 
                     @if ($table->created_at)
                         <td>
-                            {{ $alacak->created_at }}
+                            {{ $kayit->created_at }}
                         </td>
                     @endif
 
 
 
                     <td class="has-text-right">
-                    <a href="/bina-view/{{$alacak->id}}" class="icon">
+                    <a href="/bina-view/{{$kayit->id}}" class="icon">
                         <x-icon icon="eye" fill="{{config('constants.icons.color.active')}}"/>
 
                     </a>

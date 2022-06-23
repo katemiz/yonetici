@@ -19,6 +19,12 @@
                 <h2 class="subtitle">Ödenecek Fatura Kayıtları</h2>
             @endif
 
+            @if ($tur == 'gelir')
+                <h1 class="title mt-6 has-text-weight-light is-size-1 has-text-left">{{ $kayit ? 'Gelir Kaydı Güncelle' :'Gelir Kaydı Ekle' }}</h1>
+                <h2 class="subtitle">Gelir Kaydı</h2>
+            @endif
+
+
             @if ($tur == 'gider')
                 <h1 class="title mt-6 has-text-weight-light is-size-1 has-text-left">{{ $kayit ? 'Gider Kaydı Güncelle' :'Gider Kaydı Ekle' }}</h1>
                 <h2 class="subtitle">Gider Kaydı</h2>
@@ -83,11 +89,13 @@
                         <div class="control" id="name">
                             <input class="input" name="aciklama" type="text" placeholder="Açıklama" list='kalemler' value="{{ $kayit ? $kayit->aciklama :''}}">
 
+                            @if ($tur == 'gider' || $tur == 'fatura')
                             <datalist id='kalemler'>
                                 @foreach ($bina->kalemler as $kalem)
                                     <option label='{{$kalem->title}}' value='{{$kalem->title}}'>
                                 @endforeach
-                           </datalist>
+                            </datalist>
+                            @endif
 
                         </div>
                     </div>

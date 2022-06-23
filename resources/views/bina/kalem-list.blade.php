@@ -13,7 +13,7 @@
         <div class="notification {{$notification["type"]}} is-light">{!! $notification["message"] !!}</div>
     @endif
 
-    <x-table-filter add="Kalem Ekle" addlink="/kalem-form/{{ $bina->id }}"/>
+    <x-table-filter add="Kalem Ekle" addlink="/kalem-form/{{ $bina->id }}" showsearch="{{$kalemler->total() > 0 ? true:false}}"/>
 
     @if ($kalemler->total() > 0)
 

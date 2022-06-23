@@ -31,6 +31,10 @@ class DurumList extends Component
 
         $bina = Bina::find(session('bina_id'));
 
+        //dd(['aa' => $bina, 'ses' => session('bina_id')]);
+
+        //dd(session('bina_id'));
+
         if ($request->tur == 'ozet') {
             $ozet = $this->ozet($request);
 
@@ -93,13 +97,13 @@ class DurumList extends Component
                 $html['addlink'] = '/bina-form';
                 $html['noitem'] = 'Gelir kaydı yoktur';
 
-                $table['door_no'] = false;
-                $table['sakin_id'] = false;
+                $table['door_no'] = true;
+                $table['sakin_id'] = true;
                 $table['aciklama'] = true;
                 $table['donem'] = false;
-                $table['son_odeme'] = true;
+                $table['son_odeme'] = false;
                 $table['tutar'] = true;
-                $table['remarks'] = true;
+                $table['remarks'] = false;
                 $table['created_at'] = false;
 
                 break;
