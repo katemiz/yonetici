@@ -11,9 +11,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class DurumList extends Component
 {
+    use WithPagination;
+
     public $alacakverecek;
 
     public $search = '';
@@ -25,20 +28,22 @@ class DurumList extends Component
     public $sortTimeField = 'created_at';
     public $sortTimeDirection = 'desc';
 
+    public function paginationView()
+    {
+        return 'livewire::my-pagination';
+    }
+
     public function render(Request $request)
     {
         $this->tur = $request->tur;
 
         $bina = Bina::find(session('bina_id'));
 
-        //dd(['aa' => $bina, 'ses' => session('bina_id')]);
-
-        //dd(session('bina_id'));
-
         if ($request->tur == 'ozet') {
             $ozet = $this->ozet($request);
 
             return view('durum.durum', [
+                'bina' => $bina,
                 'notification' => false,
                 'alacaklar' => $ozet['alacak'],
                 'verecekler' => $ozet['verecek'],
@@ -151,32 +156,28 @@ class DurumList extends Component
         $this->alacakverecek = $request->tur;
 
         // Alacaklar
-        $alacak_top_tutar = Kayit::where(
-            'bina_id',
-            '=',
-            session('bina_id')
-        )->sum('tutar');
+        $alacak_top_tutar = Kayit::where([
+            ['bina_id', '=', session('bina_id')],
+            ['tur', '=', 'alacak'],
+        ])->sum('tutar');
 
         // Verecekler - Faturalar
-        $verecek_top_tutar = Fatura::where(
-            'bina_id',
-            '=',
-            session('bina_id')
-        )->sum('tutar');
+        $verecek_top_tutar = Kayit::where([
+            ['bina_id', '=', session('bina_id')],
+            ['tur', '=', 'verecek'],
+        ])->sum('tutar');
 
         // Gelirler
-        $gelirler_top_tutar = Gelir::where(
-            'bina_id',
-            '=',
-            session('bina_id')
-        )->sum('tutar');
+        $gelirler_top_tutar = Kayit::where([
+            ['bina_id', '=', session('bina_id')],
+            ['tur', '=', 'gelir'],
+        ])->sum('tutar');
 
         // Giderler
-        $giderler_top_tutar = Gider::where(
-            'bina_id',
-            '=',
-            session('bina_id')
-        )->sum('tutar');
+        $giderler_top_tutar = Kayit::where([
+            ['bina_id', '=', session('bina_id')],
+            ['tur', '=', 'gider'],
+        ])->sum('tutar');
 
         $nakit = $gelirler_top_tutar - $giderler_top_tutar;
 
