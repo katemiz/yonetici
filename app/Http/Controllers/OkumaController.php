@@ -27,18 +27,20 @@ class OkumaController extends Controller
 
     public function durum(Request $request)
     {
-        $okumali_bedeller = Bedel::where([
-            ['bina_id', '=', session('bina_id')],
-            ['tur', '=', 'SAYAC'],
-        ]);
+        $okumalar = [];
+
+        $okumali_bedeller = Bedel::query()
+            ->where('bina_id', '=', $request->id)
+            ->where('tur', '=', 'SAYAC')
+            ->get();
 
         foreach ($this->bina->sakinler as $sakin) {
             foreach ($okumali_bedeller as $sayac) {
-                $okumalar[$sakin->id] = Okuma::where([
-                    ['bina_id', '=', session('bina_id')],
-                    ['sakin_id', '=', $sakin->id],
-                    ['bedel_id', '=', $sayac->id],
-                ]);
+                $okumalar[$sakin->id] = Okuma::query()
+                    ->where('bina_id', '=', $request->id)
+                    ->where('sakin_id', '=', $sakin->id)
+                    ->where('bedel_id', '=', $sayac->id)
+                    ->get();
             }
         }
 
@@ -46,11 +48,12 @@ class OkumaController extends Controller
             $this->bedel = Okuma::find($request->bedelid);
         }
 
-        return view('bina.bedel-form', [
+        // dd($okumalar);
+
+        return view('bina.okuma-liste', [
             'bina' => $this->bina,
-            'bedel' => $this->bedel,
-            'tur_secenek' => $this->tur_secenek,
-            'units' => $this->units,
+            'okumalar' => $okumalar,
+            'okumali_bedeller' => $okumali_bedeller,
         ]);
     }
 

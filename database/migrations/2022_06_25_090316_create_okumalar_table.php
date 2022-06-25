@@ -22,7 +22,6 @@ return new class extends Migration {
             $table->foreignIdFor(Bina::class);
             $table->foreignIdFor(Bedel::class);
             $table->foreignIdFor(Sakin::class);
-            $table->float('ilk_okuma', 12, 2);
             $table->float('son_okuma', 12, 2);
             $table->string('status')->default('OKUNDU');
             $table->timestamps();
