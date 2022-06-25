@@ -8,6 +8,15 @@
         <h2 class="subtitle has-text-weight-light">{{$bina->name}} için harcama/fatura kalemleri</h2>
     </header>
 
+    <a href="/bina-view/{{$bina->id}}">
+        <span class="icon-text">
+            <span class="icon">
+                <x-icon icon="arrow-back" fill="{{config('constants.icons.color.active')}}"/>
+            </span>
+            <span>Geri<span>
+        </span>
+    </a>
+
     {{-- NOTIFICATION --}}
     @if ($notification)
         <div class="notification {{$notification["type"]}} is-light">{!! $notification["message"] !!}</div>

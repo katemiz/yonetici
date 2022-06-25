@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Bina;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,13 +14,15 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('binalar', function (Blueprint $table) {
+        Schema::create('bedeller', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->string('name');
-            $table->string('pbirimi');
-            $table->string('address');
-            $table->string('city');
+            $table->foreignIdFor(Bina::class);
+            $table->string('title');
+            $table->string('tur');
+            $table->string('unit');
+            $table->float('bedel', 12, 2);
+            $table->string('status')->default('ACTIVE');
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('binalar');
+        Schema::dropIfExists('bedeller');
     }
 };

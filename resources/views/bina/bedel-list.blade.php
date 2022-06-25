@@ -1,31 +1,44 @@
 <div class="section container">
 
     <header class="my-6">
-        <h1 class="title has-text-weight-light is-size-1">Bina Sakinleri</h1>
-        <h2 class="subtitle has-text-weight-light">{{$bina->name}} oturan sakinler</h2>
+        <h1 class="title has-text-weight-light is-size-1">Bina Hizmet Bedelleri</h1>
+        <h2 class="subtitle has-text-weight-light">Sabit ve/veya sayaçlı hizmet/ürünlere ait bedeller</h2>
     </header>
+
+    <a href="/bina-view/{{$bina->id}}">
+        <span class="icon-text">
+            <span class="icon">
+                <x-icon icon="arrow-back" fill="{{config('constants.icons.color.active')}}"/>
+            </span>
+            <span>Geri<span>
+        </span>
+    </a>
 
     {{-- NOTIFICATION --}}
     @if ($notification)
         <div class="notification {{$notification["type"]}} is-light">{!! $notification["message"] !!}</div>
     @endif
 
-    <x-table-filter add="Bina Sakini Ekle" addlink="/sakin-form/{{ $bina->id }}" showsearch="{{$sakinler->total() > 0 ? true:false}}"/>
+    <x-table-filter add="Ürün/Hizmet Bedeli Ekle" addlink="/bedel-form/{{$bina->id}}" showsearch="{{$bedeller->total() > 0 ? true:false}}"/>
 
-    @if ($sakinler->total() > 0)
+    @if ($bedeller->total() > 0)
 
     <!-- ************************ -->
     <!-- TABLE                    -->
     <!-- ************************ -->
-
     <table class="table is-fullwidth">
 
-        <caption>Bu yerleşkede <b>{{ $sakinler->total() }}</b> sakin oturmaktadır</caption>
+        <caption>Toplam <b>{{ $bedeller->total() }}</b> ürün/hizmet bedeli vardır</caption>
 
         <thead>
             <tr>
 
-                <th>
+                <th>Hizmet/Ürün Tanımı</th>
+                <th>Hizmet/Ürün Türü</th>
+                <th>Birimi</th>
+                <th>Bedel</th>
+
+                {{-- <th>
                     <span class="icon-text" wire:click="sortBy('title')">
                         <span class="icon {{ $sortDirection === 'asc' ? 'is-hidden' : ''}}">
                             <x-icon icon="arrow-up" fill="{{config('constants.icons.color.active')}}"/>
@@ -35,7 +48,7 @@
                         </span>
                         <span>İsim</span>
                     </span>
-                </th>
+                </th> --}}
 
                 <th class="is-2">
                     <span class="icon-text" wire:click="sortBy('created_at')">
@@ -55,19 +68,16 @@
 
         <tbody>
 
-            @foreach ($sakinler as $sakin)
+            @foreach ($bedeller as $bedel)
                 <tr>
-                    <td>
-                        <a href="/sakin-view/{{$bina->id}}/{{$sakin->id}}">{{ $sakin->name }} {{ $sakin->lastname }}</a>
-                    </td>
-
-                    <td>{{ $sakin->created_at }}</td>
+                    <td>{{ $bedel->title }}</td>
+                    <td>{{ $bedel->tur }}</td>
+                    <td>{!! $bedel->unit !!}</td>
+                    <td>{{ $bedel->bedel }}</td>
+                    <td>{{ $bedel->created_at }}</td>
 
                     <td class="has-text-right">
-                        {{-- <a href="/sakin-view/{{$bina->id}}/{{$sakin->id}}" class="icon">
-                            <x-icon icon="eye" fill="{{config('constants.icons.color.active')}}"/>
-                        </a> --}}
-                        <a href="/sakin-form/{{$bina->id}}/{{$sakin->id}}" class="icon">
+                        <a href="/bedel-form/{{$bina->id}}/{{$bedel->id}}" class="icon">
                             <x-icon icon="edit" fill="{{config('constants.icons.color.active')}}"/>
                         </a>
                     </td>
@@ -78,11 +88,13 @@
 
     </table>
 
-    {{ $sakinler->links()}}
+
+    {{ $bedeller->links()}}
+
+
 
     @else
-        <div class="notification is-warning is-light">Bu bina/yerleşke için oturan tanımı yapılmamıştır.</div>
+        <div class="notification is-warning is-light">Yönettiğiniz bina bulunmamaktadır.</div>
     @endif
 
 </div>
-

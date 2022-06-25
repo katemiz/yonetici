@@ -40,18 +40,27 @@
                         </a>
                     </li>
 
-                    <li>
+                    {{-- <li>
                         <a href="/bina-ayar/{{ $bina->id }}">
                             <span class="icon-text">
                                 <span class="icon">
                                     <x-icon icon="settings" fill="{{config('constants.icons.color.active')}}"/>
                                 </span>
-                                </span>Ayarlar <span>
+                                <span>Ayarlar </span>
+                            </span>
+                        </a>
+                    </li> --}}
+
+                    <li>
+                        <a href="/bedel-list/{{ $bina->id }}">
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <x-icon icon="settings" fill="{{config('constants.icons.color.active')}}"/>
+                                </span>
+                                <span>Hizmet Bedelleri</span>
                             </span>
                         </a>
                     </li>
-
-
 
                     <li>
                         <a href="/kalem-list/{{ $bina->id }}">
@@ -59,14 +68,23 @@
                                 <span class="icon">
                                     <x-icon icon="settings" fill="{{config('constants.icons.color.active')}}"/>
                                 </span>
-                                </span>Harcama Kalemleri<span>
+                                <span>Harcama Türleri</span>
                             </span>
                         </a>
                     </li>
 
 
 
-
+                    <li>
+                        <a href="/okuma-durum/{{ $bina->id }}">
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <x-icon icon="settings" fill="{{config('constants.icons.color.active')}}"/>
+                                </span>
+                                <span>Sayaç Okumaları</span>
+                            </span>
+                        </a>
+                    </li>
 
 
 
@@ -87,7 +105,10 @@
                         </div>
                     </div>
 
-                    <div class="content">{{ $bina->address}}</div>
+                    <div class="content">
+                        {{ $bina->address }}
+                        <p class="mt-3">Kullanılan Para Birimi : {{ $bina->pbirimi }}</p>
+                    </div>
                 </div>
 
                 <footer class="card-footer">

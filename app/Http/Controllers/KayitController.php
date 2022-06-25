@@ -4,39 +4,45 @@ namespace App\Http\Controllers;
 
 use App\Models\Kayit;
 use App\Models\Ayarlar;
+use App\Models\Bedel;
 use App\Models\Bina;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class KayitController extends Controller
 {
+    public $bina = false;
+    public $kayit = false;
+    public $tutarlar = false;
+    public $okumali_bedeller = false;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->bina = Bina::find(session('bina_id'));
+
+            if ($this->bina->user_id !== Auth::id()) {
+                abort('403');
+            }
+
+            if ($request->tur == 'aidat') {
+                $this->tutarlar = $this->calculateAidatlar();
+                $this->okumali_bedeller = $this->okumaliBedeller();
+            }
+
+            return $next($request);
+        });
+    }
+
     public function kayitForm(Request $request)
     {
-        $kayit = false;
-        $tutarlar = false;
-
-        // $this->setSelectedBina();
-        $bina = Bina::find(session('bina_id'));
-
-        // dd(['aa' => $bina, 'ses' => session('bina_id')]);
-
-        if ($bina->user_id !== Auth::id()) {
-            abort('403');
-        }
-
-        if ($request->tur == 'aidat') {
-            $tutarlar = $this->calculateAidatlar($bina);
-        }
-
-        // return redirect()->route('durum', [
-        //     'tur' => $request->tur,
-        // ]);
-
         return view('kayit.kayit-form', [
-            'bina' => $bina,
-            'kayit' => $kayit,
+            'bina' => $this->bina,
+            'kayit' => $this->kayit,
             'tur' => $request->tur,
-            'tutarlar' => $tutarlar,
+            'tutarlar' => $this->tutarlar,
+            'okumali_bedeller' => $this->okumali_bedeller,
         ]);
     }
 
@@ -123,44 +129,34 @@ class KayitController extends Controller
         // ]);
     }
 
-    public function calculateAidat()
+    public function sabitBedeller()
     {
-        $ayarlar = Ayarlar::query()
-            ->where('bina_id', '=', session('bina_id'))
-            ->first()
-            ->get()
-            ->toArray();
+        $sabit_bedeller = Bedel::where([
+            ['bina_id', '=', session('bina_id')],
+            ['tur', '=', 'SABIT'],
+        ])->sum('bedel');
 
-        $ayarlar = $ayarlar['0'];
-
-        $aylik =
-            $ayarlar['yakit'] +
-            $ayarlar['su'] +
-            $ayarlar['sicak_su'] +
-            $ayarlar['elektrik'] +
-            $ayarlar['asansor'] +
-            $ayarlar['hizmetli'] +
-            $ayarlar['vergi'] +
-            $ayarlar['bakim'] +
-            $ayarlar['onarim'] +
-            $ayarlar['aidat'];
-
-        return $aylik;
+        return $sabit_bedeller;
     }
 
-    public function calculateAidatlar($bina)
+    public function okumaliBedeller()
     {
-        $aylik = $this->calculateAidat();
+        $okumali_bedeller = Bedel::where([
+            ['bina_id', '=', session('bina_id')],
+            ['tur', '=', 'SAYAC'],
+        ]);
 
-        foreach ($bina->sakinler as $sakin) {
+        return $okumali_bedeller;
+    }
+
+    public function calculateAidatlar()
+    {
+        $aylik = $this->sabitBedeller();
+
+        foreach ($this->bina->sakinler as $sakin) {
             $tutarlar[$sakin->id] = ($sakin->payratio * $aylik) / 100;
         }
 
         return $tutarlar;
     }
-
-    // public function setSelectedBina()
-    // {
-    //     session(['selected_bina' => 'Deneme Apt', 'bina_id' => 3]);
-    // }
 }

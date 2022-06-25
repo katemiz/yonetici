@@ -8,40 +8,60 @@
 
         <div class="column box mt-6">
 
-            <form action="{{ $bina ? '/bina-update/'.$bina->id : '/bina-add' }}" method="{{ $bina ? 'POST' : 'POST' }}" enctype="multipart/form-data">
+            <form action="{{ $bina ? '/bina-update/'.$bina->id : '/bina-add' }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <div class="field">
-                <label class="label">Bina İsmi</label>
-                <div class="control">
-                <input class="input" type="text" name="binaname"
-                    placeholder="Pembeköşk Apartmanı"
-                    value="{{$bina ? $bina->name : ''}}">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Adres</label>
-                <div class="control">
-                <input class="input" type="text" name="binaaddress"
-                    placeholder="Yalıkavak Sok"
-                    value="{{$bina ? $bina->address : ''}}">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Şehir</label>
-                <div class="control">
-                    <div class="select" >
-                        <select name="binacity">
-                          <option value="6">Ankara</option>
-                          <option value="34">İstanbul</option>
-                        </select>
+                <div class="field">
+                    <label class="label">Kullanılacak Para Birimi</label>
+                    <div class="field-body">
+                        <div class="field">
+                        <div class="control">
+                            <div class="select" >
+                                <select name="parabirimi">
+                                    <option value="belirsiz">Para Birimi Seçiniz</option>
+                                    @foreach ($paralar as $key => $pbirimi)
+                                    <option value="{{$key}}" {{ $bina->pbirimi && $bina->pbirimi == $key ? 'selected':''}}>{{$pbirimi}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <button type="submit" class="button is-link is-light">{{$bina ? 'Güncelle' : 'Kaydet'}}</button>
+                <div class="field">
+                    <label class="label">Bina İsmi</label>
+                    <div class="control">
+                    <input class="input" type="text" name="binaname"
+                        placeholder="Pembeköşk Apartmanı"
+                        value="{{$bina ? $bina->name : ''}}">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Adres</label>
+                    <div class="control">
+                    <input class="input" type="text" name="binaaddress"
+                        placeholder="Yalıkavak Sok"
+                        value="{{$bina ? $bina->address : ''}}">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Şehir</label>
+                    <div class="control">
+                        <div class="select" >
+                            <select name="binacity">
+                            <option value="6">Ankara</option>
+                            <option value="34">İstanbul</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column has-text-right">
+                    <button type="submit" class="button is-link is-light">{{$bina ? 'Güncelle' : 'Kaydet'}}</button>
+                </div>
 
             </form>
 

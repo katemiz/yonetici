@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\BedelController;
 use App\Http\Controllers\BinaController;
 use App\Http\Controllers\KalemController;
 use App\Http\Controllers\KayitController;
+use App\Http\Controllers\OkumaController;
 use App\Http\Controllers\SakinController;
+use App\Http\Livewire\BedelList;
 use App\Http\Livewire\BinaList;
 use App\Http\Livewire\BinaView;
 use App\Http\Livewire\DurumList;
@@ -58,6 +61,16 @@ Route::middleware(['auth'])->group(function () {
         BinaController::class,
         'ayarUpdate',
     ]);
+
+    Route::get('/okuma-durum/{id}', [OkumaController::class, 'durum']);
+    Route::get('/okuma-form/{id}', [OkumaController::class, 'form']);
+
+    Route::get('/bedel-form/{id}', [BedelController::class, 'form']);
+    Route::get('/bedel-form/{id}/{bedelid}', [BedelController::class, 'form']);
+    Route::post('/bedel-upd/{id}/{bedelid}', [BedelController::class, 'upd']);
+
+    Route::get('/bedel-list/{id}', BedelList::class)->name('bedeller');
+    Route::post('/bedel-add/{id}', [BedelController::class, 'add']);
 
     Route::get('/kalem-list/{id}', KalemList::class)->name('kalemler');
     Route::get('/kalem-form/{id}', [KalemController::class, 'form']);

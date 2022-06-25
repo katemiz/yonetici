@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Config;
 
 class BinaController extends Controller
 {
+    public $paralar = [
+        'TL' => 'Türk Lirası',
+        'USD' => 'Amerikan Doları',
+        'EUR' => 'Avrupa Para Birimi',
+    ];
+
     public function getBinalar()
     {
         return Bina::query()
@@ -40,7 +46,6 @@ class BinaController extends Controller
         }
 
         if (count($binalarim) == 1) {
-            //dd($binalarim->first()->id);
             $this->selectActive($binalarim->first()->id);
 
             $is_bina_selected = true;
@@ -71,6 +76,7 @@ class BinaController extends Controller
 
         return view('bina.bina-form', [
             'bina' => $bina,
+            'paralar' => $this->paralar,
         ]);
     }
 
@@ -78,6 +84,7 @@ class BinaController extends Controller
     {
         $props['user_id'] = Auth::id();
         $props['name'] = $req->input('binaname');
+        $props['pbirimi'] = $req->input('parabirimi');
         $props['address'] = $req->input('binaaddress');
         $props['city'] = $req->input('binacity');
 
@@ -100,6 +107,7 @@ class BinaController extends Controller
     {
         $props['user_id'] = Auth::id();
         $props['name'] = $req->input('binaname');
+        $props['pbirimi'] = $req->input('parabirimi');
         $props['address'] = $req->input('binaaddress');
         $props['city'] = $req->input('binacity');
 

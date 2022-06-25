@@ -33,6 +33,10 @@ class Bina extends Model
         return $this->hasMany(Kalem::class);
     }
 
+    public function bedeller()
+    {
+        return $this->hasMany(Kalem::class);
+    }
 
 
     protected function carbonCreatedAt(): Attribute
