@@ -28,6 +28,11 @@ class DurumList extends Component
     public $sortTimeField = 'created_at';
     public $sortTimeDirection = 'desc';
 
+    protected $listeners = [
+        'alacakToGelir' => 'alacakToGelir',
+        'verecekToGider' => 'verecekToGider',
+    ];
+
     public function paginationView()
     {
         return 'livewire::my-pagination';
@@ -36,6 +41,8 @@ class DurumList extends Component
     public function render(Request $request)
     {
         $this->tur = $request->tur;
+
+        $action = false;
 
         $bina = Bina::find(session('bina_id'));
 
@@ -51,102 +58,105 @@ class DurumList extends Component
                 'giderler' => $ozet['gider'],
                 'nakit' => $ozet['nakit'],
             ]);
+        } else {
+            switch ($request->tur) {
+                case 'alacaklar':
+                    $html['h1'] = 'Alacaklar';
+                    $html['h2'] = $bina->name . ': Alacak Kayıtları';
+                    $html['addcommand'] = 'Alacak Ekle';
+                    $html['addlink'] = '/bina-form';
+                    $html['noitem'] = 'Alacak Kaydı Yoktur';
+
+                    $table['door_no'] = true;
+                    $table['sakin_id'] = true;
+                    $table['aciklama'] = true;
+                    $table['donem'] = true;
+                    $table['son_odeme'] = false;
+                    $table['tutar'] = true;
+                    $table['remarks'] = true;
+                    $table['created_at'] = true;
+
+                    $q = $this->listAlacaklar($request);
+
+                    $action['alindi'] = true;
+
+                    break;
+
+                case 'verecekler':
+                    $html['h1'] = 'Ödenecek Fatura ve Borçlar';
+                    $html['h2'] = $bina->name . ': Verecek Kayıtları';
+                    $html['addcommand'] = 'Fatura Ekle';
+                    $html['addlink'] = '/kayit-form/fatura';
+                    $html['noitem'] = 'Ödenecek Fatura ve Borç Kaydı Yoktur';
+
+                    $table['door_no'] = false;
+                    $table['sakin_id'] = false;
+                    $table['aciklama'] = true;
+                    $table['donem'] = false;
+                    $table['son_odeme'] = true;
+                    $table['tutar'] = true;
+                    $table['remarks'] = true;
+                    $table['created_at'] = false;
+
+                    $action['ödendi'] = true;
+
+                    $q = $this->listVerecekler($request);
+                    break;
+
+                case 'gelirler':
+                    $q = $this->listGelirler($request);
+
+                    $html['h1'] = 'Gelirler';
+                    $html['h2'] = $bina->name . ': Gelir Kayıtları';
+                    $html['addcommand'] = 'Gelir Ekle';
+                    $html['addlink'] = '/bina-form';
+                    $html['noitem'] = 'Gelir kaydı yoktur';
+
+                    $table['door_no'] = true;
+                    $table['sakin_id'] = true;
+                    $table['aciklama'] = true;
+                    $table['donem'] = false;
+                    $table['son_odeme'] = false;
+                    $table['tutar'] = true;
+                    $table['remarks'] = false;
+                    $table['created_at'] = false;
+
+                    break;
+
+                case 'giderler':
+                    $q = $this->listGiderler($request);
+
+                    $html['h1'] = 'Giderler';
+                    $html['h2'] = $bina->name . ': Gider Kayıtları';
+                    $html['addcommand'] = 'Gider Ekle';
+                    $html['addlink'] = '/kayit-form/gider';
+                    $html['noitem'] = 'Gider kaydı yoktur';
+
+                    $table['door_no'] = false;
+                    $table['sakin_id'] = false;
+                    $table['aciklama'] = true;
+                    $table['donem'] = false;
+                    $table['son_odeme'] = true;
+                    $table['tutar'] = true;
+                    $table['remarks'] = true;
+                    $table['created_at'] = false;
+                    break;
+            }
+
+            $kayitlar = $q->paginate(
+                Config::get('constants.table.no_of_results')
+            );
+
+            return view('durum.durum-list', [
+                'notification' => false,
+                'html' => (object) $html,
+                'table' => (object) $table,
+                'action' => $action,
+                'bina' => Bina::find(session('bina_id')),
+                'type' => $this->tur,
+                'kayitlar' => $kayitlar,
+            ]);
         }
-
-        switch ($request->tur) {
-            case 'alacaklar':
-                $html['h1'] = 'Alacaklar';
-                $html['h2'] = $bina->name . ': Alacak Kayıtları';
-                $html['addcommand'] = 'Alacak Ekle';
-                $html['addlink'] = '/bina-form';
-                $html['noitem'] = 'Alacak Kaydı Yoktur';
-
-                $table['door_no'] = true;
-                $table['sakin_id'] = true;
-                $table['aciklama'] = true;
-                $table['donem'] = true;
-                $table['son_odeme'] = true;
-                $table['tutar'] = true;
-                $table['remarks'] = true;
-                $table['created_at'] = true;
-
-                $q = $this->listAlacaklar($request);
-
-                break;
-
-            case 'verecekler':
-                $html['h1'] = 'Ödenecek Fatura ve Borçlar';
-                $html['h2'] = $bina->name . ': Verecek Kayıtları';
-                $html['addcommand'] = 'Fatura Ekle';
-                $html['addlink'] = '/bina-form';
-                $html['noitem'] = 'Ödenecek Fatura ve Borç Kaydı Yoktur';
-
-                $table['door_no'] = false;
-                $table['sakin_id'] = false;
-                $table['aciklama'] = true;
-                $table['donem'] = false;
-                $table['son_odeme'] = true;
-                $table['tutar'] = true;
-                $table['remarks'] = true;
-                $table['created_at'] = false;
-
-                $q = $this->listVerecekler($request);
-                break;
-
-            case 'gelirler':
-                $q = $this->listGelirler($request);
-
-                $html['h1'] = 'Gelirler';
-                $html['h2'] = $bina->name . ': Gelir Kayıtları';
-                $html['addcommand'] = 'Gelir Ekle';
-                $html['addlink'] = '/bina-form';
-                $html['noitem'] = 'Gelir kaydı yoktur';
-
-                $table['door_no'] = true;
-                $table['sakin_id'] = true;
-                $table['aciklama'] = true;
-                $table['donem'] = false;
-                $table['son_odeme'] = false;
-                $table['tutar'] = true;
-                $table['remarks'] = false;
-                $table['created_at'] = false;
-
-                break;
-
-            case 'giderler':
-                $q = $this->listGiderler($request);
-
-                $html['h1'] = 'Giderler';
-                $html['h2'] = $bina->name . ': Gider Kayıtları';
-                $html['addcommand'] = 'Gider Ekle';
-                $html['addlink'] = '/bina-form';
-                $html['noitem'] = 'Gider kaydı yoktur';
-
-                $table['door_no'] = false;
-                $table['sakin_id'] = false;
-                $table['aciklama'] = true;
-                $table['donem'] = false;
-                $table['son_odeme'] = true;
-                $table['tutar'] = true;
-                $table['remarks'] = true;
-                $table['created_at'] = false;
-                break;
-
-            default:
-                # code...
-                break;
-        }
-
-        $kayitlar = $q->paginate(Config::get('constants.table.no_of_results'));
-
-        return view('durum.durum-list', [
-            'notification' => false,
-            'html' => (object) $html,
-            'table' => (object) $table,
-            'bina' => Bina::find(session('bina_id')),
-            'type' => $this->tur,
-            'kayitlar' => $kayitlar,
-        ]);
     }
 
     public function ozet($request)
@@ -291,5 +301,23 @@ class DurumList extends Component
         }
 
         return true;
+    }
+
+    public function alacakToGelir(Request $request, $binaId, $kayitId)
+    {
+        $props['tur'] = 'gelir';
+
+        Kayit::find($kayitId)->update($props);
+
+        $request->tur = $this->tur;
+    }
+
+    public function verecekToGider(Request $request, $binaId, $kayitId)
+    {
+        $props['tur'] = 'gider';
+
+        Kayit::find($kayitId)->update($props);
+
+        $request->tur = $this->tur;
     }
 }

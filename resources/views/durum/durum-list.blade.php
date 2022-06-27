@@ -19,6 +19,60 @@
             @this.call('resetFilter',type)
         }
 
+
+
+
+        function alindiKaydi(binaId,kayitId) {
+
+            Swal.fire({
+                title: 'Bu alacak gelir kaydına dönüştürülecektir.',
+                text: 'Onaylıyor musunuz?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet',
+                cancelButtonText: 'İptal',
+
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.livewire.emit('alacakToGelir', binaId, kayitId)
+                } else {
+                return false
+                }
+            })
+        }
+
+
+
+
+        function odendiKaydi(binaId,kayitId) {
+
+            Swal.fire({
+                title: 'Ödendi Kaydı?',
+                text: 'Bu fatura/borç/verecek gider kaydına dönüştürülecektir. Onaylıyor musunuz?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet',
+                cancelButtonText: 'İptal',
+
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.livewire.emit('verecekToGider', binaId, kayitId)
+                } else {
+                return false
+                }
+            })
+        }
+
+
+
+
+
+
+
     </script>
 
 
@@ -60,10 +114,6 @@
                     <th>Borçlu</th>
                     @endif
 
-
-
-
-
                     @if ($table->aciklama)
                     <th>
                         <span class="icon-text" wire:click="sortBy('title')">
@@ -86,8 +136,6 @@
                     <th>Son Ödeme</th>
                     @endif
 
-
-
                     @if ($table->created_at)
                     <th class="is-2">
                         <span class="icon-text" wire:click="sortBy('created_at')">
@@ -102,8 +150,10 @@
                     </th>
                     @endif
 
-
+                    @if ($action)
                     <th class="has-text-right is-2">İşlemler</th>
+                    @endif
+
                 </tr>
             </thead>
 
@@ -146,14 +196,11 @@
                         </td>
                     @endif
 
-
                     @if ($table->son_odeme)
                         <td>
                             {{ $kayit->son_odeme }}
                         </td>
                     @endif
-
-
 
                     @if ($table->created_at)
                         <td>
@@ -161,17 +208,36 @@
                         </td>
                     @endif
 
-
-
+                    @if ($action)
                     <td class="has-text-right">
-                    <a href="/bina-view/{{$kayit->id}}" class="icon">
-                        <x-icon icon="eye" fill="{{config('constants.icons.color.active')}}"/>
 
-                    </a>
-                    <a href="/sakinler-form/{bina.id}/{item.id}" class="icon">
-                        <x-icon icon="edit" fill="{{config('constants.icons.color.active')}}"/>
-                    </a>
+                        @if (isset($action['view']) && $action['view'])
+                        <a href="/bina-view/{{$kayit->id}}" class="icon">
+                            <x-icon icon="eye" fill="{{config('constants.icons.color.active')}}"/>
+                        </a>
+                        @endif
+
+                        @if (isset($action['edit']) && $action['edit'])
+                        <a href="/sakinler-form/{bina.id}/{item.id}" class="icon">
+                            <x-icon icon="edit" fill="{{config('constants.icons.color.active')}}"/>
+                        </a>
+                        @endif
+
+                        @if (isset($action['alindi']) && $action['alindi'])
+                        <a onclick="alindiKaydi('{{$bina->id}}','{{$kayit->id}}')" class="icon">
+                            <x-icon icon="income" fill="{{config('constants.icons.color.active')}}"/>
+                        </a>
+                        @endif
+
+                        @if (isset($action['ödendi']) && $action['ödendi'])
+                        <a onclick="odendiKaydi('{{$bina->id}}','{{$kayit->id}}')" class="icon">
+                            <x-icon icon="outbox" fill="{{config('constants.icons.color.active')}}"/>
+                        </a>
+                        @endif
+
                     </td>
+                    @endif
+
                 </tr>
 
                 @endforeach
