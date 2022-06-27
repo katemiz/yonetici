@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
             'name' => 'Pembeköşk Apartmanı',
             'address' => 'Beste Sokak 2 Aşağı Eğlence, Etlik',
+            'pbirimi' => 'TL',
             'city' => 6,
         ]);
 
