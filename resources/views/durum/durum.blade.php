@@ -10,21 +10,21 @@
         <div class="level-item has-text-centered">
             <div>
                 <p class="heading">TOPLAM GELİR</p>
-                <p class="title has-text-link">{{$gelirler}} {{$bina->ayarlar->para_birimi}}</p>
+                <p class="title has-text-link">{{$gelirler}} {{$bina->pbirimi}}</p>
             </div>
         </div>
 
         <div class="level-item has-text-centered">
             <div>
                 <p class="heading">TOPLAM GİDER</p>
-                <p class="title has-text-link">{{$giderler}} {{$bina->ayarlar->para_birimi}}</p>
+                <p class="title has-text-link">{{$giderler}} {{$bina->pbirimi}}</p>
             </div>
         </div>
 
         <div class="level-item has-text-centered">
             <div>
                 <p class="heading">BAKİYE</p>
-                <p class="title has-text-link">{{$nakit}} {{$bina->ayarlar->para_birimi}}</p>
+                <p class="title has-text-link">{{$nakit}} {{$bina->pbirimi}}</p>
             </div>
         </div>
 
@@ -35,14 +35,14 @@
         <div class="level-item has-text-centered">
             <div>
                 <p class="heading">TOPLAM ALACAKLAR</p>
-                <p class="title">{{$alacaklar}} {{$bina->ayarlar->para_birimi}}</p>
+                <p class="title">{{$alacaklar}} {{$bina->pbirimi}}</p>
             </div>
         </div>
 
         <div class="level-item has-text-centered">
             <div>
                 <p class="heading">TOPLAM BORÇLAR</p>
-                <p class="title">{{$verecekler}} {{$bina->ayarlar->para_birimi}}</p>
+                <p class="title">{{$verecekler}} {{$bina->pbirimi}}</p>
             </div>
         </div>
 

@@ -1736,6 +1736,7 @@ class DatabaseSeeder extends Seeder
             'son_okuma' => 50,
             'created_at' => '2022-04-22 20:00:00',
             'updated_at' => '2022-04-22 20:00:00',
+            'status' => 'ODENDI',
         ]);
 
         Okuma::create([
