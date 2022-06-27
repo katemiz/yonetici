@@ -6,7 +6,7 @@
             <img src="{{ asset('/images/app_header_logo.svg') }}" alt="{{ config('constants.app.app_header_logo') }}">
         </a>
 
-        <a href="/" class="navbar-item has-text-white">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar_ana">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -26,7 +26,6 @@
                     </span>
                 </a>
 
-
                 <div class="navbar-item has-dropdown is-hoverable">
                     <p class="navbar-link" href="/durum/ozet">Durum</p>
                     <div class="navbar-dropdown">
@@ -35,18 +34,6 @@
                         <a href="/durum/verecekler" class="navbar-item">Verecekler</a>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
                 <a href="/durum/gelirler" class="navbar-item icon-text">
                     <span class="icon">
@@ -78,8 +65,6 @@
                         <a href="/kayit-form/fatura" class="navbar-item">Fatura Kaydı</a>
                         <a href="/kayit-form/gelir" class="navbar-item">Gelir Kaydı</a>
                         <a href="/kayit-form/gider" class="navbar-item">Gider Kaydı</a>
-
-
 
                     </div>
                 </div>

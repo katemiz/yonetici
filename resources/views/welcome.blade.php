@@ -4,9 +4,16 @@
 
         <div class="columns">
 
-            <div class="column content is-half">
+            <div class="column is-half">
+                <h1 class="title has-text-weight-light is-size-1 has-text-left">Akıllı Yönetici / Akıllı Uygulama</h1>
 
-                <h1 class="title my-6 has-text-weight-light is-size-1 has-text-left">Akıllı Yönetici / Akıllı Uygulama</h1>
+                <figure class="image is-1by1">
+                    <img src="images/hero.svg" alt="The Process Flow" on:click="{showImg}">
+                </figure>
+            </div>
+
+            <div class="column content">
+
                 <h1 class="subtitle has-text-weight-light">Tüm İşlemlerinizi Cepten Yönetin</h1>
 
 
@@ -38,18 +45,18 @@
 
                         <ul>
                             <li>Kararların Takibi/Tutulması</li>
-                            <li>Karararın Bildirimi</li>
+                            <li>Kararların Bildirimi</li>
                         </ul>
                     </li>
                 </ul>
 
             </div>
 
-            <div class="column is-half">
+            {{-- <div class="column is-half">
                 <figure class="image is-1by1">
                     <img src="images/hero.svg" alt="The Process Flow" on:click="{showImg}">
                 </figure>
-            </div>
+            </div> --}}
 
         </div>
 
