@@ -14,7 +14,7 @@
         </article>
 
         <article class="tile is-child notification has-text-centered my-6 is-2">
-            <p class="has-text-weight-light">{{config('constants.app.title')}}</p>
+            <p class="has-text-weight-light is-hidden-mobile">{{config('constants.app.title')}}</p>
 
             <figure class="image is-inline-block" >
             <img class="mt-3 mt-1-mobile pt-3 pt-1-mobile" src="/images/{{config('constants.app.app_footer_logo')}}" alt="App Logo">
