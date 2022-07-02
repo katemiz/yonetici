@@ -85,21 +85,12 @@ class KayitController extends Controller
             foreach ($bina->sakinler as $sakin) {
                 $props['sakin_id'] = $sakin->id;
                 $props['tutar'] =
-                    ($sakin->payratio / 100) * $this->calculateAidat();
+                    ($sakin->payratio / 100) * $this->sabitBedeller();
 
                 Kayit::create($props);
             }
 
             return redirect()->route('durum', ['tur' => 'alacaklar']);
-
-            // return view('kayit.kayit-list', [
-            //     'notification' => [
-            //         'type' => 'is-success',
-            //         'message' => 'Dönem aidat kaydı eklenmiştir',
-            //     ],
-            //     'bina' => $bina,
-            //     'sakin' => $sakin,
-            // ]);
         }
 
         if ($req->tur == 'fatura') {
@@ -109,24 +100,10 @@ class KayitController extends Controller
             $props['tutar'] = $req->input('tutar');
             $props['son_odeme'] = $req->input('sonodeme');
 
-            // dd($props);
-
             Kayit::create($props);
 
             return redirect()->route('durum', ['tur' => 'verecekler']);
         }
-
-        // $sakin = Alacak::create($props);
-        // $bina = Bina::find($req->id);
-
-        // return view('kayit.kayit-view', [
-        //     'notification' => [
-        //         'type' => 'is-success',
-        //         'message' => 'Kayıt eklenmiştir',
-        //     ],
-        //     'bina' => $bina,
-        //     'sakin' => $sakin,
-        // ]);
     }
 
     public function sabitBedeller()
