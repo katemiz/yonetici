@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class KayitController extends Controller
 {
-    public $bina = false;
+    public $bina;
     public $kayit = false;
     public $tutarlar = false;
     public $okumali_bedeller = false;
@@ -154,7 +154,7 @@ class KayitController extends Controller
         $aylik = $this->sabitBedeller();
 
         foreach ($this->bina->sakinler as $sakin) {
-            $tutarlar[$sakin->id] = ($sakin->payratio * $aylik) / 100;
+            $tutarlar[$sakin->id] = round(($sakin->payratio * $aylik) / 100, 0);
         }
 
         return $tutarlar;
