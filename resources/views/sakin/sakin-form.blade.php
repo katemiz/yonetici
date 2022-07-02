@@ -73,7 +73,7 @@
 
                         <label class="label" for="payratio">Genel Ödeme Oranı (%)</label>
                         <div class="control" id="payratio">
-                            <input class="input" name="payratio" type="number" min="50" max="100" placeholder="100"  value="{{$sakin ? $sakin->payratio: ''}}">
+                            <input class="input" name="payratio" type="number" step=0.01 min="50" max="100" placeholder="100"  value="{{$sakin ? $sakin->payratio: ''}}">
                         </div>
                     </div>
 
