@@ -298,7 +298,7 @@ class DurumList extends Component
         return true;
     }
 
-    public function alacakToGelir(Request $request, $binaId, $kayitId)
+    public function alacakToGelir(Request $request, $kayitId)
     {
         $props['tur'] = 'gelir';
 
@@ -307,7 +307,7 @@ class DurumList extends Component
         $request->tur = $this->tur;
     }
 
-    public function verecekToGider(Request $request, $binaId, $kayitId)
+    public function verecekToGider(Request $request, $kayitId)
     {
         $props['tur'] = 'gider';
 

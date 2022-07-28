@@ -16,7 +16,7 @@
             @this.call('resetFilter')
         }
 
-        function alindiKaydi(binaId,kayitId) {
+        function alindiKaydi(kayitId) {
 
             Swal.fire({
                 title: 'Bu alacak gelir kaydına dönüştürülecektir.',
@@ -30,14 +30,14 @@
 
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.livewire.emit('alacakToGelir', binaId, kayitId)
+                    window.livewire.emit('alacakToGelir', kayitId)
                 } else {
                 return false
                 }
             })
         }
 
-        function odendiKaydi(binaId,kayitId) {
+        function odendiKaydi(kayitId) {
 
             Swal.fire({
                 title: 'Ödendi Kaydı?',
@@ -51,7 +51,7 @@
 
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.livewire.emit('verecekToGider', binaId, kayitId)
+                    window.livewire.emit('verecekToGider', kayitId)
                 } else {
                 return false
                 }
@@ -196,13 +196,13 @@
                         @endif
 
                         @if (isset($action['alindi']) && $action['alindi'])
-                        <a onclick="alindiKaydi('{{$bina->id}}','{{$kayit->id}}')" class="icon">
+                        <a onclick="alindiKaydi('{{$kayit->id}}')" class="icon">
                             <x-icon icon="income" fill="{{config('constants.icons.color.active')}}"/>
                         </a>
                         @endif
 
                         @if (isset($action['ödendi']) && $action['ödendi'])
-                        <a onclick="odendiKaydi('{{$bina->id}}','{{$kayit->id}}')" class="icon">
+                        <a onclick="odendiKaydi('{{$kayit->id}}')" class="icon">
                             <x-icon icon="outbox" fill="{{config('constants.icons.color.active')}}"/>
                         </a>
                         @endif
