@@ -17,11 +17,6 @@ class Bina extends Model
     protected $table = 'binalar';
 
 
-    public function ayarlar()
-    {
-        return $this->hasOne(Ayarlar::class);
-    }
-
     public function sakinler()
     {
         return $this->hasMany(Sakin::class);
@@ -35,7 +30,7 @@ class Bina extends Model
 
     public function bedeller()
     {
-        return $this->hasMany(Kalem::class);
+        return $this->hasMany(Bedel::class);
     }
 
 

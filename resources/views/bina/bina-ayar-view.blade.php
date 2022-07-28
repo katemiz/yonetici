@@ -6,7 +6,6 @@
         <h1 class="title has-text-weight-light">Ayarlar</h1>
         <h2 class="subtitle">{{$bina->name}} : Fiyatlandırma Birim Değerleri</h2>
 
-
         <a href="/bina-view/{{$bina->id}}">
             <span class="icon-text">
                 <span class="icon">
@@ -15,7 +14,6 @@
                 <span>Geri<span>
             </span>
         </a>
-
 
         {{-- NOTIFICATION --}}
         @if ($notification)

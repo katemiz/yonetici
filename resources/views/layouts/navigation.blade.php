@@ -89,17 +89,17 @@
 
             <div class="navbar-item has-dropdown is-hoverable">
 
-                <div class="navbar-item">
-                    {{session('bina')}}
-                </div>
-
-
                 <p class="navbar-link">
                     <span class="icon">
                         <x-icon icon="user" fill="{{config('constants.icons.color.dark')}}"/>
                     </span>
-                    <span class="mx-1">{{ Auth::user()->name }} {{ Auth::user()->lastname }}</span>
+                    <span class="mx-3 has-text-right">
+                        {{ Auth::user()->name }} {{ Auth::user()->lastname }}
+                        <span class="block has-text-warning is-size-7">{{session('selected_bina')}}</span>
+                    </span>
                 </p>
+
+
 
                 <div class="navbar-dropdown">
 

@@ -2,10 +2,6 @@
 
     <section class="section container">
 
-        {{session('selected_bina')}}
-        {{session('bina_id')}}
-
-
         @if ($bina_sayisi == 0)
 
             <header class="my-6">
@@ -39,29 +35,21 @@
 
             <header class="my-6">
                 <h1 class="title has-text-weight-light is-size-1">Hoşgeldiniz</h1>
-                <h2 class="subtitle has-text-weight-light">{{config('constants.app.welcome_subtitle')}}</h2>
+                <h2 class="subtitle has-text-weight-light">{{config('constants.app.welcome_subtitle')}} : Geçerli Bina</h2>
             </header>
+
+            <div class="notification is-success is-light">Şu anda tanımlı tek bir bina olduğundan bundan sonraki tüm işlemler için bu bina kullanılacaktır.</div>
 
             <div class="notification is-success is-light">{{$bina->name}}</div>
 
 
-            @if (count($bina->sakinler) < 1 || !$bina->ayarlar || count($bina->kalemler) < 1)
+            @if (count($bina->sakinler) < 1 || count($bina->kalemler) < 1)
 
                 <div class="content">
                     <ol>
 
                         @if (count($bina->sakinler) < 1)
                             <li>Bu bina için tanımlı bina sakini bulunmamaktadır. Buradan Ekleyebilirsiniz</li>
-                        @endif
-
-
-                        @if (!$bina->ayarlar)
-                            <li>Bina ayarları (aidat ve hizmet bedelleri gibi) henüz belirlenmemiştir. Ekleyebilirsiniz</li>
-                        @endif
-
-
-                        @if (count($bina->kalemler) < 1)
-                            <li>Harcama Kalemlerini Tanımlayınız</li>
                         @endif
 
                     </ol>

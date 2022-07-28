@@ -16,7 +16,6 @@
 
                 <h1 class="subtitle has-text-weight-light">Tüm İşlemlerinizi Cepten Yönetin</h1>
 
-
                 <p class="mb-3">Bu uygulama ile tüm apartman/site yöneticleri tüm verilerini ve bütçelerini zorlanmadan yönetebilmesi amacıyla hazırlanmıştır.</p>
 
                 <p class="mb-3">Uğraşmadan :</p>
@@ -40,7 +39,6 @@
                         </ul>
                     </li>
 
-
                     <li>Karar Yönetimi
 
                         <ul>
@@ -51,12 +49,6 @@
                 </ul>
 
             </div>
-
-            {{-- <div class="column is-half">
-                <figure class="image is-1by1">
-                    <img src="images/hero.svg" alt="The Process Flow" on:click="{showImg}">
-                </figure>
-            </div> --}}
 
         </div>
 

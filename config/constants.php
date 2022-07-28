@@ -15,6 +15,7 @@ return [
         'welcome_header' => 'constants.welcome_header',
         'welcome_subtitle' => 'Akıllı Yönetici/Akıllı Uygulama',
         'description' => 'Description here',
+        'app_login_logo' => 'app_login_logo.svg',
         'app_header_logo' => 'app_header_logo.svg',
         'app_footer_logo' => 'app_footer_logo.svg',
         'version' => '2022.04.08',
