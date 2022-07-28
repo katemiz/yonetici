@@ -50,7 +50,7 @@ class KayitController extends Controller
     {
         $props['user_id'] = Auth::id();
         $props['bina_id'] = session('bina_id');
-        $props['sakin_id'] = '';
+        $props['sakin_id'] = 0;
         $props['remarks'] = $req->input('editor_data');
 
         if ($req->tur == 'aidat') {
