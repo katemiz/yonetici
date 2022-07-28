@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->integer('door_no');
             $table->boolean('is_evsahibi')->default(1);
             $table->string('phone', 16)->nullable();
-            $table->float('payratio', 12, 2)->default(100);
+            $table->float('payratio', 12, 4)->default(100);
             $table->string('giris_tarihi')->nullable();
             $table->string('remarks')->nullable();
             $table->timestamps();
