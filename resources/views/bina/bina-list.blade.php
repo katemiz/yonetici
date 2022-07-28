@@ -82,7 +82,7 @@
                     <x-icon icon="eye" fill="{{config('constants.icons.color.active')}}"/>
 
                 </a>
-                <a href="/sakinler-form/{bina.id}/{item.id}" class="icon">
+                <a href="/bina-form/{{$bina->id}}" class="icon">
                     <x-icon icon="edit" fill="{{config('constants.icons.color.active')}}"/>
                 </a>
                 </td>

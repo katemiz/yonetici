@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kayit;
-use App\Models\Ayarlar;
 use App\Models\Bedel;
 use App\Models\Bina;
 use Illuminate\Http\Request;
