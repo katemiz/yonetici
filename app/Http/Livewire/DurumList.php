@@ -4,11 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Kayit;
 use App\Models\Bina;
-use App\Models\Fatura;
-use App\Models\Gelir;
-use App\Models\Gider;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -38,15 +34,18 @@ class DurumList extends Component
         return 'livewire::my-pagination';
     }
 
+    public function mount()
+    {
+        $this->tur = request('tur');
+    }
+
     public function render(Request $request)
     {
-        $this->tur = $request->tur;
-
         $action = false;
 
         $bina = Bina::find(session('bina_id'));
 
-        if ($request->tur == 'ozet') {
+        if ($this->tur == 'ozet') {
             $ozet = $this->ozet($request);
 
             return view('durum.durum', [
@@ -59,7 +58,7 @@ class DurumList extends Component
                 'nakit' => $ozet['nakit'],
             ]);
         } else {
-            switch ($request->tur) {
+            switch ($this->tur) {
                 case 'alacaklar':
                     $html['h1'] = 'Alacaklar';
                     $html['h2'] = $bina->name . ': Alacak Kayıtları';
@@ -76,7 +75,7 @@ class DurumList extends Component
                     $table['remarks'] = true;
                     $table['created_at'] = true;
 
-                    $q = $this->listAlacaklar($request);
+                    $q = $this->listAlacaklar();
 
                     $action['alindi'] = true;
 
@@ -100,11 +99,11 @@ class DurumList extends Component
 
                     $action['ödendi'] = true;
 
-                    $q = $this->listVerecekler($request);
+                    $q = $this->listVerecekler();
                     break;
 
                 case 'gelirler':
-                    $q = $this->listGelirler($request);
+                    $q = $this->listGelirler();
 
                     $html['h1'] = 'Gelirler';
                     $html['h2'] = $bina->name . ': Gelir Kayıtları';
@@ -124,7 +123,7 @@ class DurumList extends Component
                     break;
 
                 case 'giderler':
-                    $q = $this->listGiderler($request);
+                    $q = $this->listGiderler();
 
                     $html['h1'] = 'Giderler';
                     $html['h2'] = $bina->name . ': Gider Kayıtları';
@@ -153,7 +152,7 @@ class DurumList extends Component
                 'table' => (object) $table,
                 'action' => $action,
                 'bina' => Bina::find(session('bina_id')),
-                'type' => $this->tur,
+                // 'type' => $this->tur,
                 'kayitlar' => $kayitlar,
             ]);
         }
@@ -200,7 +199,7 @@ class DurumList extends Component
         return $ozet;
     }
 
-    public function listAlacaklar($request)
+    public function listAlacaklar()
     {
         $this->isBinaSelected();
 
@@ -220,7 +219,7 @@ class DurumList extends Component
         return $q;
     }
 
-    public function listVerecekler($request)
+    public function listVerecekler()
     {
         $this->isBinaSelected();
 
@@ -240,7 +239,7 @@ class DurumList extends Component
         return $q;
     }
 
-    public function listGelirler($request)
+    public function listGelirler()
     {
         $this->isBinaSelected();
 
@@ -260,7 +259,7 @@ class DurumList extends Component
         return $q;
     }
 
-    public function listGiderler($request)
+    public function listGiderler()
     {
         $this->isBinaSelected();
 
@@ -280,18 +279,14 @@ class DurumList extends Component
         return $q;
     }
 
-    public function ara(Request $request, $query)
+    public function ara($query)
     {
         $this->search = $query;
-        $request->type = $this->type;
     }
 
-    public function resetFilter(Request $request)
+    public function resetFilter()
     {
         $this->search = '';
-        $request->type = $this->type;
-
-        //$this->resetPage();
     }
 
     public function isBinaSelected()

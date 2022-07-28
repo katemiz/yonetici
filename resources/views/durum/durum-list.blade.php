@@ -1,7 +1,5 @@
 <div class="section container">
 
-
-
     <script>
 
         function searchFunction() {
@@ -14,13 +12,9 @@
         }
 
         function resetFilter() {
-            let type = document.getElementById('hiddenType').value
             document.getElementById('queryInput').value = ''
-            @this.call('resetFilter',type)
+            @this.call('resetFilter')
         }
-
-
-
 
         function alindiKaydi(binaId,kayitId) {
 
@@ -43,9 +37,6 @@
             })
         }
 
-
-
-
         function odendiKaydi(binaId,kayitId) {
 
             Swal.fire({
@@ -67,24 +58,7 @@
             })
         }
 
-
-
-
-
-
-
     </script>
-
-
-
-
-
-
-
-
-
-
-
 
     <header class="my-6">
         <h1 class="title has-text-weight-light is-size-1">{{$html->h1}}</h1>
@@ -184,9 +158,7 @@
 
                     @if ($table->aciklama)
                         <td>
-                            <a href="/bina-view/{{$kayit->id}}">
-                                {{ $kayit->aciklama }}
-                            </a>
+                            {!! $kayit->aciklama !!}
                         </td>
                     @endif
 
