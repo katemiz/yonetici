@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="column field">
-                        <label class="label" for="surname">Tutar, {{$bina->ayarlar->para_birimi}}</label>
+                        <label class="label" for="surname">Tutar, {{$bina->pbirimi}}</label>
                         <div class="control" id="surname">
                             <input class="input" name="tutar" type="text" placeholder="650,25 örnek" value="{{ $kayit ? $kayit->tutar :''}}">
                         </div>
