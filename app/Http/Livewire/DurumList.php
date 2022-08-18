@@ -63,7 +63,7 @@ class DurumList extends Component
                     $html['h1'] = 'Alacaklar';
                     $html['h2'] = $bina->name . ': Alacak Kayıtları';
                     $html['addcommand'] = 'Alacak Ekle';
-                    $html['addlink'] = '/bina-form';
+                    $html['addlink'] = '/kayit-form/alacak';
                     $html['noitem'] = 'Alacak Kaydı Yoktur';
 
                     $table['door_no'] = true;

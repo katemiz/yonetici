@@ -20,7 +20,7 @@
                                 <select name="parabirimi">
                                     <option value="belirsiz">Para Birimi Seçiniz</option>
                                     @foreach ($paralar as $key => $pbirimi)
-                                    <option value="{{$key}}" {{ $bina->pbirimi && $bina->pbirimi == $key ? 'selected':''}}>{{$pbirimi}}</option>
+                                    <option value="{{$key}}" {{ $bina && $bina->pbirimi && $bina->pbirimi == $key ? 'selected':''}}>{{$pbirimi}}</option>
                                     @endforeach
                                 </select>
                             </div>

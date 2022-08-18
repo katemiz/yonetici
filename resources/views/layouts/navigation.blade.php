@@ -62,21 +62,13 @@
                     <div class="navbar-dropdown">
 
                         <a href="/kayit-form/aidat" class="navbar-item">Toplu Aidat Kaydı</a>
+                        <a href="/kayit-form/alacak" class="navbar-item">Alacak Kaydı</a>
                         <a href="/kayit-form/fatura" class="navbar-item">Fatura Kaydı</a>
                         <a href="/kayit-form/gelir" class="navbar-item">Gelir Kaydı</a>
                         <a href="/kayit-form/gider" class="navbar-item">Gider Kaydı</a>
 
                     </div>
                 </div>
-
-
-                {{-- <div class="navbar-item has-dropdown is-hoverable">
-                    <p class="navbar-link" href="/Admin">Admin</p>
-                    <div class="navbar-dropdown">
-                        <a href="/bina-list" class="navbar-item">Binalarım</a>
-                        <a href="/" class="navbar-item">Reserved</a>
-                    </div>
-                </div> --}}
 
             @endif
 

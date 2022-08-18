@@ -92,6 +92,19 @@ class KayitController extends Controller
             return redirect()->route('durum', ['tur' => 'alacaklar']);
         }
 
+        if ($req->tur == 'alacak') {
+            $props['sakin_id'] = $req->input('borclu');
+            $props['tur'] = 'alacak';
+            $props['aciklama'] = $req->input('aciklama');
+            $props['donem'] = '';
+            $props['tutar'] = $req->input('tutar');
+            $props['son_odeme'] = $req->input('sonodeme');
+
+            Kayit::create($props);
+
+            return redirect()->route('durum', ['tur' => 'alacaklar']);
+        }
+
         if ($req->tur == 'fatura') {
             $props['tur'] = 'verecek';
             $props['aciklama'] = $req->input('aciklama');

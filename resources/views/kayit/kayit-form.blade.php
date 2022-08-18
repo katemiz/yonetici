@@ -107,7 +107,7 @@
                         </div>
                     </div>
 
-                    @if ($tur == 'fatura')
+                    @if ($tur == 'fatura' || $tur == 'alacak')
                     <div class="column field is-3 has-text-right">
                         <label class="label" for="giris">Son Ödeme</label>
                         <div class="control" id="giris">
