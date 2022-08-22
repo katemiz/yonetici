@@ -72,6 +72,7 @@ class DurumList extends Component
                     $table['donem'] = true;
                     $table['son_odeme'] = false;
                     $table['tutar'] = true;
+                    $table['dosya'] = true;
                     $table['remarks'] = true;
                     $table['created_at'] = true;
 
@@ -94,6 +95,7 @@ class DurumList extends Component
                     $table['donem'] = false;
                     $table['son_odeme'] = true;
                     $table['tutar'] = true;
+                    $table['dosya'] = true;
                     $table['remarks'] = true;
                     $table['created_at'] = false;
 
@@ -108,7 +110,7 @@ class DurumList extends Component
                     $html['h1'] = 'Gelirler';
                     $html['h2'] = $bina->name . ': Gelir Kayıtları';
                     $html['addcommand'] = 'Gelir Ekle';
-                    $html['addlink'] = '/bina-form';
+                    $html['addlink'] = '/kayit-form/gelir';
                     $html['noitem'] = 'Gelir kaydı yoktur';
 
                     $table['door_no'] = true;
@@ -117,6 +119,7 @@ class DurumList extends Component
                     $table['donem'] = false;
                     $table['son_odeme'] = false;
                     $table['tutar'] = true;
+                    $table['dosya'] = true;
                     $table['remarks'] = false;
                     $table['created_at'] = false;
 
@@ -137,6 +140,7 @@ class DurumList extends Component
                     $table['donem'] = false;
                     $table['son_odeme'] = true;
                     $table['tutar'] = true;
+                    $table['dosya'] = true;
                     $table['remarks'] = true;
                     $table['created_at'] = false;
                     break;
@@ -152,7 +156,6 @@ class DurumList extends Component
                 'table' => (object) $table,
                 'action' => $action,
                 'bina' => Bina::find(session('bina_id')),
-                // 'type' => $this->tur,
                 'kayitlar' => $kayitlar,
             ]);
         }
@@ -223,20 +226,18 @@ class DurumList extends Component
     {
         $this->isBinaSelected();
 
-        $q = Kayit::query()->orderBy(
-            $this->sortTimeField,
-            $this->sortTimeDirection
+        $q = Kayit::where('bina_id', '=', session('bina_id'))->where(
+            'tur',
+            '=',
+            'verecek'
         );
-
-        $q->where('bina_id', '=', session('bina_id'));
-        $q->where('tur', '=', 'verecek');
 
         if (strlen($this->search) > 0) {
             $q->where('aciklama', 'like', '%' . $this->search . '%');
             $q->orWhere('remarks', 'like', '%' . $this->search . '%');
         }
 
-        return $q;
+        return $q->orderBy($this->sortTimeField, $this->sortTimeDirection);
     }
 
     public function listGelirler()

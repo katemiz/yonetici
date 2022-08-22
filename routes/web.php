@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BedelController;
 use App\Http\Controllers\BinaController;
+use App\Http\Controllers\DosyaController;
 use App\Http\Controllers\KalemController;
 use App\Http\Controllers\KayitController;
 use App\Http\Controllers\OkumaController;
@@ -101,6 +102,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kayit-form/{tur}/{id}', [KayitController::class, 'kayitForm']);
 
     Route::post('/kayit-add/{tur}', [KayitController::class, 'kayitAdd']);
+    Route::get('/kayit-dosya-gor/{id}', [DosyaController::class, 'dosya']);
 
     Route::get('/select-active/{id}', [BinaController::class, 'selectActive']);
 

@@ -106,6 +106,10 @@
                     <th class="has-text-right">Tutar</th>
                     @endif
 
+                    @if ($table->dosya)
+                    <th class="has-text-right">Dosya</th>
+                    @endif
+
                     @if ($table->son_odeme)
                     <th>Son Ödeme</th>
                     @endif
@@ -168,6 +172,16 @@
                         </td>
                     @endif
 
+                    @if ($table->dosya)
+                        <td class="has-text-right">
+                            @foreach ($kayit->dosyalar as $dosya)
+                                <a href="/kayit-dosya-gor/{{$dosya->id}}" class="icon">
+                                    <x-icon icon="file" fill="{{config('constants.icons.color.active')}}"/>
+                                </a>
+                            @endforeach
+                        </td>
+                    @endif
+
                     @if ($table->son_odeme)
                         <td>
                             {{ $kayit->son_odeme }}
@@ -175,13 +189,12 @@
                     @endif
 
                     @if ($table->created_at)
-                        <td>
-                            {{ $kayit->created_at }}
-                        </td>
+                        <td>{{ $kayit->created_at }}</td>
                     @endif
 
                     @if ($action)
                     <td class="has-text-right">
+
 
                         @if (isset($action['view']) && $action['view'])
                         <a href="/bina-view/{{$kayit->id}}" class="icon">

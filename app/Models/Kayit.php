@@ -10,4 +10,9 @@ class Kayit extends Model
     use HasFactory;
     protected $guarded = [];
     protected $table = 'kayitlar';
+
+    public function dosyalar()
+    {
+        return $this->hasMany(Dosya::class);
+    }
 }

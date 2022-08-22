@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Kayit;
 use App\Models\Bedel;
 use App\Models\Bina;
+use App\Models\Dosya;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class KayitController extends Controller
 {
@@ -86,7 +88,8 @@ class KayitController extends Controller
                 $props['tutar'] =
                     ($sakin->payratio / 100) * $this->sabitBedeller();
 
-                Kayit::create($props);
+                $kayit = Kayit::create($props);
+                $this->addFiles($req, $kayit->id);
             }
 
             return redirect()->route('durum', ['tur' => 'alacaklar']);
@@ -100,7 +103,8 @@ class KayitController extends Controller
             $props['tutar'] = $req->input('tutar');
             $props['son_odeme'] = $req->input('sonodeme');
 
-            Kayit::create($props);
+            $kayit = Kayit::create($props);
+            $this->addFiles($req, $kayit->id);
 
             return redirect()->route('durum', ['tur' => 'alacaklar']);
         }
@@ -112,9 +116,23 @@ class KayitController extends Controller
             $props['tutar'] = $req->input('tutar');
             $props['son_odeme'] = $req->input('sonodeme');
 
-            Kayit::create($props);
+            $kayit = Kayit::create($props);
+            $this->addFiles($req, $kayit->id);
 
             return redirect()->route('durum', ['tur' => 'verecekler']);
+        }
+
+        if ($req->tur == 'gider') {
+            $props['tur'] = 'gider';
+            $props['aciklama'] = $req->input('aciklama');
+            $props['donem'] = '';
+            $props['tutar'] = $req->input('tutar');
+            $props['son_odeme'] = date('Y-m-d', time());
+
+            $kayit = Kayit::create($props);
+            $this->addFiles($req, $kayit->id);
+
+            return redirect()->route('durum', ['tur' => 'giderler']);
         }
     }
 
@@ -147,5 +165,34 @@ class KayitController extends Controller
         }
 
         return $tutarlar;
+    }
+
+    public function addFiles($req, $id)
+    {
+        if ($req->has('dosyalar')) {
+            foreach ($req->file('dosyalar') as $dosya) {
+                if (strlen($dosya->getMimeType()) > 32) {
+                    $filename = '/usr' . Auth::id() . '/file/other';
+                } else {
+                    $filename =
+                        '/usr' . Auth::id() . '/' . $dosya->getMimeType();
+                }
+
+                $saved_dir = Storage::disk('local')->put($filename, $dosya);
+
+                $this->saveRecord($dosya, $id, $saved_dir);
+            }
+        }
+    }
+
+    public function saveRecord($dosya, $kayit_id, $saved_dir)
+    {
+        $dosya_data = [
+            'kayit_id' => $kayit_id,
+            'filename' => $dosya->getClientOriginalName(),
+            'stored_as' => $saved_dir,
+        ];
+
+        Dosya::create($dosya_data);
     }
 }
