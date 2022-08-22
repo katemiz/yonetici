@@ -134,6 +134,19 @@ class KayitController extends Controller
 
             return redirect()->route('durum', ['tur' => 'giderler']);
         }
+
+        if ($req->tur == 'gelir') {
+            $props['tur'] = 'gelir';
+            $props['aciklama'] = $req->input('aciklama');
+            $props['donem'] = '';
+            $props['tutar'] = $req->input('tutar');
+            $props['son_odeme'] = date('Y-m-d', time());
+
+            $kayit = Kayit::create($props);
+            $this->addFiles($req, $kayit->id);
+
+            return redirect()->route('durum', ['tur' => 'gelirler']);
+        }
     }
 
     public function sabitBedeller()

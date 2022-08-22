@@ -1119,6 +1119,347 @@ class DatabaseSeeder extends Seeder
         Kayit::create([
             'user_id' => 1,
             'bina_id' => 1,
+            'sakin_id' => 1,
+            'tur' => 'alacak',
+            'aciklama' => 'Haziran 2022 dönemi aidatı',
+            'donem' => '2022-06-20',
+            'son_odeme' => '',
+            'tutar' => 550,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 2,
+            'tur' => 'alacak',
+            'aciklama' => 'Haziran 2022 dönemi aidatı',
+            'donem' => '2022-06-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 3,
+            'tur' => 'alacak',
+            'aciklama' => 'Haziran 2022 dönemi aidatı',
+            'donem' => '2022-06-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 4,
+            'tur' => 'alacak',
+            'aciklama' => 'Haziran 2022 dönemi aidatı',
+            'donem' => '2022-06-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 5,
+            'tur' => 'alacak',
+            'aciklama' => 'Haziran 2022 dönemi aidatı',
+            'donem' => '2022-06-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 6,
+            'tur' => 'alacak',
+            'aciklama' => 'Haziran 2022 dönemi aidatı',
+            'donem' => '2022-06-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 7,
+            'tur' => 'alacak',
+            'aciklama' => 'Haziran 2022 dönemi aidatı',
+            'donem' => '2022-06-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 8,
+            'tur' => 'alacak',
+            'aciklama' => 'Haziran 2022 dönemi aidatı',
+            'donem' => '2022-06-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 1,
+            'tur' => 'alacak',
+            'aciklama' => 'Temmuz 2022 dönemi aidatı',
+            'donem' => '2022-07-20',
+            'son_odeme' => '',
+            'tutar' => 550,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 2,
+            'tur' => 'alacak',
+            'aciklama' => 'Temmuz 2022 dönemi aidatı',
+            'donem' => '2022-07-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 3,
+            'tur' => 'alacak',
+            'aciklama' => 'Temmuz 2022 dönemi aidatı',
+            'donem' => '2022-07-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 4,
+            'tur' => 'alacak',
+            'aciklama' => 'Temmuz 2022 dönemi aidatı',
+            'donem' => '2022-07-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 5,
+            'tur' => 'alacak',
+            'aciklama' => 'Temmuz 2022 dönemi aidatı',
+            'donem' => '2022-07-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 6,
+            'tur' => 'alacak',
+            'aciklama' => 'Temmuz 2022 dönemi aidatı',
+            'donem' => '2022-07-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 7,
+            'tur' => 'alacak',
+            'aciklama' => 'Temmuz 2022 dönemi aidatı',
+            'donem' => '2022-07-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 8,
+            'tur' => 'alacak',
+            'aciklama' => 'Temmuz 2022 dönemi aidatı',
+            'donem' => '2022-07-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 1,
+            'tur' => 'alacak',
+            'aciklama' => 'Ağustos 2022 dönemi aidatı',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 550,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 2,
+            'tur' => 'alacak',
+            'aciklama' => 'Ağustos 2022 dönemi aidatı',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 3,
+            'tur' => 'alacak',
+            'aciklama' => 'Ağustos 2022 dönemi aidatı',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 4,
+            'tur' => 'alacak',
+            'aciklama' => 'Ağustos 2022 dönemi aidatı',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 5,
+            'tur' => 'alacak',
+            'aciklama' => 'Ağustos 2022 dönemi aidatı',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 6,
+            'tur' => 'alacak',
+            'aciklama' => 'Ağustos 2022 dönemi aidatı',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 7,
+            'tur' => 'alacak',
+            'aciklama' => 'Ağustos 2022 dönemi aidatı',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 8,
+            'tur' => 'alacak',
+            'aciklama' => 'Ağustos 2022 dönemi aidatı',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 600,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 2,
+            'tur' => 'alacak',
+            'aciklama' => 'Garaj Kapısı Tamir Bedeli',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 350,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 3,
+            'tur' => 'alacak',
+            'aciklama' => 'Garaj Kapısı Tamir Bedeli',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 350,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 4,
+            'tur' => 'alacak',
+            'aciklama' => 'Garaj Kapısı Tamir Bedeli',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 350,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 5,
+            'tur' => 'alacak',
+            'aciklama' => 'Garaj Kapısı Tamir Bedeli',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 350,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 6,
+            'tur' => 'alacak',
+            'aciklama' => 'Garaj Kapısı Tamir Bedeli',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 350,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 7,
+            'tur' => 'alacak',
+            'aciklama' => 'Garaj Kapısı Tamir Bedeli',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 350,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
+            'sakin_id' => 8,
+            'tur' => 'alacak',
+            'aciklama' => 'Garaj Kapısı Tamir Bedeli',
+            'donem' => '2022-08-20',
+            'son_odeme' => '',
+            'tutar' => 350,
+        ]);
+
+        Kayit::create([
+            'user_id' => 1,
+            'bina_id' => 1,
             'sakin_id' => null,
             'tur' => 'gider',
             'aciklama' => 'Doğalgaz Faturası Ödeme (Eylül) [ÖDENDİ]',
