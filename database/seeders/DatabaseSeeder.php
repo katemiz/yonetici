@@ -2277,7 +2277,7 @@ class DatabaseSeeder extends Seeder
             'sakin_id' => null,
             'tur' => 'gider',
             'aciklama' =>
-                'Otopark Beriyeri - Kilitli Araba Park Etme Demiri 2022-08-11',
+                'Otopark Bariyeri - Kilitli Araba Park Etme Demiri 2022-08-11',
             'donem' => '',
             'son_odeme' => '2022-08-11',
             'tutar' => 269.6,
