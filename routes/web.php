@@ -102,6 +102,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kayit-form/{tur}/{id}', [KayitController::class, 'kayitForm']);
 
     Route::post('/kayit-add/{tur}', [KayitController::class, 'kayitAdd']);
+    Route::post('/kayit-dosya-add/{id}/{tur}', [
+        KayitController::class,
+        'dosyaEkle',
+    ]);
+
     Route::get('/kayit-dosya-gor/{id}', [DosyaController::class, 'dosya']);
 
     Route::get('/select-active/{id}', [BinaController::class, 'selectActive']);

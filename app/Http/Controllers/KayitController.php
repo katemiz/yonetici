@@ -198,6 +198,13 @@ class KayitController extends Controller
         }
     }
 
+    public function dosyaEkle(Request $request)
+    {
+        $this->addFiles($request, request('id'));
+
+        return redirect()->route('durum', ['tur' => request('tur')]);
+    }
+
     public function saveRecord($dosya, $kayit_id, $saved_dir)
     {
         $dosya_data = [

@@ -2,6 +2,9 @@
 
     <script>
 
+        let cicon = `<x-icon icon="cancel" fill="{{config('constants.icons.color.danger')}}"/>`
+
+
         function searchFunction() {
 
             if (document.getElementById('queryInput').value.length > 1) {
@@ -53,9 +56,63 @@
                 if (result.isConfirmed) {
                     window.livewire.emit('verecekToGider', kayitId)
                 } else {
-                return false
+                    return false
                 }
             })
+        }
+
+
+        function getNames() {
+
+            var newFiles = document.getElementById('fupload')
+
+            if (Object.entries(newFiles.files).length < 1) {
+                document.getElementById('noFile').classList.remove('is-hidden')
+                return true
+            }
+
+            document.getElementById('noFile').classList.add('is-hidden')
+
+            let satir = ''
+            dosyalar = []
+
+            for (const [key, dosya] of Object.entries(newFiles.files)) {
+
+                satir = satir +`
+                <tr id="K${key}">
+                    <td>${dosya.name}</td>
+                    <td>${dosya.size}</td>
+                    <td>${dosya.type}</td>
+                    <td><a onclick="cancelFile('${key}','${dosya.name}')">${cicon}</a></td>
+                </tr>`
+
+                dosyalar.push({key:dosya})
+            }
+
+            let thead = document.createElement('thead')
+
+            thead.innerHTML = `
+            <tr>
+                <th>Dosya Adı</th>
+                <th>Boyut</th>
+                <th>Dosya Türü</th>
+                <th>&nbsp;</th>
+            </tr>`
+
+            document.getElementById('filesList').prepend(thead)
+            document.getElementById('filesList').innerHTML = satir
+        }
+
+
+
+
+        function addFile(kayitId,tur) {
+            document.getElementById('add_file').classList.add('is-active')
+            document.getElementById('form_add').action = '/kayit-dosya-add/'+kayitId+'/'+tur
+        }
+
+        function hideModal() {
+            document.getElementById('add_file').classList.remove('is-active')
         }
 
     </script>
@@ -107,6 +164,7 @@
                     @endif
 
                     @if ($table->dosya)
+                    <th>&nbsp;</th>
                     <th class="has-text-right">Dosya</th>
                     @endif
 
@@ -173,7 +231,13 @@
                     @endif
 
                     @if ($table->dosya)
+                        <td>
+                            <a onclick="addFile('{{$kayit->id}}','{{$tur}}')" class="icon mr-6">
+                            <x-icon icon="plus" fill="{{config('constants.icons.color.active')}}"/>
+                            </a>
+                        </td>
                         <td class="has-text-right">
+
                             @foreach ($kayit->dosyalar as $dosya)
                                 <a href="/kayit-dosya-gor/{{$dosya->id}}" class="icon">
                                     <x-icon icon="file" fill="{{config('constants.icons.color.active')}}"/>
@@ -194,7 +258,6 @@
 
                     @if ($action)
                     <td class="has-text-right">
-
 
                         @if (isset($action['view']) && $action['view'])
                         <a href="/bina-view/{{$kayit->id}}" class="icon">
@@ -236,5 +299,62 @@
     @else
         <div class="notification is-warning is-light">{{$html->noitem}}</div>
     @endif
+
+    <div class="modal" id="add_file">
+        <div class="modal-background" onclick="hideModal()"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Kayıtlara Dosya Ekleme</p>
+                <button class="delete" aria-label="close" onclick="hideModal()"></button>
+            </header>
+
+            <form id="form_add" action="" method="POST" enctype="multipart/form-data">
+            @csrf
+                <section class="modal-card-body">
+                    <div class="columns">
+
+                        <div class="column is-narrow">
+                            <div class="file is-boxed">
+                                <label class="file-label">
+                                <input
+                                    class="file-input"
+                                    type="file"
+                                    name="dosyalar[]"
+                                    id="fupload"
+                                    multiple
+                                    onchange="getNames()" />
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                    <x-icon icon="upload" fill="{{config('constants.icons.color.active')}}"/>
+                                    </span>
+                                    <span class="file-label">Dosyalar</span>
+                                </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="column">
+                            <table class="table is-striped is-fullwidth" >
+
+                                <tbody id="filesList">
+                                </tbody>
+
+                                <tfoot id="noFile">
+                                    <tr>
+                                        <td colspan="4" class="has-text-centered">Henüz seçilmiş dosya yok!</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                    </div>
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button is-success">Yükle</button>
+                    <button class="button" onclick="hideModal()">Cancel</button>
+                </footer>
+            </form>
+        </div>
+    </div>
 
 </div>
