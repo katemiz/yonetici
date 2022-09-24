@@ -252,8 +252,6 @@ class DurumList extends Component
         $q->where('bina_id', '=', session('bina_id'));
         $q->where('tur', '=', 'gelir');
 
-        // dd($q->toSql());
-
         if (strlen($this->search) > 0) {
             $q->where('aciklama', 'like', '%' . $this->search . '%');
             $q->orWhere('remarks', 'like', '%' . $this->search . '%');

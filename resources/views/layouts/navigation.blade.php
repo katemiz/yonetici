@@ -70,6 +70,13 @@
                     </div>
                 </div>
 
+                <a href="/dokum" class="navbar-item icon-text">
+                    <span class="icon">
+                        <x-icon icon="lira" fill="{{config('constants.icons.color.dark')}}"/>
+                    </span>
+                    <span>Döküm</span>
+                </a>
+
             @endif
 
         </div>

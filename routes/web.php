@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BedelController;
 use App\Http\Controllers\BinaController;
+use App\Http\Controllers\DokumController;
 use App\Http\Controllers\DosyaController;
 use App\Http\Controllers\KalemController;
 use App\Http\Controllers\KayitController;
@@ -112,6 +113,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/select-active/{id}', [BinaController::class, 'selectActive']);
 
     Route::get('/durum/{tur}', DurumList::class)->name('durum');
+
+    Route::get('/dokum', [DokumController::class, 'dokum'])->name('dokum');
 
     Route::get('/help', function () {
         return View::make('help');
