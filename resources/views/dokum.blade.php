@@ -13,102 +13,119 @@
     <link rel="stylesheet" href="{{ asset('/css/sweetalert2_min.css') }}">
     <script src="{{ asset('/js/sweetalert2.min.js') }}"></script>
 
-    @livewireStyles
-
+    <style>
+        .pbreak {
+            page-break-after: always;
+        }
+    </style>
   </head>
   <body>
 
+
+
+    {{-- KAPAK SAYFASI --}}
+    <div class="section pbreak">
+
+        <h1 class="title has-text-weight-light is-size-1 has-text-left">Akıllı Yönetici / Akıllı Uygulama</h1>
+        <h2 class="subtitle has-text-weight-light">{{session('selected_bina')}} Gelir-Gider Durum Dökümü</h2>
+
+        <div class="column card-image has-text-centered">
+            <figure class="image">
+                <img src="images/kapak.svg" alt="kapak sayfası resmi" >
+            </figure>
+        </div>
+
+        {{-- <div>
+            <h2 class="subtitle has-text-weight-light">{{$bina->name}}</h2>
+            <h2 class="subtitle has-text-weight-light">{{$bina->address}}</h2>
+            <h2 class="subtitle has-text-weight-light">Bina Sakinleri</h2>
+
+
+            <table class="table is-fullwidth">
+            @foreach ($sakinler as $key => $value)
+            <tr>
+                <th>Daire {{$key}}</th>
+                <td>{{$value}}</td>
+            </tr>
+
+            @endforeach
+            </table>
+        </div> --}}
+
+        <header class="my-1">
+            <h1 class="title has-text-weight-light is-size-1 has-text-centered">{{$bina->name}}</h1>
+            <h2 class="subtitle has-text-weight-light has-text-centered">{{$bina->address}}</h2>
+        </header>
+
+        <h2 class="title has-text-weight-light has-text-centered">{{date('d M Y',time())}}</h2>
+        <h2 class="subtitle has-text-weight-light has-text-centered">https://yonetici.kapkara.one</h2>
+
+    </div>
+
+
     {{-- OZET --}}
-    <div class="section">
+    <div class="section pbreak">
 
         <header class="my-6">
             <h1 class="title has-text-weight-light is-size-1">Genel Durum</h1>
             <h2 class="subtitle has-text-weight-light">{{session('selected_bina')}}</h2>
         </header>
 
-        <div class="columns">
+        <nav class="level my-6 box has-background-grey-light">
 
-            <div class="column is-4">
-
-                <h2 class="subtitle has-text-weight-light">Bina Sakinleri</h2>
-
-                <table class="table is-fullwidth">
-                @foreach ($sakinler as $key => $value)
-                <tr>
-                    <th>Daire {{$key}}</th>
-                    <td>{{$value}}</td>
-                </tr>
-
-                @endforeach
-                </table>
-
-
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">TOPLAM GELİR</p>
+                    <p class="title has-text-link">{{$ozet->toplam_gelir}} {{$bina->pbirimi}}</p>
+                </div>
             </div>
 
-            <div class="column">
-
-                <nav class="level my-6 box has-background-grey-light">
-
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="heading">TOPLAM GELİR</p>
-                            <p class="title has-text-link">{{$ozet->toplam_gelir}} {{$bina->pbirimi}}</p>
-                        </div>
-                    </div>
-
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="heading">TOPLAM GİDER</p>
-                            <p class="title has-text-link">{{$ozet->toplam_gider}} {{$bina->pbirimi}}</p>
-                        </div>
-                    </div>
-
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="heading">BAKİYE</p>
-                            <p class="title has-text-link">{{$ozet->nakit}} {{$bina->pbirimi}}</p>
-                        </div>
-                    </div>
-
-                </nav>
-
-                <nav class="level my-6 box has-background-light">
-
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="heading">TOPLAM ALACAKLAR</p>
-                            <p class="title">{{$ozet->toplam_alacak}} {{$bina->pbirimi}}</p>
-                        </div>
-                    </div>
-
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="heading">TOPLAM BORÇLAR</p>
-                            <p class="title">{{$ozet->toplam_borc}} {{$bina->pbirimi}}</p>
-                        </div>
-                    </div>
-
-                </nav>
-
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">TOPLAM GİDER</p>
+                    <p class="title has-text-link">{{$ozet->toplam_gider}} {{$bina->pbirimi}}</p>
+                </div>
             </div>
-        </div>
 
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">BAKİYE</p>
+                    <p class="title has-text-link">{{$ozet->nakit}} {{$bina->pbirimi}}</p>
+                </div>
+            </div>
 
+        </nav>
+
+        <nav class="level my-6 box has-background-light">
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">TOPLAM ALACAKLAR</p>
+                    <p class="title">{{$ozet->toplam_alacak}} {{$bina->pbirimi}}</p>
+                </div>
+            </div>
+
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">TOPLAM BORÇLAR</p>
+                    <p class="title">{{$ozet->toplam_borc}} {{$bina->pbirimi}}</p>
+                </div>
+            </div>
+
+        </nav>
 
     </div>
 
 
     {{-- GELİRLER --}}
-    <div class="section">
+    <div class="section pbreak">
 
         <header class="my-6">
             <h1 class="title has-text-weight-light is-size-1">Gelirler</h1>
             <h2 class="subtitle has-text-weight-light">{{session('selected_bina')}}</h2>
         </header>
 
-
         <table class="table is-fullwidth">
-
 
             <thead>
                 <tr>
@@ -116,7 +133,6 @@
                     <th>Bina Sakini</th>
                     <th>Açıklama</th>
                     <th class="has-text-right">Tutar</th>
-                    <th class="has-text-right">Kayıt Tarihi</th>
                 </tr>
             </thead>
 
@@ -128,7 +144,6 @@
                     <td>{{$gelir->sakin_id ? $sakinler[$gelir->sakin_id] : '' }}</td>
                     <td>{{$gelir->aciklama}}</td>
                     <td nowrap class="has-text-right">{{number_format($gelir->tutar, 2, ',', ' ')}} </td>
-                    <td nowrap class="has-text-right">{{$gelir->updated_at}}</td>
                 </tr>
                 @endforeach
 
@@ -139,7 +154,7 @@
     </div>
 
     {{-- GIDERLER --}}
-    <div class="section">
+    <div class="section pbreak">
 
         <header class="my-6">
             <h1 class="title has-text-weight-light is-size-1">Giderler</h1>
@@ -148,15 +163,12 @@
 
         <table class="table is-fullwidth">
 
-            <caption>Tüm Giderlerin Dökümü</caption>
-
             <thead>
                 <tr>
                     <th class="is-narrow">No</th>
                     <th>Açıklama</th>
                     <th class="has-text-right">Tutar</th>
                     <th>Son Ödeme Tarihi</th>
-                    <th>Kayıt Tarihi</th>
                 </tr>
             </thead>
 
@@ -168,7 +180,6 @@
                     <td>{{$gelir->aciklama}}</td>
                     <td nowrap class="has-text-right">{{number_format($gelir->tutar, 2, ',', ' ')}} </td>
                     <td>{{$gelir->son_odeme}}</td>
-                    <td>{{$gelir->updated_at}}</td>
                 </tr>
                 @endforeach
 
