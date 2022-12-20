@@ -6,11 +6,53 @@ use App\Models\Bina;
 use App\Models\Kayit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\Switch_;
 
 class DokumController extends Controller
 {
     public $bina;
     public $sakinler;
+
+    public $sayilar = [
+        'birler' => [
+            0 => '',
+            1 => 'bir',
+            2 => 'iki',
+            3 => 'üç',
+            4 => 'dört',
+            5 => 'beş',
+            6 => 'altı',
+            7 => 'yedi',
+            8 => 'sekiz',
+            9 => 'dokuz',
+        ],
+
+        'onlar' => [
+            0 => '',
+            1 => 'on',
+            2 => 'yirmi',
+            3 => 'otuz',
+            4 => 'kırk',
+            5 => 'elli',
+            6 => 'altmış',
+            7 => 'yetmiş',
+            8 => 'seksen',
+            9 => 'doksan',
+        ],
+
+        'yuzler' => [
+            0 => '',
+            1 => 'yüz',
+            2 => 'iki yüz',
+            3 => 'üç yüz',
+            4 => 'dört yüz',
+            5 => 'beş yüz',
+            6 => 'altı yüz',
+            7 => 'yedi yüz',
+            8 => 'sekiz yüz',
+            9 => 'dokuz yüz',
+        ],
+    ];
 
     public function __construct()
     {
@@ -41,6 +83,109 @@ class DokumController extends Controller
             'gelirler' => $this->gelirler(),
             'giderler' => $this->giderler(),
         ]);
+    }
+
+    public function makbuz(Request $request)
+    {
+        $record = false;
+        $yazi = '';
+
+        if (request('record')) {
+            $record = Kayit::find(request('record'));
+            //$record['yaziile'] = $this->numberToText($record['tutar']);
+            $yazi = $this->numberToText('810');
+        }
+
+        return view('makbuz', [
+            'notification' => false,
+            'bina' => $this->bina,
+            'sakinler' => $this->sakinler,
+            'record' => $record,
+            'yazi' => $yazi,
+        ]);
+    }
+
+    public function numberToText($number)
+    {
+        if ($number < 10) {
+            return $this->sayilar['birler'][$number];
+        }
+
+        if ($number < 100 && $number > 9) {
+            return $this->sayilar['onlar'][substr($number, 0, 1)] .
+                ' ' .
+                $this->sayilar['birler'][substr($number, -1)];
+        }
+
+        if ($number < 1000 && $number > 99) {
+            return $this->sayilar['yuzler'][substr($number, 0, 1)] .
+                ' ' .
+                $this->sayilar['onlar'][substr($number, 1, 1)] .
+                ' ' .
+                $this->sayilar['birler'][substr($number, -1)];
+        }
+
+        $rakamlar = strlen($number);
+
+        switch (substr($rakamlar, -1)) {
+            case '1':
+                $bir = 'bir';
+                break;
+
+            case '2':
+                $bir = 'iki';
+                break;
+
+            case '3':
+                $bir = 'üç';
+                break;
+
+            case '14':
+                $bir = 'dört';
+                break;
+        }
+
+        switch (substr($rakamlar, -2, 1)) {
+            case '1':
+                $on = 'on';
+                break;
+
+            case '2':
+                $on = 'yirmi';
+                break;
+
+            case '3':
+                $on = 'otuz';
+                break;
+
+            case '4':
+                $on = 'kırk';
+                break;
+        }
+
+        switch (substr($rakamlar, -3, 1)) {
+            case '1':
+                $yuz = 'yüz';
+                break;
+
+            case '2':
+                $yuz = 'on';
+                break;
+
+            case '3':
+                $yuz = 'on';
+                break;
+
+            case '4':
+                $yuz = 'on';
+                break;
+        }
+
+        // substr($number, -3)
+
+        // for ($i = 0 ; $i<= strlen($number); $i++) {
+
+        // }
     }
 
     public function ozet()

@@ -115,6 +115,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/durum/{tur}', DurumList::class)->name('durum');
 
     Route::get('/dokum', [DokumController::class, 'dokum'])->name('dokum');
+    Route::get('/makbuz', [DokumController::class, 'makbuz'])->name('makbuz');
 
     Route::get('/help', function () {
         return View::make('help');

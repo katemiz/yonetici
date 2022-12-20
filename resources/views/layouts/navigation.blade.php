@@ -70,12 +70,14 @@
                     </div>
                 </div>
 
-                <a href="/dokum" class="navbar-item icon-text">
-                    <span class="icon">
-                        <x-icon icon="lira" fill="{{config('constants.icons.color.dark')}}"/>
-                    </span>
-                    <span>Döküm</span>
-                </a>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <p class="navbar-link" href="/Admin">Yazdır</p>
+                    <div class="navbar-dropdown">
+                        <a href="/dokum" class="navbar-item icon-text">Gelir-Gider Döküm</a>
+                        <a href="/makbuz" class="navbar-item icon-text">Boş Makbuz</a>
+                    </div>
+                </div>
 
             @endif
 
