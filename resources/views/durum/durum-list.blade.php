@@ -1,9 +1,16 @@
 <div class="section container">
 
+    <style>
+        .td-tutar {
+            white-space:nowrap;
+            width:150px;
+            vertical-align:top;
+        }
+    </style>
+
     <script>
 
         let cicon = `<x-icon icon="cancel" fill="{{config('constants.icons.color.danger')}}"/>`
-
 
         function searchFunction() {
 
@@ -61,7 +68,6 @@
             })
         }
 
-
         function getNames() {
 
             var newFiles = document.getElementById('fupload')
@@ -102,9 +108,6 @@
             document.getElementById('filesList').prepend(thead)
             document.getElementById('filesList').innerHTML = satir
         }
-
-
-
 
         function addFile(kayitId,tur) {
             document.getElementById('add_file').classList.add('is-active')
@@ -225,7 +228,7 @@
                     @endif
 
                     @if ($table->tutar)
-                        <td class="has-text-right">
+                        <td class="has-text-right td-tutar">
                             {{ number_format($kayit->tutar, 2, ',', ' ') }}
                         </td>
                     @endif
@@ -236,8 +239,8 @@
                             <x-icon icon="plus" fill="{{config('constants.icons.color.active')}}"/>
                             </a>
                         </td>
-                        <td class="has-text-right">
 
+                        <td class="has-text-right">
                             @foreach ($kayit->dosyalar as $dosya)
                                 <a href="/kayit-dosya-gor/{{$dosya->id}}" class="icon">
                                     <x-icon icon="file" fill="{{config('constants.icons.color.active')}}"/>
@@ -258,6 +261,12 @@
 
                     @if ($action)
                     <td class="has-text-right">
+
+                        @if (isset($action['makbuz']) && $action['makbuz'])
+                        <a href="/makbuz/{{$kayit->id}}" class="icon">
+                            <x-icon icon="receipt" fill="{{config('constants.icons.color.active')}}"/>
+                        </a>
+                        @endif
 
                         @if (isset($action['view']) && $action['view'])
                         <a href="/bina-view/{{$kayit->id}}" class="icon">

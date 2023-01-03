@@ -61,9 +61,7 @@
             <tr class="{{ $selected_bina && $selected_bina == $bina->id ? 'is-selected' :''}}">
 
                 <td>
-                    <a href="/select-active/{{$bina->id}}">
-                        Seç
-                    </a>
+                    <a href="/select-active/{{$bina->id}}">Seç</a>
                 </td>
 
                 <td>

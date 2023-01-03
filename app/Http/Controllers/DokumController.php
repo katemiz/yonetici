@@ -6,7 +6,6 @@ use App\Models\Bina;
 use App\Models\Kayit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\Switch_;
 
 class DokumController extends Controller
 {
@@ -85,6 +84,18 @@ class DokumController extends Controller
         ]);
     }
 
+    public function sayac(Request $request)
+    {
+        return view('kayit.okumalar-gor', [
+            'notification' => false,
+            'bina' => $this->bina,
+            'sakinler' => $this->sakinler,
+            'ozet' => $this->ozet(),
+            'gelirler' => $this->gelirler(),
+            'giderler' => $this->giderler(),
+        ]);
+    }
+
     public function makbuz(Request $request)
     {
         $record = false;
@@ -93,7 +104,7 @@ class DokumController extends Controller
         if (request('record')) {
             $record = Kayit::find(request('record'));
             //$record['yaziile'] = $this->numberToText($record['tutar']);
-            $yazi = $this->numberToText('810');
+            $yazi = $this->numberToText($record->tutar);
         }
 
         return view('makbuz', [

@@ -6,6 +6,7 @@ use App\Models\Kayit;
 use App\Models\Bedel;
 use App\Models\Bina;
 use App\Models\Dosya;
+use App\Models\Okuma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -14,6 +15,7 @@ class KayitController extends Controller
 {
     public $bina;
     public $kayit = false;
+    public $okuma = false;
     public $tutarlar = false;
     public $okumali_bedeller = false;
 
@@ -23,13 +25,14 @@ class KayitController extends Controller
         $this->middleware(function ($request, $next) {
             $this->bina = Bina::find(session('bina_id'));
 
+            $this->okumali_bedeller = $this->okumaliBedeller();
+
             if ($this->bina->user_id !== Auth::id()) {
                 abort('403');
             }
 
             if ($request->tur == 'aidat') {
                 $this->tutarlar = $this->calculateAidatlar();
-                $this->okumali_bedeller = $this->okumaliBedeller();
             }
 
             return $next($request);
@@ -47,8 +50,25 @@ class KayitController extends Controller
         ]);
     }
 
+    public function okuma(Request $request)
+    {
+        return view('kayit.okuma-form', [
+            'bina' => $this->bina,
+            'okuma' => $this->okuma,
+            'tur' => $request->tur,
+            'tutarlar' => $this->tutarlar,
+            'okumali_bedeller' => $this->okumali_bedeller,
+        ]);
+    }
+
     public function kayitAdd(Request $req)
     {
+        $req->validate([
+            'aciklama' => 'required|string|min:10',
+            'tutar' => 'required|numeric|gt:0',
+            'sonodeme' => 'required|date',
+        ]);
+
         $props['user_id'] = Auth::id();
         $props['bina_id'] = session('bina_id');
         $props['sakin_id'] = 0;
@@ -149,6 +169,39 @@ class KayitController extends Controller
         }
     }
 
+    public function okumaAdd(Request $req)
+    {
+        $req->validate([
+            'reading_type' => 'required',
+        ]);
+
+        $props['user_id'] = Auth::id();
+        $props['bina_id'] = session('bina_id');
+        $props['bedel_id'] = $req->input('reading_type');
+
+        $bina = Bina::find(session('bina_id'));
+
+        $donem_exp = explode('-', $req->input('donem'));
+
+        foreach ($bina->sakinler as $sakin) {
+            $degisken_okuma = 'okuma_' . $sakin->id;
+            $degisken_tarih = 'donem_' . $sakin->id;
+
+            if (
+                $req->input($degisken_okuma) > 0 &&
+                $req->input($degisken_tarih)
+            ) {
+                $props['sakin_id'] = $sakin->id;
+                $props['son_okuma'] = $req->input($degisken_okuma);
+                $props['note'] = $req->input('note_' . $sakin->id);
+
+                Okuma::create($props);
+            }
+        }
+
+        return redirect()->route('durum', ['tur' => 'alacaklar']);
+    }
+
     public function sabitBedeller()
     {
         $sabit_bedeller = Bedel::where([
@@ -164,7 +217,9 @@ class KayitController extends Controller
         $okumali_bedeller = Bedel::where([
             ['bina_id', '=', session('bina_id')],
             ['tur', '=', 'SAYAC'],
-        ]);
+        ])->get();
+
+        //dd($okumali_bedeller);
 
         return $okumali_bedeller;
     }

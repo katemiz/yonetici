@@ -194,6 +194,6 @@ class BinaController extends Controller
 
         session(['selected_bina' => $bina->name, 'bina_id' => $bina->id]);
 
-        //return redirect()->route('durum', ['id' => $bina->id]);
+        return redirect()->route('durum', ['tur' => 'ozet']);
     }
 }

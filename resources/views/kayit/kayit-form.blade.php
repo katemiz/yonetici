@@ -4,19 +4,9 @@
         <script src="{{ asset('/js/ckeditor5/ckeditor.js') }}"></script>
         <script src="{{ asset('/js/tabs.js') }}"></script>
 
-
-
         <script>
 
             let cicon = `<x-icon icon="cancel" fill="{{config('constants.icons.color.danger')}}"/>`
-
-            // let filesToDelete = {
-            //     'image':[],
-            //     'audio':[],
-            //     'video':[],
-            //     'doc':[],
-            //     'dosya':[]
-            // }
 
             let filesToExclude = []
 
@@ -111,6 +101,16 @@
         </script>
 
 
+        @php
+            switch ($tur) {
+                case 'aidat':
+                    $header = 'Aylık Ödeme - Aidatlar';
+                    $subtitle = 'Toplu Aidat Kaydı Oluşturma';
+
+                    $field['select']['label'] = 'Borçlu Sakin';
+
+            }
+        @endphp
 
 
         @if ($tur == 'aidat')
@@ -139,25 +139,37 @@
                 <h2 class="subtitle">Gider Kaydı</h2>
             @endif
 
+
+            @if ($tur == 'okuma')
+            <h1 class="title mt-6 has-text-weight-light is-size-1 has-text-left">{{ $kayit ? 'Sayaçlı Okuma Kaydı Güncelle' :'Sayaçlı Okuma Kaydı Ekle' }}</h1>
+            <h2 class="subtitle">Sayaca Bağlı Okuma Kaydı</h2>
+            @endif
+
         @endif
 
         <form action="{{ $kayit ? '/kayit-update/'.$tur.'/'.$kayit->id : '/kayit-add/'.$tur }}" method="POST" enctype="multipart/form-data">
         @csrf
 
-
             <input type="hidden" id="hiddenTur" name="hiddenTur" value="{{$tur}}" />
-
 
             <div class="box">
 
-                @if ($tur == 'alacak')
+                @if ($tur == 'alacak' || $tur == 'okuma')
                 <div class="field">
+
+                    @if ($tur == 'alacak')
                     <label class="label">Borçlu Sakin</label>
+                    @endif
+
+                    @if ($tur == 'okuma')
+                    <label class="label">Sayaçlı Okumanın Ait Olduğu Daire/Sakin</label>
+                    @endif
+
                     <div class="control">
                         <div class="select" >
                             <select name="borclu">
                                 @foreach ($bina->sakinler as $sakin )
-                                    <option value="{{$sakin->id}}">{{$sakin->name}} {{$sakin->lastname}} {{ $sakin->door_no}} numaralı sakin</option>
+                                    <option value="{{$sakin->id}}">[ No {{ $sakin->door_no}} ] {{$sakin->name}} {{$sakin->lastname}} </option>
                                 @endforeach
                             </select>
                         </div>
@@ -196,7 +208,7 @@
                     <div class="column field is-half">
                         <label class="label" for="name">Açıklama</label>
                         <div class="control" id="name">
-                            <input class="input" name="aciklama" type="text" placeholder="Açıklama" list='kalemler' value="{{ $kayit ? $kayit->aciklama :''}}">
+                            <input class="input" name="aciklama" type="text" placeholder="Açıklama" list='kalemler' value="{{ old('aciklama', $kayit ? $kayit->aciklama : '') }}">
 
                             @if ($tur == 'gider' || $tur == 'fatura')
                             <datalist id='kalemler'>
@@ -206,36 +218,52 @@
                             </datalist>
                             @endif
 
+                            @error('aciklama')
+                            <div class="column">
+                            <p class="has-text-danger">Açıklama 10 harften fazla olmalı.</p>
+                            </div>
+                            @enderror
+
                         </div>
                     </div>
 
                     <div class="column field">
+
                         <label class="label" for="surname">Tutar, {{$bina->pbirimi}}</label>
-                        <div class="control" id="surname">
-                            <input class="input" name="tutar" type="text" placeholder="650,25 örnek" value="{{ $kayit ? $kayit->tutar :''}}">
+
+                        <div class="control">
+                            <input class="input" name="tutar" type="text" placeholder="650,25 örnek" value="{{ old('tutar', $kayit ? $kayit->tutar : '') }}">
                         </div>
+
+                        @error('tutar')
+                        <div class="column">
+                        <p class="has-text-danger">Tutar girilmeli! (Nokta kullanınız)</p>
+                        </div>
+                        @enderror
                     </div>
 
                     @if ($tur == 'fatura' || $tur == 'alacak')
                     <div class="column field is-3 has-text-right">
-                        <label class="label" for="giris">Son Ödeme</label>
-                        <div class="control" id="giris">
-                            <input type="date" name="sonodeme" value="{{$kayit ? $kayit->son_odeme: ''}}">
+                        <label class="label" for="odemetarihi">Son Ödeme</label>
+                        <div class="control" id="odemetarihi">
+                            <input type="date" name="sonodeme" value="{{old('sonodeme',$kayit ? $kayit->son_odeme: '')}}">
                         </div>
+
+                        @error('sonodeme')
+                        <div class="column">
+                        <p class="has-text-danger">Tarih giriniz!</p>
+                        </div>
+                        @enderror
                     </div>
                     @endif
                 </div>
                 @endif
-
 
                 <div class="field" id="ck">
                     <input type="hidden" name="editor_data" id="ckeditor" value="{{$kayit ? $kayit->remarks : ''}}">
                     <label class="label">Notlar</label>
                     <div class="column" id="editor">{!!$kayit ? $kayit->remarks: ''!!}</div>
                 </div>
-
-
-
 
                 <div class="column box mt-6">
 
@@ -290,10 +318,6 @@
                     </div>
 
                 </div>
-
-
-
-
 
                 <div class="buttons is-right">
                     <button class="button is-link">{{ $kayit ? 'Güncelle' : 'Kaydet'}}</button>

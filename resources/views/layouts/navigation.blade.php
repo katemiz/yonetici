@@ -56,6 +56,13 @@
                     <span>Faturalar</span>
                 </a>
 
+                <a href="/sayaclar" class="navbar-item icon-text">
+                    <span class="icon">
+                        <x-icon icon="lira" fill="{{config('constants.icons.color.dark')}}"/>
+                    </span>
+                    <span>Sayaçlar</span>
+                </a>
+
 
                 <div class="navbar-item has-dropdown is-hoverable">
                     <p class="navbar-link" href="/Admin">Kayıtlar</p>
@@ -66,6 +73,7 @@
                         <a href="/kayit-form/fatura" class="navbar-item">Fatura Kaydı</a>
                         <a href="/kayit-form/gelir" class="navbar-item">Gelir Kaydı</a>
                         <a href="/kayit-form/gider" class="navbar-item">Gider Kaydı</a>
+                        <a href="/okuma-form" class="navbar-item">Okuma Kaydı</a>
 
                     </div>
                 </div>

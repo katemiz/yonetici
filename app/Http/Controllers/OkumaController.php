@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OkumaController extends Controller
 {
-    public $bina = false;
+    public $bina;
 
     public function __construct()
     {

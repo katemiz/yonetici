@@ -1,4 +1,21 @@
-<article class="column m-0 mb-6 p-0 makbuz">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article class="box column m-0 p-0 card">
 
     <div class="column">
 
@@ -30,11 +47,7 @@
 
         <div class="columns">
 
-            <div class="column is-4 ">
-
-
-
-
+            {{-- <div class="column is-4 ">
 
                 <table class="table is-bordered is-fullwidth ">
                     <thead>
@@ -58,9 +71,7 @@
                     </tfoot>
                 </table>
 
-
-
-            </div>
+            </div> --}}
 
             <div class="column ">
 
@@ -86,11 +97,9 @@
 
                 <div class="column has-text-centered">
 
-                    Sayın <strong>{{$record ? $sakinler[$record->sakin_id] : '___ '}}</strong> (Daire No : <strong>{{$record ? $record->sakin_id : '___ '}}</strong>) Aralık 2022 aidat bedeli olarak <strong>{{$record ? $yazi : '____'}}</strong> TL alınmıştır.
-
-
-                    {{-- <p class="title has-text-centered is-size-1"> 750.00 &#8378;</p> --}}
-                    {{-- <p class="has-text-centered"> Sayın Celal ÇETİNDAĞ (Daire No : 5) Aralık 2022 aidat bedeli olarak <strong>yedi yüz elli</strong> TL alınmıştır.</p> --}}
+                    Sayın <strong>{{$record ? $sakinler[$record->sakin_id] : '___ '}}</strong>
+                    (Daire No : <strong>{{$record ? $record->sakin_id : '___ '}}</strong>)
+                    {{$record ? $record->aciklama : '___ '}} olarak <strong>{{$record ? $yazi : '____'}}</strong> TL alınmıştır.
 
                 </div>
 
@@ -101,8 +110,8 @@
 
                     <div class="columns is-vcentered has-background-light mt-4">
 
-                        <div class="column is-8 is-size-7"><strong>{{ Auth::user()->name }} {{ strtoupper(Auth::user()->lastname) }}</strong><br>{{$bina->name}} Yöneticisi <br><span class="has-text-grey">[Makbuzu Veren]</span></div>
-                        <div class="column is-4 is-size-7 has-text-grey has-text-centered">İmza<br><br><br></div>
+                        <div class="column is-8 is-size-7">{{$bina->name}} Yöneticisi <br><span class="has-text-grey">[Makbuzu Veren]</span></div>
+                        <div class="column is-4 is-size-7 has-text-grey has-text-right">İmza<br><br><br></div>
 
 
                     </div>
@@ -125,18 +134,28 @@
         </div>
     </div>
 
-    <div class="column py-0">
 
-        <table class="table is-fullwidth my-0" >
 
-            <tbody>
-                <tr>
-                    <td class="is-size-7 has-text-grey">Bina Yönetim Sistemi</td>
-                    <td class="is-size-7 has-text-grey has-text-right">https://yonetici.kapkara.one</td>
-                </tr>
-            </tbody>
 
-        </table>
-    </div>
+
+
+
 
 </article>
+
+<div class="columns py-0 mt-1">
+
+    <div class="column is-half help">
+        Bina Yönetim Sistemi
+    </div>
+
+    <div class="column has-text-right help">
+        <a href="https://yonetici.kapkara.one" class="help is-link">https://yonetici.kapkara.one</a>
+
+    </div>
+
+
+
+
+</div>
+

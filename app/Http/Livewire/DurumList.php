@@ -113,6 +113,8 @@ class DurumList extends Component
                     $html['addlink'] = '/kayit-form/gelir';
                     $html['noitem'] = 'Gelir kaydı yoktur';
 
+                    $action['makbuz'] = true;
+
                     $table['door_no'] = true;
                     $table['sakin_id'] = true;
                     $table['aciklama'] = true;

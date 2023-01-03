@@ -14,6 +14,7 @@ use App\Http\Livewire\BinaView;
 use App\Http\Livewire\DurumList;
 use App\Http\Livewire\KalemList;
 use App\Http\Livewire\SakinList;
+use App\Http\Livewire\OkumaList;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
@@ -102,6 +103,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kayit-form/{tur}', [KayitController::class, 'kayitForm']);
     Route::get('/kayit-form/{tur}/{id}', [KayitController::class, 'kayitForm']);
 
+    Route::get('/okuma-form', [KayitController::class, 'okuma']);
+    Route::get('/okuma-form/{id}', [KayitController::class, 'okuma']);
+    Route::post('/okuma-add', [KayitController::class, 'okumaAdd']);
+
     Route::post('/kayit-add/{tur}', [KayitController::class, 'kayitAdd']);
     Route::post('/kayit-dosya-add/{id}/{tur}', [
         KayitController::class,
@@ -109,13 +114,13 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
     Route::get('/kayit-dosya-gor/{id}', [DosyaController::class, 'dosya']);
-
     Route::get('/select-active/{id}', [BinaController::class, 'selectActive']);
-
     Route::get('/durum/{tur}', DurumList::class)->name('durum');
-
     Route::get('/dokum', [DokumController::class, 'dokum'])->name('dokum');
-    Route::get('/makbuz', [DokumController::class, 'makbuz'])->name('makbuz');
+    Route::get('/sayaclar', OkumaList::class);
+    Route::get('/makbuz/{record?}', [DokumController::class, 'makbuz'])->name(
+        'makbuz'
+    );
 
     Route::get('/help', function () {
         return View::make('help');
