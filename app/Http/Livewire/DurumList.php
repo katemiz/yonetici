@@ -36,6 +36,8 @@ class DurumList extends Component
 
     public function mount()
     {
+        $this->isBinaSelected();
+
         $this->tur = request('tur');
     }
 
@@ -165,7 +167,7 @@ class DurumList extends Component
 
     public function ozet($request)
     {
-        $this->isBinaSelected();
+        // $this->isBinaSelected();
 
         $this->alacakverecek = $request->tur;
 
@@ -206,7 +208,7 @@ class DurumList extends Component
 
     public function listAlacaklar()
     {
-        $this->isBinaSelected();
+        // $this->isBinaSelected();
 
         $q = Kayit::query()->orderBy(
             $this->sortTimeField,
@@ -226,7 +228,7 @@ class DurumList extends Component
 
     public function listVerecekler()
     {
-        $this->isBinaSelected();
+        // $this->isBinaSelected();
 
         $q = Kayit::where('bina_id', '=', session('bina_id'))->where(
             'tur',
@@ -244,7 +246,7 @@ class DurumList extends Component
 
     public function listGelirler()
     {
-        $this->isBinaSelected();
+        // $this->isBinaSelected();
 
         $q = Kayit::query()->orderBy(
             $this->sortTimeField,
@@ -264,7 +266,7 @@ class DurumList extends Component
 
     public function listGiderler()
     {
-        $this->isBinaSelected();
+        // $this->isBinaSelected();
 
         $q = Kayit::query()->orderBy(
             $this->sortTimeField,

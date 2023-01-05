@@ -1,20 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <article class="box column m-0 p-0 card">
 
     <div class="column">
@@ -37,7 +20,6 @@
             <div class="column">
                 <h1 class="subtitle is-size-5 has-text-right">BİNA GELİR-GİDER MAKBUZU</h1>
             </div>
-
 
         </div>
     </div>
@@ -93,69 +75,44 @@
                 </div>
                 </div>
 
-
-
                 <div class="column has-text-centered">
 
-                    Sayın <strong>{{$record ? $sakinler[$record->sakin_id] : '___ '}}</strong>
-                    (Daire No : <strong>{{$record ? $record->sakin_id : '___ '}}</strong>)
-                    {{$record ? $record->aciklama : '___ '}} olarak <strong>{{$record ? $yazi : '____'}}</strong> TL alınmıştır.
+                    @if ($record->sakin_id)
+
+                        Sayın <strong>{{$record ? $sakinler[$record->sakin_id] : '___ '}}</strong>
+                        (Daire No : <strong>{{$record ? $record->sakin_id : '___ '}}</strong>)
+                        {{$record ? $record->aciklama : '___ '}} olarak <strong>{{$record ? $yazi : '____'}}</strong> TL alınmıştır.
+
+                    @else
+
+                        {{$record ? $record->aciklama : '___ '}} olarak <strong>{{$record ? $yazi : '____'}}</strong>
+
+                    @endif
 
                 </div>
-
 
                 <div class="column">
 
-
-
                     <div class="columns is-vcentered has-background-light mt-4">
-
                         <div class="column is-8 is-size-7">{{$bina->name}} Yöneticisi <br><span class="has-text-grey">[Makbuzu Veren]</span></div>
                         <div class="column is-4 is-size-7 has-text-grey has-text-right">İmza<br><br><br></div>
-
-
                     </div>
 
                 </div>
-
-
-
-
-
-
-
-
-
-
-
 
             </div>
 
         </div>
     </div>
 
-
-
-
-
-
-
-
 </article>
 
 <div class="columns py-0 mt-1">
 
-    <div class="column is-half help">
-        Bina Yönetim Sistemi
-    </div>
+    <div class="column is-half help">Bina Yönetim Sistemi</div>
 
     <div class="column has-text-right help">
         <a href="https://yonetici.kapkara.one" class="help is-link">https://yonetici.kapkara.one</a>
-
     </div>
 
-
-
-
 </div>
-

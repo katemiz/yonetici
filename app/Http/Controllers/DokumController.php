@@ -55,6 +55,10 @@ class DokumController extends Controller
 
     public function __construct()
     {
+        if (!session('bina_id')) {
+            return redirect()->route('binalar');
+        }
+
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
             $this->bina = Bina::find(session('bina_id'));
@@ -70,6 +74,23 @@ class DokumController extends Controller
 
             return $next($request);
         });
+    }
+
+    public function initialize()
+    {
+        if (!session('bina_id')) {
+            return redirect()->route('binalar');
+        }
+
+        $this->bina = Bina::find(session('bina_id'));
+
+        if ($this->bina->user_id !== Auth::id()) {
+            abort('403');
+        }
+
+        foreach ($this->bina->sakinler as $sakin) {
+            $this->sakinler[$sakin->id] = $sakin->name . ' ' . $sakin->lastname;
+        }
     }
 
     public function dokum(Request $request)
@@ -103,9 +124,10 @@ class DokumController extends Controller
 
         if (request('record')) {
             $record = Kayit::find(request('record'));
-            //$record['yaziile'] = $this->numberToText($record['tutar']);
             $yazi = $this->numberToText($record->tutar);
         }
+
+        $this->initialize();
 
         return view('makbuz', [
             'notification' => false,
