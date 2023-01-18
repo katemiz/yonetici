@@ -15,6 +15,7 @@ use App\Http\Livewire\DurumList;
 use App\Http\Livewire\KalemList;
 use App\Http\Livewire\SakinList;
 use App\Http\Livewire\OkumaList;
+use App\Http\Livewire\KararList;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
@@ -121,6 +122,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/makbuz/{record?}', [DokumController::class, 'makbuz'])->name(
         'makbuz'
     );
+
+    Route::get('/karar/{id?}', KararList::class);
 
     Route::get('/help', function () {
         return View::make('help');

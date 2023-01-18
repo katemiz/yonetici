@@ -51,17 +51,26 @@
 
                 <a href="/durum/verecekler" class="navbar-item icon-text">
                     <span class="icon">
-                        <x-icon icon="lira" fill="{{config('constants.icons.color.dark')}}"/>
+                        <x-icon icon="receipt" fill="{{config('constants.icons.color.dark')}}"/>
                     </span>
                     <span>Faturalar</span>
                 </a>
 
                 <a href="/sayaclar" class="navbar-item icon-text">
                     <span class="icon">
-                        <x-icon icon="lira" fill="{{config('constants.icons.color.dark')}}"/>
+                        <x-icon icon="reading" fill="{{config('constants.icons.color.dark')}}"/>
                     </span>
                     <span>Sayaçlar</span>
                 </a>
+
+
+                <a href="/karar" class="navbar-item icon-text">
+                    <span class="icon">
+                        <x-icon icon="decision" fill="{{config('constants.icons.color.dark')}}"/>
+                    </span>
+                    <span>Kararlar</span>
+                </a>
+
 
 
                 <div class="navbar-item has-dropdown is-hoverable">
