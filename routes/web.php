@@ -19,6 +19,8 @@ use App\Http\Livewire\KararList;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
+use App\Http\Controllers\PDFController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -128,4 +130,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/help', function () {
         return View::make('help');
     });
+
+    Route::get('/makbuzpdf/{record}', [PDFController::class, 'index']);
 });

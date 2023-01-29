@@ -17,14 +17,22 @@ class KayitController extends Controller
     public $kayit = false;
     public $okuma = false;
     public $tutarlar = false;
-    public $okumali_bedeller = false;
+    public $okumali_bedeller;
+    public $sabit_bedeller;
+    public $toplam_sabit_aidat;
+    public $sabit_dokumu;
 
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
+            // if (!session('bina_id')) {
+            //     return redirect()->route('binalar');
+            // }
+
             $this->bina = Bina::find(session('bina_id'));
 
+            $this->sabitBedeller();
             $this->okumali_bedeller = $this->okumaliBedeller();
 
             if ($this->bina->user_id !== Auth::id()) {
@@ -32,7 +40,7 @@ class KayitController extends Controller
             }
 
             if ($request->tur == 'aidat') {
-                $this->tutarlar = $this->calculateAidatlar();
+                $this->calculateAidatlar();
             }
 
             return $next($request);
@@ -63,11 +71,11 @@ class KayitController extends Controller
 
     public function kayitAdd(Request $req)
     {
-        $req->validate([
-            'aciklama' => 'required|string|min:10',
-            'tutar' => 'required|numeric|gt:0',
-            'sonodeme' => 'required|date',
-        ]);
+        // $req->validate([
+        //     'aciklama' => 'required|string|min:10',
+        //     'tutar' => 'required|numeric|gt:0',
+        //     'sonodeme' => 'required|date',
+        // ]);
 
         $props['user_id'] = Auth::id();
         $props['bina_id'] = session('bina_id');
@@ -103,10 +111,17 @@ class KayitController extends Controller
             $props['donem'] = $req->input('donem');
             $props['son_odeme'] = '';
 
+            //dd($props);
+
             foreach ($bina->sakinler as $sakin) {
                 $props['sakin_id'] = $sakin->id;
-                $props['tutar'] =
-                    ($sakin->payratio / 100) * $this->sabitBedeller();
+                $props['tutar'] = $this->tutarlar[$sakin->id];
+                //($sakin->payratio / 100) * $this->sabitBedeller()['0'];
+
+                $props['dokum'] = json_encode($this->sabit_dokumu[$sakin->id]);
+                //($sakin->payratio / 100) * $this->sabitBedeller()['0'];
+
+                //dd($props);
 
                 $kayit = Kayit::create($props);
                 $this->addFiles($req, $kayit->id);
@@ -207,9 +222,22 @@ class KayitController extends Controller
         $sabit_bedeller = Bedel::where([
             ['bina_id', '=', session('bina_id')],
             ['tur', '=', 'SABIT'],
-        ])->sum('bedel');
+        ]);
 
-        return $sabit_bedeller;
+        $this->toplam_sabit_aidat = $sabit_bedeller->sum('bedel');
+        //$this->sabit_bedeller = $sabit_bedeller->get();
+
+        // $sabit_bedel_toplam = $sabit_bedeller->sum('bedel');
+
+        // $all = [];
+
+        foreach ($sabit_bedeller->get() as $v) {
+            $this->sabit_bedeller[$v->title] = $v->bedel;
+        }
+
+        //return [$sabit_bedel_toplam, $all];
+        //return $sabit_bedeller->get();
+        return true;
     }
 
     public function okumaliBedeller()
@@ -226,13 +254,35 @@ class KayitController extends Controller
 
     public function calculateAidatlar()
     {
-        $aylik = $this->sabitBedeller();
+        //$aylik = $this->sabitBedeller()['0'];
+        //$dokum_kalemler = $this->sabitBedeller()['1'];
+
+        //$this->sabitBedeller();
+
+        // $saidat = 0;
+
+        // foreach ($this->sabitBedeller() as $bedel) {
+        //     $saidat = $saidat + $bedel;
+        // }
 
         foreach ($this->bina->sakinler as $sakin) {
-            $tutarlar[$sakin->id] = round(($sakin->payratio * $aylik) / 100, 0);
+            $this->tutarlar[$sakin->id] = round(
+                ($sakin->payratio * $this->toplam_sabit_aidat) / 100,
+                0
+            );
+
+            foreach ($this->sabit_bedeller as $kalem_name => $kalem_deger) {
+                $this->sabit_dokumu[$sakin->id][$kalem_name] = round(
+                    ($sakin->payratio * $kalem_deger) / 100,
+                    0
+                );
+            }
         }
 
-        return $tutarlar;
+        //dd(['a' => $tutarlar, 'b' => $aylik, 'c' => $dokum]);
+
+        //return $tutarlar;
+        return true;
     }
 
     public function addFiles($req, $id)

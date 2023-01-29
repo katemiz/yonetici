@@ -77,7 +77,7 @@
 
                 <div class="column has-text-centered">
 
-                    @if ($record->sakin_id)
+                    @if ($record && $record->sakin_id)
 
                         Sayın <strong>{{$record ? $sakinler[$record->sakin_id] : '___ '}}</strong>
                         (Daire No : <strong>{{$record ? $record->sakin_id : '___ '}}</strong>)

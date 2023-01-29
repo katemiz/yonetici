@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->string('aciklama');
             $table->string('donem')->nullable();
             $table->string('son_odeme')->nullable();
+            $table->json('dokum')->nullable();
             $table->float('tutar', 12, 2);
             $table->string('remarks')->nullable();
             $table->string('status')->default('KAYIT');

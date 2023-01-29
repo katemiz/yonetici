@@ -263,7 +263,7 @@
                     <td class="has-text-right">
 
                         @if (isset($action['makbuz']) && $action['makbuz'])
-                        <a href="/makbuz/{{$kayit->id}}" class="icon">
+                        <a href="/makbuzpdf/{{$kayit->id}}" class="icon">
                             <x-icon icon="receipt" fill="{{config('constants.icons.color.active')}}"/>
                         </a>
                         @endif

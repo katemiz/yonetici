@@ -80,6 +80,7 @@ class DurumList extends Component
 
                     $q = $this->listAlacaklar();
 
+                    $action['makbuz'] = true;
                     $action['alindi'] = true;
 
                     break;
