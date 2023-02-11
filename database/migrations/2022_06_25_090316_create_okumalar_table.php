@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->foreignIdFor(Bedel::class);
             $table->foreignIdFor(Sakin::class);
             $table->float('son_okuma', 12, 2);
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->string('status')->default('OKUNDU');
             $table->timestamps();
         });
