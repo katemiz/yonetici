@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Elibyy\TCPDF\Facades\TCPDF;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Auth;
 
 class PDFController extends Controller
 {
@@ -58,6 +59,7 @@ class PDFController extends Controller
     public $yonetici;
     public $kayit;
     public $borclu;
+    public $sakinler;
 
     public function getData($idKayit)
     {
@@ -100,7 +102,7 @@ class PDFController extends Controller
         $pdf = new TCPDF();
 
         $pdf::SetAutoPageBreak(false);
-        $pdf::AddPage('L', 'A5');
+        $pdf::AddPage('P', 'A4');
 
         $style = [
             'width' => 0.25,
@@ -197,7 +199,7 @@ class PDFController extends Controller
         $style2 = [
             'border' => false,
             'padding' => 0,
-            'fgcolor' => [128, 0, 255],
+            'fgcolor' => [0, 0, 0],
             'bgcolor' => false,
         ];
 
@@ -638,9 +640,203 @@ class PDFController extends Controller
             $valign = 'M'
         );
 
-        $pdf::Output(public_path($filename), 'F');
+        //$pdf::Output(public_path($filename), 'F');
 
-        return response()->download(public_path($filename));
+        return response()->make($pdf::Output($filename, 'I'), 200, [
+            'Content-Type' => 'application/pdf',
+        ]);
+
+        //return response()->download(public_path($filename));
+    }
+
+    public function getBinaData($idBina)
+    {
+        $this->bina = Bina::find($idBina);
+        $this->yonetici = User::find($this->bina->user_id);
+
+        if ($this->bina->user_id !== Auth::id()) {
+            abort('403');
+        }
+
+        foreach ($this->bina->sakinler as $sakin) {
+            $this->sakinler[$sakin->id] = $sakin->name . ' ' . $sakin->lastname;
+        }
+    }
+
+    public function gelirler()
+    {
+        return Kayit::where('bina_id', $this->bina->id)
+            ->where('tur', '=', 'gelir')
+            ->get();
+    }
+
+    public function giderler()
+    {
+        return Kayit::where('bina_id', $this->bina->id)
+            ->where('tur', '=', 'gider')
+            ->get();
+    }
+
+    public function dokum(Request $request)
+    {
+        if (!session('bina_id')) {
+            return redirect()->route('binalar');
+        }
+
+        $this->getBinaData(session('bina_id'));
+
+        $filename = 'GelirGiderDokumu' . $this->bina->id . '.pdf';
+
+        $pdf = new TCPDF();
+
+        $pdf::SetAutoPageBreak(false);
+        $pdf::AddPage('P', 'A4');
+
+        $pdf::SetFont('dejavusans', 'B', 20);
+
+        $pdf::MultiCell(
+            $w = 190,
+            $h = 16,
+            $txt = Config::get('constants.app.welcome_subtitle'),
+            $border = 0,
+            $align = 'L',
+            $fill = 0,
+            1,
+            $x = 10,
+            $y = 15,
+            $reseth = true,
+            $strech = 0,
+            $ishtml = false,
+            $autopadding = true,
+            $maxh = 16,
+            $valign = 'B'
+        );
+
+        $pdf::SetFont('dejavusans', '', 14);
+
+        $pdf::MultiCell(
+            $w = 190,
+            $h = 16,
+            $txt = $this->bina->name . ' Gelir-Gider Durum Dökümü',
+            $border = 0,
+            $align = 'L',
+            $fill = 0,
+            1,
+            $x = 10,
+            $y = 22,
+            $reseth = true,
+            $strech = 0,
+            $ishtml = false,
+            $autopadding = true,
+            $maxh = 16,
+            $valign = 'B'
+        );
+
+        // ICON
+        $pdf::ImageSVG(
+            $file = '/images/kapak.svg',
+            $x = 50,
+            $y = 60,
+            $w = '110',
+            $h = '110',
+            $link = 'https://yonetici.kapkara.one',
+            $align = '',
+            $palign = '',
+            $border = 0,
+            $fitonpage = false
+        );
+
+        $pdf::SetFont('dejavusans', 'B', 22);
+
+        $pdf::MultiCell(
+            $w = 190,
+            $h = 16,
+            $txt = $this->bina->name,
+            $border = 0,
+            $align = 'C',
+            $fill = 0,
+            1,
+            $x = 10,
+            $y = 200,
+            $reseth = true,
+            $strech = 0,
+            $ishtml = false,
+            $autopadding = true,
+            $maxh = 16,
+            $valign = 'M'
+        );
+
+        $pdf::SetFont('dejavusans', '', 18);
+
+        $pdf::MultiCell(
+            $w = 190,
+            $h = 16,
+            $txt = $this->bina->address,
+            $border = 0,
+            $align = 'C',
+            $fill = 0,
+            1,
+            $x = 10,
+            $y = 215,
+            $reseth = true,
+            $strech = 0,
+            $ishtml = false,
+            $autopadding = true,
+            $maxh = 16,
+            $valign = 'M'
+        );
+
+        $pdf::SetFont('dejavusans', 'B', 17);
+
+        $pdf::MultiCell(
+            $w = 190,
+            $h = 16,
+            $txt = date('d M Y', time()),
+            $border = 0,
+            $align = 'C',
+            $fill = 0,
+            1,
+            $x = 10,
+            $y = 260,
+            $reseth = true,
+            $strech = 0,
+            $ishtml = false,
+            $autopadding = true,
+            $maxh = 16,
+            $valign = 'M'
+        );
+
+        $pdf::SetFont('dejavusans', '', 12);
+
+        $pdf::MultiCell(
+            $w = 190,
+            $h = 16,
+            $txt = url('/'),
+            $border = 0,
+            $align = 'C',
+            $fill = 0,
+            1,
+            $x = 10,
+            $y = 270,
+            $reseth = true,
+            $strech = 0,
+            $ishtml = false,
+            $autopadding = true,
+            $maxh = 16,
+            $valign = 'M'
+        );
+
+        $pdf::AddPage('P', 'A4');
+
+        $pdf::SetFillColor(240, 240, 240);
+
+        //$pdf::Output(public_path($filename), 'F');
+
+        //return response()->download(public_path($filename));
+
+        return response()->make($pdf::Output($filename, 'I'), 200, [
+            'Content-Type' => 'application/pdf',
+        ]);
     }
 
     public function numberToText($number)

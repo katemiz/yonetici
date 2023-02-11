@@ -111,17 +111,11 @@ class KayitController extends Controller
             $props['donem'] = $req->input('donem');
             $props['son_odeme'] = '';
 
-            //dd($props);
-
             foreach ($bina->sakinler as $sakin) {
                 $props['sakin_id'] = $sakin->id;
                 $props['tutar'] = $this->tutarlar[$sakin->id];
-                //($sakin->payratio / 100) * $this->sabitBedeller()['0'];
 
                 $props['dokum'] = json_encode($this->sabit_dokumu[$sakin->id]);
-                //($sakin->payratio / 100) * $this->sabitBedeller()['0'];
-
-                //dd($props);
 
                 $kayit = Kayit::create($props);
                 $this->addFiles($req, $kayit->id);
@@ -225,18 +219,11 @@ class KayitController extends Controller
         ]);
 
         $this->toplam_sabit_aidat = $sabit_bedeller->sum('bedel');
-        //$this->sabit_bedeller = $sabit_bedeller->get();
-
-        // $sabit_bedel_toplam = $sabit_bedeller->sum('bedel');
-
-        // $all = [];
 
         foreach ($sabit_bedeller->get() as $v) {
             $this->sabit_bedeller[$v->title] = $v->bedel;
         }
 
-        //return [$sabit_bedel_toplam, $all];
-        //return $sabit_bedeller->get();
         return true;
     }
 
@@ -254,17 +241,6 @@ class KayitController extends Controller
 
     public function calculateAidatlar()
     {
-        //$aylik = $this->sabitBedeller()['0'];
-        //$dokum_kalemler = $this->sabitBedeller()['1'];
-
-        //$this->sabitBedeller();
-
-        // $saidat = 0;
-
-        // foreach ($this->sabitBedeller() as $bedel) {
-        //     $saidat = $saidat + $bedel;
-        // }
-
         foreach ($this->bina->sakinler as $sakin) {
             $this->tutarlar[$sakin->id] = round(
                 ($sakin->payratio * $this->toplam_sabit_aidat) / 100,
@@ -279,9 +255,6 @@ class KayitController extends Controller
             }
         }
 
-        //dd(['a' => $tutarlar, 'b' => $aylik, 'c' => $dokum]);
-
-        //return $tutarlar;
         return true;
     }
 
@@ -297,7 +270,6 @@ class KayitController extends Controller
                 }
 
                 $saved_dir = Storage::disk('local')->put($filename, $dosya);
-
                 $this->saveRecord($dosya, $id, $saved_dir);
             }
         }

@@ -16,7 +16,7 @@ class DurumList extends Component
     public $alacakverecek;
 
     public $search = '';
-    public $tur = false;
+    public $tur;
 
     public $sortField = 'title';
     public $sortDirection = 'asc';
@@ -310,7 +310,7 @@ class DurumList extends Component
 
         Kayit::find($kayitId)->update($props);
 
-        $request->tur = $this->tur;
+        $request->replace(['tur' => $this->tur]);
     }
 
     public function verecekToGider(Request $request, $kayitId)
@@ -319,6 +319,6 @@ class DurumList extends Component
 
         Kayit::find($kayitId)->update($props);
 
-        $request->tur = $this->tur;
+        $request->replace(['tur' => $this->tur]);
     }
 }

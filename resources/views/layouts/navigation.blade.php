@@ -93,8 +93,6 @@
                     <div class="navbar-dropdown">
                         <a href="/dokum" class="navbar-item icon-text">Gelir-Gider Döküm</a>
                         <a href="/makbuz" class="navbar-item icon-text">Boş Makbuz</a>
-                        <a href="/pdf" class="navbar-item icon-text">pdf</a>
-
                     </div>
                 </div>
 

@@ -55,12 +55,12 @@ class DokumController extends Controller
 
     public function __construct()
     {
-        if (!session('bina_id')) {
-            return redirect()->route('binalar');
-        }
-
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
+            if (!session('bina_id')) {
+                return redirect()->route('binalar');
+            }
+
             $this->bina = Bina::find(session('bina_id'));
 
             if ($this->bina->user_id !== Auth::id()) {
