@@ -213,12 +213,6 @@ class DokumController extends Controller
                 $yuz = 'on';
                 break;
         }
-
-        // substr($number, -3)
-
-        // for ($i = 0 ; $i<= strlen($number); $i++) {
-
-        // }
     }
 
     public function ozet()
