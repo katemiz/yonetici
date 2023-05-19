@@ -128,7 +128,7 @@ class KayitController extends Controller
             $props['sakin_id'] = $req->input('borclu');
             $props['tur'] = 'alacak';
             $props['aciklama'] = $req->input('aciklama');
-            $props['donem'] = '';
+            $props['donem'] = date('Y-m-d', time());
             $props['tutar'] = $req->input('tutar');
             $props['son_odeme'] = $req->input('sonodeme');
 

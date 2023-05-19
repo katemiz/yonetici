@@ -94,7 +94,7 @@
 
 
     @else
-        <div class="notification is-warning is-light">Yönettiğiniz bina bulunmamaktadır.</div>
+        <div class="notification is-warning is-light">Bina için tanımlanmış ürün/hizmet bedeli bulunmamaktadır.</div>
     @endif
 
 </div>

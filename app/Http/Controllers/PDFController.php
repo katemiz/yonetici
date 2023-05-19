@@ -565,7 +565,46 @@ class PDFController extends Controller
 
                 $uz = $uz + 6;
             }
+        } elseif ($this->kayit->aciklama) {
+
+            $pdf::MultiCell(
+                $w = $title_w,
+                $h = 6,
+                $txt = $this->kayit->aciklama,
+                $border = 'B',
+                $align = 'L',
+                $fill = 0,
+                1,
+                $x = $startx,
+                $y = $uz,
+                $reseth = true,
+                $strech = 0,
+                $ishtml = false,
+                $autopadding = true,
+                $maxh = 6,
+                $valign = 'M'
+            );
+
+            $pdf::MultiCell(
+                $w = 20,
+                $h = 6,
+                $txt = number_format($this->kayit->tutar, 2, ',', ' '),
+                $border = 'LB',
+                $align = 'R',
+                $fill = 0,
+                1,
+                $x = $startx + $title_w,
+                $y = $uz,
+                $reseth = true,
+                $strech = 0,
+                $ishtml = false,
+                $autopadding = true,
+                $maxh = 6,
+                $valign = 'M'
+            );
         }
+
+
 
         // DÖKÜM TOPLAM
         $pdf::MultiCell(
@@ -661,6 +700,7 @@ class PDFController extends Controller
         foreach ($this->bina->sakinler as $sakin) {
             $this->sakinler[$sakin->id] = $sakin->name . ' ' . $sakin->lastname;
         }
+
     }
 
     public function gelirler()
@@ -830,6 +870,125 @@ class PDFController extends Controller
 
         $pdf::SetFillColor(240, 240, 240);
 
+        // GELİR-GİDER OZET
+
+        $ozet = $this->ozet();
+
+        $pdf::SetFont('dejavusans', 'B', 22);
+
+        $pdf::MultiCell(
+            $w = 190,
+            $h = 16,
+            $txt = 'Gelir-Gider Özet',
+            $border = 0,
+            $align = 'C',
+            $fill = 0,
+            1,
+            $x = 10,
+            $y = 30,
+            $reseth = true,
+            $strech = 0,
+            $ishtml = false,
+            $autopadding = true,
+            $maxh = 16,
+            $valign = 'M'
+        );
+
+
+
+        $pdf::SetFont('dejavusans', '', 14);
+
+        $pdf::MultiCell(
+            $w = 60,
+            $h = 16,
+            $txt = 'Gelir',
+            $border = 0,
+            $align = 'C',
+            $fill = 0,
+            1,
+            $x = 15,
+            $y = 50,
+            $reseth = true,
+            $strech = 0,
+            $ishtml = false,
+            $autopadding = true,
+            $maxh = 16,
+            $valign = 'M'
+        );
+
+        $pdf::SetFont('dejavusans', 'B', 20);
+
+        $pdf::MultiCell(
+            $w = 60,
+            $h = 16,
+            $txt = $ozet->toplam_gelir,
+            $border = 'LRT',
+            $align = 'C',
+            $fill = 1,
+            1,
+            $x = 15,
+            $y = 70,
+            $reseth = true,
+            $strech = 0,
+            $ishtml = false,
+            $autopadding = true,
+            $maxh = 16,
+            $valign = 'M'
+        );
+
+
+
+        $pdf::MultiCell(
+            $w = 60,
+            $h = 16,
+            $txt = 'Gider',
+            $border = 0,
+            $align = 'C',
+            $fill = 0,
+            1,
+            $x = 75,
+            $y = 50,
+            $reseth = true,
+            $strech = 0,
+            $ishtml = false,
+            $autopadding = true,
+            $maxh = 16,
+            $valign = 'M'
+        );
+
+
+        $pdf::MultiCell(
+            $w = 60,
+            $h = 16,
+            $txt = 'Bakiye',
+            $border = 0,
+            $align = 'C',
+            $fill = 0,
+            1,
+            $x = 135,
+            $y = 50,
+            $reseth = true,
+            $strech = 0,
+            $ishtml = false,
+            $autopadding = true,
+            $maxh = 16,
+            $valign = 'M'
+        );
+
+
+
+        // GELIRLER
+
+        // foreach ($this->gelirler() as $key => $gelir) {
+        //     # code...
+        // }
+
+
+
+
+
+
+
         //$pdf::Output(public_path($filename), 'F');
 
         //return response()->download(public_path($filename));
@@ -838,6 +997,57 @@ class PDFController extends Controller
             'Content-Type' => 'application/pdf',
         ]);
     }
+
+
+
+
+    public function ozet()
+    {
+
+
+
+        // Alacaklar
+        $alacak_top_tutar = Kayit::where([
+            ['bina_id', '=', $this->bina->id],
+            ['tur', '=', 'alacak'],
+        ])->sum('tutar');
+
+        // Verecekler - Faturalar
+        $verecek_top_tutar = Kayit::where([
+            ['bina_id', '=', $this->bina->id],
+            ['tur', '=', 'verecek'],
+        ])->sum('tutar');
+
+        // Gelirler
+        $gelirler_top_tutar = Kayit::where([
+            ['bina_id', '=', $this->bina->id],
+            ['tur', '=', 'gelir'],
+        ])->sum('tutar');
+
+        // Giderler
+        $giderler_top_tutar = Kayit::where([
+            ['bina_id', '=', $this->bina->id],
+            ['tur', '=', 'gider'],
+        ])->sum('tutar');
+
+        $nakit = $gelirler_top_tutar - $giderler_top_tutar;
+
+        $ozet['toplam_alacak'] = number_format($alacak_top_tutar, 2, ',', ' ');
+        $ozet['toplam_borc'] = number_format($verecek_top_tutar, 2, ',', ' ');
+        $ozet['toplam_gelir'] = number_format($gelirler_top_tutar, 2, ',', ' ');
+        $ozet['toplam_gider'] = number_format($giderler_top_tutar, 2, ',', ' ');
+        $ozet['nakit'] = number_format($nakit, 2, ',', ' ');
+
+        return (object) $ozet;
+    }
+
+
+
+
+
+
+
+
 
     public function numberToText($number)
     {
