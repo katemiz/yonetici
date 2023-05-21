@@ -70,22 +70,51 @@ class PDFController extends Controller
         $this->bina = Bina::find(session('bina_id'));
         $this->yonetici = User::find($this->bina->user_id);
 
-        $this->kayit = Kayit::find($idKayit);
 
-        $this->borclu['yazi'] = '-';
-        $this->borclu['kapino'] = '-';
-        $this->borclu['isim'] = '-';
+        if ($idKayit) {
 
-        if (is_numeric($this->kayit->sakin_id) && $this->kayit->sakin_id > 0) {
-            $owner = Sakin::find($this->kayit->sakin_id);
+            $this->kayit = Kayit::find($idKayit);
 
-            $this->borclu['yazi'] =
-                'Yalnız ' .
-                $this->numberToText($this->kayit->tutar) .
-                ' Türk Lirası tahsil edilmiştir.';
-            $this->borclu['kapino'] = $owner->door_no;
-            $this->borclu['isim'] = $owner->name . ' ' . $owner->lastname;
+            $this->borclu['yazi'] = '-';
+            $this->borclu['kapino'] = '-';
+            $this->borclu['isim'] = '-';
+
+            if (is_numeric($this->kayit->sakin_id) && $this->kayit->sakin_id > 0) {
+                $owner = Sakin::find($this->kayit->sakin_id);
+
+                $this->borclu['yazi'] =
+                    'Yalnız ' .
+                    $this->numberToText($this->kayit->tutar) .
+                    ' Türk Lirası tahsil edilmiştir.';
+                $this->borclu['kapino'] = $owner->door_no;
+                $this->borclu['isim'] = $owner->name . ' ' . $owner->lastname;
+            }
+
+        } else {
+
+            $k['id'] = 'id';
+            $k['donem'] = ' .... - .... - ....';
+            $k['tutar'] = '0';
+
+            $k['dokum'] = json_encode(['.....' => '']);
+            $k['aciklama'] = '                  ';
+
+
+
+
+
+            $this->kayit = (object) $k;
+
+            $this->borclu['yazi'] = '';
+            $this->borclu['kapino'] = '';
+            $this->borclu['isim'] = '';
+            $this->borclu['yazi'] = 'Yalnız ..........................................................................  Türk Lirası tahsil edilmiştir.';
+            $this->borclu['kapino'] = ' ';
+            $this->borclu['isim'] = ' ';
         }
+
+
+
     }
 
     /**
@@ -93,6 +122,15 @@ class PDFController extends Controller
      *
      * @return response()
      */
+
+     public function dolumakbuz(Request $request)
+     {
+        $this->getData(request('record'));
+
+        $this->index($request);         
+     }
+
+
     public function index(Request $request)
     {
         $this->getData(request('record'));
@@ -687,6 +725,18 @@ class PDFController extends Controller
 
         //return response()->download(public_path($filename));
     }
+
+
+    public function bosmakbuz(Request $request)
+    {
+
+        $this->getData(false);
+
+        $this->index($request);         
+
+    }
+
+
 
     public function getBinaData($idBina)
     {

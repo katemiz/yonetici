@@ -18,7 +18,7 @@ return [
         'app_login_logo' => 'app_login_logo.svg',
         'app_header_logo' => 'app_header_logo.svg',
         'app_footer_logo' => 'app_footer_logo.svg',
-        'version' => '2022.04.08',
+        'version' => '2023.05.20 - 99',
         'copyright' => '© 2022 All Rights Reserved',
     ],
 

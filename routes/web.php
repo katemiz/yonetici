@@ -126,11 +126,16 @@ Route::middleware(['auth'])->group(function () {
         'makbuz'
     );
 
+
+    Route::get('/bosmakbuz', [PDFController::class, 'bosmakbuz'])->name(
+        'bosmakbuz'
+    );
+
     Route::get('/karar/{id?}', KararList::class);
 
     Route::get('/help', function () {
         return View::make('help');
     });
 
-    Route::get('/makbuzpdf/{record}', [PDFController::class, 'index']);
+    Route::get('/makbuzpdf/{record}', [PDFController::class, 'dolumakbuz']);
 });
