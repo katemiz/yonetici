@@ -94,7 +94,7 @@ class PDFController extends Controller
         $pdf = new TCPDF();
 
         $pdf::SetAutoPageBreak(false);
-        $pdf::AddPage('P', 'A4');
+        $pdf::AddPage('L', 'A5');
 
         $style = [
             'width' => 0.25,
