@@ -41,6 +41,8 @@ class PDFController extends Controller
             if (is_numeric($this->kayit->sakin_id) && $this->kayit->sakin_id > 0) {
                 $owner = Sakin::find($this->kayit->sakin_id);
 
+                //dd($this->numberToText(4000));
+
                 $this->borclu['yazi'] =
                     'Yalnız ' .
                     $this->numberToText($this->kayit->tutar) .
@@ -1188,7 +1190,10 @@ class PDFController extends Controller
         ];
 
         $s[] = $binler[substr($number, 0, 1)] ;
-        $s[] = $this->toYuzler(substr($number, 1));
+
+        if (substr($number, 1) > 0) {
+            $s[] = $this->toYuzler(substr($number, 1));
+        }
 
         return implode(' ', $s);
     }
