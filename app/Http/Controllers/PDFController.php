@@ -14,47 +14,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PDFController extends Controller
 {
-    public $sayilar = [
-        'birler' => [
-            0 => '',
-            1 => 'bir',
-            2 => 'iki',
-            3 => 'üç',
-            4 => 'dört',
-            5 => 'beş',
-            6 => 'altı',
-            7 => 'yedi',
-            8 => 'sekiz',
-            9 => 'dokuz',
-        ],
-
-        'onlar' => [
-            0 => '',
-            1 => 'on',
-            2 => 'yirmi',
-            3 => 'otuz',
-            4 => 'kırk',
-            5 => 'elli',
-            6 => 'altmış',
-            7 => 'yetmiş',
-            8 => 'seksen',
-            9 => 'doksan',
-        ],
-
-        'yuzler' => [
-            0 => '',
-            1 => 'yüz',
-            2 => 'iki yüz',
-            3 => 'üç yüz',
-            4 => 'dört yüz',
-            5 => 'beş yüz',
-            6 => 'altı yüz',
-            7 => 'yedi yüz',
-            8 => 'sekiz yüz',
-            9 => 'dokuz yüz',
-        ],
-    ];
-
     public $bina;
     public $yonetici;
     public $kayit;
@@ -85,7 +44,7 @@ class PDFController extends Controller
                 $this->borclu['yazi'] =
                     'Yalnız ' .
                     $this->numberToText($this->kayit->tutar) .
-                    ' Türk Lirası tahsil edilmiştir.';
+                    ' TL tahsil edilmiştir.';
                 $this->borclu['kapino'] = $owner->door_no;
                 $this->borclu['isim'] = $owner->name . ' ' . $owner->lastname;
             }
@@ -99,10 +58,6 @@ class PDFController extends Controller
             $k['dokum'] = json_encode(['.....' => '']);
             $k['aciklama'] = '                  ';
 
-
-
-
-
             $this->kayit = (object) $k;
 
             $this->borclu['yazi'] = '';
@@ -112,9 +67,6 @@ class PDFController extends Controller
             $this->borclu['kapino'] = ' ';
             $this->borclu['isim'] = ' ';
         }
-
-
-
     }
 
     /**
@@ -367,7 +319,7 @@ class PDFController extends Controller
         $pdf::MultiCell(
             $w = 50,
             $h = 6,
-            $txt = explode('-', $this->kayit->donem)[2],
+            $txt = $this->kayit->donem ? explode('-', $this->kayit->donem)[2]: '-',
             $border = 0,
             $align = 'L',
             $fill = 0,
@@ -385,10 +337,10 @@ class PDFController extends Controller
         $pdf::MultiCell(
             $w = 50,
             $h = 6,
-            $txt =
+            $txt = $this->kayit->donem ? 
                 explode('-', $this->kayit->donem)[1] .
                 '/' .
-                explode('-', $this->kayit->donem)[0],
+                explode('-', $this->kayit->donem)[0] :'-',
             $border = 0,
             $align = 'R',
             $fill = 1,
@@ -563,7 +515,7 @@ class PDFController extends Controller
 
         $pdf::SetFont('dejavusans', '', 6);
 
-        if ($this->kayit->dokum) {
+        if ($this->kayit->dokum ) {
             foreach (json_decode($this->kayit->dokum) as $title => $deger) {
                 $pdf::MultiCell(
                     $w = $title_w,
@@ -603,7 +555,9 @@ class PDFController extends Controller
 
                 $uz = $uz + 6;
             }
-        } elseif ($this->kayit->aciklama) {
+        } 
+        
+        if ($this->kayit->aciklama) {
 
             $pdf::MultiCell(
                 $w = $title_w,
@@ -641,8 +595,6 @@ class PDFController extends Controller
                 $valign = 'M'
             );
         }
-
-
 
         // DÖKÜM TOPLAM
         $pdf::MultiCell(
@@ -729,11 +681,8 @@ class PDFController extends Controller
 
     public function bosmakbuz(Request $request)
     {
-
         $this->getData(false);
-
         $this->index($request);         
-
     }
 
 
@@ -1102,21 +1051,171 @@ class PDFController extends Controller
     public function numberToText($number)
     {
         if ($number < 10) {
-            return $this->sayilar['birler'][$number];
+
+            if ($number < 1) {
+                return "sıfır";
+            }
+    
+            return $this->toBirler($number);
         }
 
         if ($number < 100 && $number > 9) {
-            return $this->sayilar['onlar'][substr($number, 0, 1)] .
-                ' ' .
-                $this->sayilar['birler'][substr($number, -1)];
+            return $this->toOnlar($number);
         }
 
         if ($number < 1000 && $number > 99) {
-            return $this->sayilar['yuzler'][substr($number, 0, 1)] .
-                ' ' .
-                $this->sayilar['onlar'][substr($number, 1, 1)] .
-                ' ' .
-                $this->sayilar['birler'][substr($number, -1)];
+            return $this->toYuzler($number);
+        }
+
+        if ($number < 10000 && $number > 999) {
+            return $this->toBinler($number);
+        }
+
+        if ($number < 100000 && $number > 9999) {
+            return $this->toOnbinler($number);
+        }
+
+        if ($number < 1000000 && $number > 99999) {
+            return $this->toYuzbinler($number);
+        }
+
+        if ($number < 100000000 && $number > 999999) {
+            return $this->toMilyonlar($number);
         }
     }
+
+
+    public function toBirler($number) {
+
+        $birler = [
+                0 => '',
+                1 => 'bir',
+                2 => 'iki',
+                3 => 'üç',
+                4 => 'dört',
+                5 => 'beş',
+                6 => 'altı',
+                7 => 'yedi',
+                8 => 'sekiz',
+                9 => 'dokuz',
+        ];
+
+
+        return $birler[$number];
+    }
+
+    public function toOnlar($number) {
+
+        $onlar = [
+            1 => 'on',
+            2 => 'yirmi',
+            3 => 'otuz',
+            4 => 'kırk',
+            5 => 'elli',
+            6 => 'altmış',
+            7 => 'yetmiş',
+            8 => 'seksen',
+            9 => 'doksan',
+        ];
+
+        if ($number < 1) {
+            return null;
+        }
+
+        $s[] = $onlar[substr($number, 0, 1)] ;
+
+        if (substr($number, 1, 1) > 0) {
+            $s[] = $this->toBirler(substr($number, 1, 1));
+        }
+
+        return implode(' ', $s);
+    }
+
+    public function toYuzler($number) {
+
+        $yuzler = [
+            1 => 'yüz',
+            2 => 'iki yüz',
+            3 => 'üç yüz',
+            4 => 'dört yüz',
+            5 => 'beş yüz',
+            6 => 'altı yüz',
+            7 => 'yedi yüz',
+            8 => 'sekiz yüz',
+            9 => 'dokuz yüz',
+        ];
+
+        $number = ltrim($number, "0"); 
+
+        if ($number > 0 && $number < 10) {
+            return $this->toBirler($number);
+        }
+
+        if ($number > 10 && $number < 100) {
+            return $this->toOnlar($number);
+        }
+
+        if ($number > 0) {
+            $s[] = $yuzler[substr($number, 0, 1)] ;
+        } else {
+            return null;
+        }
+
+        if (substr($number, 1, 1) > 0) {
+            $s[] = $this->toOnlar(substr($number, 1, 1));
+        }
+
+        if (substr($number, 2, 1) > 0) {
+            $s[] = $this->toBirler(substr($number, 2, 1));
+        }
+
+        return implode(' ', $s);
+    }
+
+
+    public function toBinler($number) {
+
+        $binler = [
+            1 => 'bin',
+            2 => 'iki bin',
+            3 => 'üç bin',
+            4 => 'dört bin',
+            5 => 'beş bin',
+            6 => 'altı bin',
+            7 => 'yedi bin',
+            8 => 'sekiz bin',
+            9 => 'dokuz bin',
+        ];
+
+        $s[] = $binler[substr($number, 0, 1)] ;
+        $s[] = $this->toYuzler(substr($number, 1));
+
+        return implode(' ', $s);
+    }
+
+    public function toOnbinler($number) {
+
+        $s[] = $this->toOnlar(substr($number, 0, 2));
+        $s[] = $this->toYuzler(substr($number, 2));
+
+        return trim(implode(' bin ', $s));
+    }
+
+    public function toYuzbinler($number) {
+
+        $s[] = $this->toYuzler(substr($number, 0, 3));
+        $s[] = $this->toYuzler(substr($number, 3));
+
+        return trim(implode(' bin ', $s));
+    }
+
+    public function toMilyonlar($number) {
+
+        $s[] = $this->toYuzler(substr($number, 0,-6));
+        $s[] = $this->toYuzbinler(substr($number, -6));
+
+        return trim(implode(' milyon ', $s));
+    }
+
+
 }
