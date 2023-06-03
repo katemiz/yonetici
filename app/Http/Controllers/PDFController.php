@@ -41,8 +41,6 @@ class PDFController extends Controller
             if (is_numeric($this->kayit->sakin_id) && $this->kayit->sakin_id > 0) {
                 $owner = Sakin::find($this->kayit->sakin_id);
 
-                //dd($this->numberToText(4000));
-
                 $this->borclu['yazi'] =
                     'Yalnız ' .
                     $this->numberToText($this->kayit->tutar) .

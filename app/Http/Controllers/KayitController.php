@@ -124,12 +124,14 @@ class KayitController extends Controller
             return redirect()->route('durum', ['tur' => 'alacaklar']);
         }
 
+        $tutar = str_replace(',','.',$req->input('tutar'));
+
         if ($req->tur == 'alacak') {
             $props['sakin_id'] = $req->input('borclu');
             $props['tur'] = 'alacak';
             $props['aciklama'] = $req->input('aciklama');
             $props['donem'] = date('Y-m-d', time());
-            $props['tutar'] = $req->input('tutar');
+            $props['tutar'] = $tutar;
             $props['son_odeme'] = $req->input('sonodeme');
 
             $kayit = Kayit::create($props);
@@ -142,7 +144,7 @@ class KayitController extends Controller
             $props['tur'] = 'verecek';
             $props['aciklama'] = $req->input('aciklama');
             $props['donem'] = '';
-            $props['tutar'] = $req->input('tutar');
+            $props['tutar'] = $tutar;
             $props['son_odeme'] = $req->input('sonodeme');
 
             $kayit = Kayit::create($props);
@@ -155,7 +157,7 @@ class KayitController extends Controller
             $props['tur'] = 'gider';
             $props['aciklama'] = $req->input('aciklama');
             $props['donem'] = '';
-            $props['tutar'] = $req->input('tutar');
+            $props['tutar'] = $tutar;
             $props['son_odeme'] = date('Y-m-d', time());
 
             $kayit = Kayit::create($props);
@@ -168,7 +170,7 @@ class KayitController extends Controller
             $props['tur'] = 'gelir';
             $props['aciklama'] = $req->input('aciklama');
             $props['donem'] = '';
-            $props['tutar'] = $req->input('tutar');
+            $props['tutar'] = $tutar;
             $props['son_odeme'] = date('Y-m-d', time());
 
             $kayit = Kayit::create($props);
