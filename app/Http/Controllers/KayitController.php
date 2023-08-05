@@ -262,6 +262,8 @@ class KayitController extends Controller
 
     public function addFiles($req, $id)
     {
+
+
         if ($req->has('dosyalar')) {
             foreach ($req->file('dosyalar') as $dosya) {
                 if (strlen($dosya->getMimeType()) > 32) {
