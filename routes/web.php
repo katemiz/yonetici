@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
 use App\Http\Controllers\PDFController;
-use App\Http\Controllers\PDFControllerBos;
 
 
 /*
@@ -126,11 +125,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sayaclar', OkumaList::class);
     Route::get('/makbuz/{record?}', [DokumController::class, 'makbuz'])->name(
         'makbuz'
-    );
-
-
-    Route::get('/bosmakbuz', [PDFControllerBos::class, 'bosmakbuz'])->name(
-        'bosmakbuz'
     );
 
     Route::get('/karar/{id?}', KararList::class);
