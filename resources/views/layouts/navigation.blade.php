@@ -92,7 +92,8 @@
                     <p class="navbar-link" href="/Admin">Yazdır</p>
                     <div class="navbar-dropdown">
                         <a href="/dokum" class="navbar-item icon-text">Gelir-Gider Döküm</a>
-                        <a href="/bosmakbuz" class="navbar-item icon-text">Boş Makbuz</a>
+                        <a href="/aylik-aidatlar" class="navbar-item icon-text">Aylık Aidatlar</a>
+                        {{-- <a href="/bosmakbuz" class="navbar-item icon-text">Boş Makbuz</a> --}}
                     </div>
                 </div>
 

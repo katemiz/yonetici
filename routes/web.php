@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\PDFControllerBos;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -127,7 +129,7 @@ Route::middleware(['auth'])->group(function () {
     );
 
 
-    Route::get('/bosmakbuz', [PDFController::class, 'bosmakbuz'])->name(
+    Route::get('/bosmakbuz', [PDFControllerBos::class, 'bosmakbuz'])->name(
         'bosmakbuz'
     );
 
@@ -138,4 +140,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get('/makbuzpdf/{record}', [PDFController::class, 'dolumakbuz']);
+    Route::get('/aylik-aidatlar', [PDFController::class, 'aylikaidatlar']);
+
 });
