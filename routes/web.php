@@ -120,8 +120,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kayit-dosya-gor/{id}', [DosyaController::class, 'dosya']);
     Route::get('/select-active/{id}', [BinaController::class, 'selectActive']);
     Route::get('/durum/{tur}', DurumList::class)->name('durum');
-    //Route::get('/dokum', [DokumController::class, 'dokum'])->name('dokum');
-    Route::get('/dokum', [PDFController::class, 'dokum']);
+    Route::get('/dokum', [DokumController::class, 'dokum'])->name('dokum');
+    //Route::get('/dokum', [PDFController::class, 'dokum']);
     Route::get('/sayaclar', OkumaList::class);
     Route::get('/makbuz/{record?}', [DokumController::class, 'makbuz'])->name(
         'makbuz'

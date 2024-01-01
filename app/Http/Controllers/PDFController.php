@@ -976,6 +976,9 @@ class PDFController extends Controller
             $valign = 'M'
         );
 
+        //dd('here');
+
+
         return response()->make($pdf::Output($filename, 'I'), 200, [
             'Content-Type' => 'application/pdf',
         ]);

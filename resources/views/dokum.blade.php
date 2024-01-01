@@ -71,30 +71,28 @@
             <h2 class="subtitle has-text-weight-light">{{session('selected_bina')}}</h2>
         </header>
 
-        <nav class="level my-6 box has-background-grey-light">
 
-            <div class="level-item has-text-centered">
-                <div>
-                    <p class="heading">TOPLAM GELİR</p>
-                    <p class="title has-text-link">{{$ozet->toplam_gelir}} {{$bina->pbirimi}}</p>
-                </div>
+        <div class="column has-text-centered">
+            <div>
+                <p class="heading">TOPLAM GELİR</p>
+                <p class="title has-text-link">{{$ozet->toplam_gelir}} {{$bina->pbirimi}}</p>
             </div>
+        </div>
 
-            <div class="level-item has-text-centered">
-                <div>
-                    <p class="heading">TOPLAM GİDER</p>
-                    <p class="title has-text-link">{{$ozet->toplam_gider}} {{$bina->pbirimi}}</p>
-                </div>
+        <div class="column has-text-centered m7-6">
+            <div>
+                <p class="heading">TOPLAM GİDER</p>
+                <p class="title has-text-link">{{$ozet->toplam_gider}} {{$bina->pbirimi}}</p>
             </div>
+        </div>
 
-            <div class="level-item has-text-centered">
-                <div>
-                    <p class="heading">BAKİYE</p>
-                    <p class="title has-text-link">{{$ozet->nakit}} {{$bina->pbirimi}}</p>
-                </div>
+        <div class="column has-text-centered">
+            <div>
+                <p class="heading">BAKİYE</p>
+                <p class="title has-text-link">{{$ozet->nakit}} {{$bina->pbirimi}}</p>
             </div>
+        </div>
 
-        </nav>
 
         <nav class="level my-6 box has-background-light">
 
