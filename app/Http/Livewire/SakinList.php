@@ -81,7 +81,8 @@ class SakinList extends Component
             $this->sortTimeDirection
         );
 
-        $q->where('bina_id', '=', $req->id);
+        $q->where('bina_id', '=', $req->id)
+        ->where('is_active','=',1);
 
         if (strlen($this->search) > 0) {
             $q->where('name', 'like', '%' . $this->search . '%');
