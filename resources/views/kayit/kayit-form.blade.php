@@ -188,7 +188,7 @@
 
                     <div class="column">
                         <table class="table is-fullwidth">
-                            @foreach ($bina->sakinler as $sakin)
+                            @foreach ($bina->active_sakinler as $sakin)
                                 <tr>
                                     <td>{{$sakin->door_no}}</td>
                                     <td>{{$sakin->name}}</td>

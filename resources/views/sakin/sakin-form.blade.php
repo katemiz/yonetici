@@ -109,6 +109,32 @@
                     <div class="column" id="editor">{!!$sakin ? $sakin->remarks: ''!!}</div>
                 </div>
 
+
+
+                <div class="column field">
+                    <label class="label" for="status">Durum</label>
+
+                    <div class="control" id="status">
+                        <label class="radio">
+                        <input type="radio" name="status" value="1" {{$sakin && $sakin->is_active == '1' ? 'checked': ''}}>
+                        {{ $durum['1'] }}
+                        </label>
+                        <br>
+                        <label class="radio">
+                        <input type="radio" name="status" value="0" {{$sakin && $sakin->is_active == '0' ? 'checked': ''}}>
+                        {{ $durum['0'] }}
+                        </label>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
                 <div class="buttons is-right">
                     <button class="button is-link">{{ $sakin ? 'Güncelle' : 'Kaydet'}}</button>
                 </div>

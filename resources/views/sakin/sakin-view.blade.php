@@ -63,6 +63,13 @@
                                     <td>{!! $sakin->remarks !!}</td>
                                 </tr>
 
+                                <tr>
+                                    <td class="has-text-grey has-text-right">Durum</td>
+                                    <td>{{ $sakin->is_active ? $durum['1'] : $durum['0']}}</td>
+                                </tr>
+
+
+
                             </table>
 
 

@@ -111,7 +111,7 @@ class KayitController extends Controller
             $props['donem'] = $req->input('donem');
             $props['son_odeme'] = '';
 
-            foreach ($bina->sakinler as $sakin) {
+            foreach ($bina->active_sakinler as $sakin) {
                 $props['sakin_id'] = $sakin->id;
                 $props['tutar'] = $this->tutarlar[$sakin->id];
 
@@ -243,7 +243,8 @@ class KayitController extends Controller
 
     public function calculateAidatlar()
     {
-        foreach ($this->bina->sakinler as $sakin) {
+        foreach ($this->bina->active_sakinler as $sakin) {
+
             $this->tutarlar[$sakin->id] = round(
                 ($sakin->payratio * $this->toplam_sabit_aidat) / 100,
                 0
@@ -262,7 +263,6 @@ class KayitController extends Controller
 
     public function addFiles($req, $id)
     {
-
 
         if ($req->has('dosyalar')) {
             foreach ($req->file('dosyalar') as $dosya) {

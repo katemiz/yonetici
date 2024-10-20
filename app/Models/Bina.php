@@ -21,6 +21,14 @@ class Bina extends Model
         return $this->hasMany(Sakin::class);
     }
 
+    public function active_sakinler()
+    {
+        return $this->hasMany(Sakin::class)->where('is_active','=',1);
+    }
+
+
+
+
 
     public function kalemler()
     {

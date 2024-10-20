@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class SakinController extends Controller
 {
+
+    public $durum = [
+        "1" => 'Güncel Sakin - Halen Oturuyor',
+        "0" => 'Geçmiş Sakin - Ayrldı',
+    ];
+
     public function formSakin(Request $request)
     {
         $bina = Bina::find($request->id);
@@ -25,6 +31,7 @@ class SakinController extends Controller
         return view('sakin.sakin-form', [
             'bina' => $bina,
             'sakin' => $sakin,
+            'durum' => $this->durum
         ]);
     }
 
@@ -41,6 +48,9 @@ class SakinController extends Controller
         $props['giris_tarihi'] = $req->input('giristarihi');
         $props['remarks'] = $req->input('editor_data');
 
+        $props['is_active'] = $req->input('status');
+
+
         $sakin = Sakin::create($props);
         $bina = Bina::find($req->id);
 
@@ -51,6 +61,7 @@ class SakinController extends Controller
             ],
             'bina' => $bina,
             'sakin' => $sakin,
+            'durum' => $this->durum
         ]);
     }
 
@@ -67,6 +78,8 @@ class SakinController extends Controller
         $props['giris_tarihi'] = $req->input('giristarihi');
         $props['remarks'] = $req->input('editor_data');
 
+        $props['is_active'] = $req->input('status');
+
         Sakin::find($req->sakinid)->update($props);
 
         return redirect()->route('sakinview', [
@@ -76,6 +89,7 @@ class SakinController extends Controller
             ],
             'id' => $req->id,
             'sakinid' => $req->sakinid,
+            'durum' => $this->durum
         ]);
     }
 
@@ -93,6 +107,7 @@ class SakinController extends Controller
             'notification' => false,
             'bina' => $bina,
             'sakin' => $sakin,
+            'durum' => $this->durum
         ]);
     }
 }

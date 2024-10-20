@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->float('payratio', 12, 4)->default(100);
             $table->string('giris_tarihi')->nullable();
             $table->string('remarks')->nullable();
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }
