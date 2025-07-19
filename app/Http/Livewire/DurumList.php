@@ -22,7 +22,7 @@ class DurumList extends Component
     public $sortDirection = 'asc';
 
     public $sortTimeField = 'created_at';
-    public $sortTimeDirection = 'desc';
+    public $sortTimeDirection = 'asc';
 
     protected $listeners = [
         'alacakToGelir' => 'alacakToGelir',
@@ -211,13 +211,26 @@ class DurumList extends Component
     {
         // $this->isBinaSelected();
 
-        $q = Kayit::query()->orderBy(
-            $this->sortTimeField,
-            $this->sortTimeDirection
-        );
+        // $q = Kayit::query()->orderBy(
+        //     'sakin_id',
+        //     // $this->sortTimeField,
+        //     $this->sortTimeDirection
+        // );
 
-        $q->where('bina_id', '=', session('bina_id'));
-        $q->where('tur', '=', 'alacak');
+
+        // $q->where('bina_id', '=', session('bina_id'));
+
+        $q = Kayit::query()
+            ->join('sakinler', 'kayitlar.sakin_id', '=', 'sakinler.id')
+            // ->where('bina_id', '=', session('bina_id'))
+            ->where('tur', '=', 'alacak')
+            ->orderBy('sakinler.door_no','asc')
+            ->orderBy($this->sortTimeField, $this->sortTimeDirection)
+            ->select('kayitlar.*');
+            // ->get();
+
+        // $q->where('bina_id', '=', session('bina_id'));
+        // $q->where('tur', '=', 'alacak');
 
         if (strlen($this->search) > 0) {
             $q->where('aciklama', 'like', '%' . $this->search . '%');
