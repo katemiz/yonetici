@@ -264,7 +264,7 @@ class DurumList extends Component
 
         $q = Kayit::query()->orderBy(
             $this->sortTimeField,
-            $this->sortTimeDirection
+            'desc'
         );
 
         $q->where('bina_id', '=', session('bina_id'));
@@ -284,7 +284,7 @@ class DurumList extends Component
 
         $q = Kayit::query()->orderBy(
             $this->sortTimeField,
-            $this->sortTimeDirection
+            'desc'
         );
 
         $q->where('bina_id', '=', session('bina_id'));
@@ -298,15 +298,18 @@ class DurumList extends Component
         return $q;
     }
 
+    
     public function ara($query)
     {
         $this->search = $query;
     }
 
+
     public function resetFilter()
     {
         $this->search = '';
     }
+
 
     public function isBinaSelected()
     {
