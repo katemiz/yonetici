@@ -65,6 +65,43 @@ class PDFController extends Controller
      }
 
 
+     public function bosmakbuz()
+     {
+        $this->initialize();
+
+        //$this->kayit = Kayit::find(393);
+        $this->kayit = false;
+
+
+        $this->borclu['yazi'] = '';
+        $this->borclu['kapino'] = '';
+        $this->borclu['isim'] = '';
+
+
+        //$this->kayit['tutar'] = '';
+
+        //dd($this->kayit);
+
+        
+
+
+        $pdf = new TCPDF();
+
+        $pdf::SetAutoPageBreak(false);
+
+
+        $pdf = $this->prepareSinglePage($pdf);
+        
+
+        return response()->make($pdf::Output('bosmakbuz.pdf', 'I'), 200, [
+            'Content-Type' => 'application/pdf',
+        ]);
+     }
+
+
+
+
+
     public function aylikaidatlar(Request $request) {
 
         $this->initialize();
@@ -340,7 +377,7 @@ class PDFController extends Controller
         $pdf::MultiCell(
             $w = 50,
             $h = 6,
-            $txt = $this->kayit->donem ? explode('-', $this->kayit->donem)[2]: '-',
+            $txt = $this->kayit ? explode('-', $this->kayit->donem)[2]: '-',
             $border = 0,
             $align = 'L',
             $fill = 0,
@@ -358,7 +395,7 @@ class PDFController extends Controller
         $pdf::MultiCell(
             $w = 50,
             $h = 6,
-            $txt = $this->kayit->donem ? 
+            $txt = $this->kayit ? 
                 explode('-', $this->kayit->donem)[1] .
                 '/' .
                 explode('-', $this->kayit->donem)[0] :'-',
@@ -381,7 +418,7 @@ class PDFController extends Controller
         $pdf::MultiCell(
             $w = 20,
             $h = 6,
-            $txt = 'Belge No ' . $this->kayit->id,
+            $txt = $this->kayit ? 'Belge No ' . $this->kayit->id : 'Belge No ',
             $border = 0,
             $align = 'C',
             $fill = 0,
@@ -401,7 +438,7 @@ class PDFController extends Controller
         $pdf::MultiCell(
             $w = 100,
             $h = 16,
-            $txt = number_format($this->kayit->tutar, 2, ',', ' ') . ' TL',
+            $txt = $this->kayit ? number_format($this->kayit->tutar, 2, ',', ' ') . ' TL' : '',
             $border = 'B',
             $align = 'R',
             $fill = 1,
@@ -534,7 +571,7 @@ class PDFController extends Controller
 
         $pdf::SetFont('dejavusans', '', 6);
 
-        if ($this->kayit->dokum ) {
+        if ($this->kayit ) {
             foreach (json_decode($this->kayit->dokum) as $title => $deger) {
                 $pdf::MultiCell(
                     $w = $title_w,
@@ -576,7 +613,7 @@ class PDFController extends Controller
             }
         } 
         
-        if ($this->kayit->aciklama) {
+        if ($this->kayit) {
 
             $pdf::MultiCell(
                 $w = $title_w,
@@ -637,7 +674,7 @@ class PDFController extends Controller
         $pdf::MultiCell(
             $w = 20,
             $h = 6,
-            $txt = number_format($this->kayit->tutar, 2, ',', ' '),
+            $txt = $this->kayit ? number_format($this->kayit->tutar, 2, ',', ' ') : '',
             $border = 'LT',
             $align = 'R',
             $fill = 1,

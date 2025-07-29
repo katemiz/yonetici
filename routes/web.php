@@ -136,4 +136,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/makbuzpdf/{record}', [PDFController::class, 'dolumakbuz']);
     Route::get('/aylik-aidatlar', [PDFController::class, 'aylikaidatlar']);
 
+
+    Route::get('/bosmakbuz', [PDFController::class, 'bosmakbuz']);
+
 });
