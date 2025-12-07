@@ -19,6 +19,9 @@ use App\Http\Livewire\KararList;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
+
+use App\Http\Livewire\SayacOkuma;
+
 use App\Http\Controllers\PDFController;
 
 
@@ -112,6 +115,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/okuma-add', [KayitController::class, 'okumaAdd']);
 
     Route::post('/kayit-add/{tur}', [KayitController::class, 'kayitAdd']);
+    Route::get('/kayit-gor/{id}', [KayitController::class, 'kayitGor']);
+
     Route::post('/kayit-dosya-add/{id}/{tur}', [
         KayitController::class,
         'dosyaEkle',
@@ -138,5 +143,9 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/bosmakbuz', [PDFController::class, 'bosmakbuz']);
+
+    Route::get('/sayac-okuma/{idBedel?}/{idBina?}', SayacOkuma::class);
+
+
 
 });

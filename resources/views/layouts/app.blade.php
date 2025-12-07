@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
 
-    <link  rel="icon" type="image/svg+xml" href="{{ asset(Config::get('constants.favicon')) }}" />
+<head>
+  <meta charset="utf-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <link  href="{{ asset('/css/app.css') }}" rel="stylesheet" />
-    <link  href="{{ asset('/css/bulma.css') }}" rel="stylesheet" />
-    <script src="{{ asset('/js/js.js') }}"></script>
+  <link rel="icon" type="image/svg+xml" href="{{ asset(Config::get('constants.favicon')) }}" />
 
-    <link rel="stylesheet" href="{{ asset('/css/sweetalert2_min.css') }}">
-    <script src="{{ asset('/js/sweetalert2.min.js') }}"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>{{ config('constants.app.name', 'Bina Yönetim Sistemi') }}</title>
 
-    @livewireStyles
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-  </head>
-  <body>
+  @livewireStyles
 
-    @include('layouts.navigation',["user"=>false])
-    {{-- <x-active-bina /> --}}
+</head>
 
-    {{ $slot }}
+<body>
 
-    @include('layouts.footer')
+  @include('layouts.navigation', ["user" => false])
 
-    @livewireScripts
+  {{ $slot }}
 
-  </body>
+  @include('layouts.footer')
+
+  @livewireScripts
+
+</body>
+
 </html>

@@ -18,14 +18,14 @@ return [
         'app_login_logo' => 'app_login_logo.svg',
         'app_header_logo' => 'app_header_logo.svg',
         'app_footer_logo' => 'app_footer_logo.svg',
-        'version' => '2023.05.20 - 99',
-        'copyright' => '© 2022 All Rights Reserved',
+        'version' => '2025.12.07',
+        'copyright' => '© 2025 All Rights Reserved',
     ],
 
     'icons' => [
         'size' => '24',
         'color' => [
-            'light' => 'hsl(0, 0%, 100%)',
+            'light' => 'hsla(236, 58%, 50%, 1.00)',
             'dark' => 'hsl(0, 0%, 4%)',
             'active' => 'hsl(217, 71%, 53%)',
             'inactive' => 'hsl(0, 0%, 211%)',

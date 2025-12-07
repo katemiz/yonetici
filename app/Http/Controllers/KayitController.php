@@ -7,6 +7,7 @@ use App\Models\Bedel;
 use App\Models\Bina;
 use App\Models\Dosya;
 use App\Models\Okuma;
+use App\Models\Sakin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -295,5 +296,36 @@ class KayitController extends Controller
         ];
 
         Dosya::create($dosya_data);
+    }
+
+
+
+    public function kayitGor(){
+
+
+        if ( empty(session()->get(key: 'bina_id'))) {
+            redirect('/bina-list');
+        }
+
+
+        $bina = Bina::find(session()->get(key: 'bina_id'));
+        $kayit = Kayit::find(request('id'));
+
+        $yerlesenler = Sakin::where('bina_id','=',$bina['id'])->get()->toArray();
+
+        foreach ($yerlesenler as $yerlesen) {
+            $sakinler[$yerlesen['id']] = $yerlesen;
+        }
+
+        //dd(vars: $sakinler);
+
+        return view('kayit.kayit-gor',[
+            'kayit' => $kayit,
+            'bina' => $bina,
+            'sakinler' => $sakinler
+        ]);
+
+
+
     }
 }

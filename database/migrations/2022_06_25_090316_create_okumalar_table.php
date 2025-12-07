@@ -1,5 +1,4 @@
 <?php
-
 use App\Models\Bedel;
 use App\Models\Bina;
 use App\Models\Sakin;
@@ -21,10 +20,13 @@ return new class extends Migration {
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Bina::class);
             $table->foreignIdFor(Bedel::class);
+
             $table->foreignIdFor(Sakin::class);
-            $table->float('son_okuma', 12, 2);
+            $table->float('okuma_degeri', 12, 2);
+            $table->string('okuma_tarihi')->nullable();
             $table->text('note')->nullable();
             $table->string('status')->default('OKUNDU');
+            $table->integer('kayit_id')->default(0);
             $table->timestamps();
         });
     }

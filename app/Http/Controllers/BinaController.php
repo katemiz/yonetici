@@ -45,6 +45,7 @@ class BinaController extends Controller
         }
 
         if (count($binalarim) == 1) {
+            
             $this->selectActive($binalarim->first()->id);
 
             $is_bina_selected = true;

@@ -4,8 +4,10 @@
 
         <div class="columns">
 
-            <div class="column is-half">
-                <h1 class="title has-text-weight-light is-size-1 has-text-left">Akıllı Yönetici / Akıllı Uygulama</h1>
+            <div class="column">
+                <h1 class="title has-text-weight-light is-size-1 has-text-centered-mobile">
+                    Akıllı Yönetici<br>Akıllı Uygulama
+                </h1>
 
                 <figure class="image is-1by1">
                     <img src="images/hero.svg" alt="The Process Flow" on:click="{showImg}">
@@ -13,10 +15,11 @@
             </div>
 
             <div class="column content">
-
                 <h1 class="subtitle has-text-weight-light">Tüm İşlemlerinizi Cepten Yönetin</h1>
 
-                <p class="mb-3">Bu uygulama ile tüm apartman/site yöneticleri tüm verilerini ve bütçelerini zorlanmadan yönetebilmesi amacıyla hazırlanmıştır.</p>
+                <p class="mb-3">Bu uygulama ile tüm apartman/site yöneticleri tüm verilerini ve bütçelerini
+                    zorlanmadan
+                    yönetebilmesi amacıyla hazırlanmıştır.</p>
 
                 <p class="mb-3">Uğraşmadan :</p>
 
@@ -55,4 +58,3 @@
     </section>
 
 </x-app-layout>
-
