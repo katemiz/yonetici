@@ -178,19 +178,30 @@ class SayacOkuma extends Component
         $okumaDegerleri['note'] = $this->okumaNotu;
         $okumaDegerleri['status'] = 'OKUNDU';
 
-        if (Okuma::create($okumaDegerleri)) {
+        if ($idOkuma) {
 
-            $this->toggleModal('okumaModal');
+            //dd($okumaDegerleri);
 
-            // Yeniden okumaları yükle
-            $this->getOkumalar();
-            return true;
+            // EDIT
+            Okuma::find($idOkuma)->update($okumaDegerleri);
 
         } else {
 
-            dd('Error', $okumaDegerleri);
-            return false;
+            // NEW RECORD: CREATE
+            if ( !Okuma::create($okumaDegerleri)) {
+
+                dd('Error', $okumaDegerleri);
+                return false;
+            }
         }
+
+        $this->toggleModal(idModal: 'okumaModal');
+
+
+        // Yeniden okumaları yükle
+        $this->getOkumalar();
+        return true;
+
     }   
 
 
@@ -203,16 +214,11 @@ class SayacOkuma extends Component
 
         $this->idOkuma = $idOkuma;
 
-
-        // if ( !$this->okuma ) {
-        //     return;
-        // }
-
         $okuma = Okuma::find($idOkuma);
 
         $this->currentSakin = Sakin::find(id: $okuma->sakin_id);
 
-
+        $this->bedel_id = $okuma->bedel_id;
 
         $this->okumaTarihi = $okuma->okuma_tarihi;
         $this->okumaDegeri = $okuma->okuma_degeri;

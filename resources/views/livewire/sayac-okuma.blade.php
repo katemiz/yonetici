@@ -124,9 +124,7 @@
                                     @if (strlen($okuma['note']) > 0)
                                         <tr>
                                             <td colspan="5" class="is-size-7 has-text-grey">
-
                                                 {{ $okuma['note'] }}
-
                                             </td>
                                         </tr>
                                     @endif
