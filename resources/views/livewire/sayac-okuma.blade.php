@@ -90,7 +90,7 @@
 
                                         <td>
 
-                                            @if ($okuma['kayit_id'] < 1)
+                                            @if ($okuma['status'] == 'OKUNDU' && $okuma['kayit_id'] < 1)
 
                                                 <button class="button" wire:click="okumaDuzenle({{ $okuma['id'] }})">
                                                     <span class="icon is-small">
