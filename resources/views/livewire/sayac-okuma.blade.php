@@ -63,21 +63,31 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Okuma Tarihi</th>
-                                    <th class="has-text-right" wire:model="okumaDegeri">Okuma Değeri</th>
-                                    <th>Fatura Durumu</th>
+                                    <th>Okuma<br>Tarihi</th>
+                                    <th class="has-text-right" wire:model="okumaDegeri">Okuma<br>Değeri</th>
+                                    <th>Fatura<br>Durumu</th>
                                     <th>İşlemler</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($okumalar[$sayacTur['id']][$sakin['id']] as $key => $okuma)
                                     <tr>
-                                        <td>{{ count($okumalar[$sayacTur['id']][$sakin['id']]) - $key }}.{{ $sayacTur['title'] }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($okuma['okuma_tarihi'])->format('d M Y') }}</td>
+                                        <td>{{ count($okumalar[$sayacTur['id']][$sakin['id']]) - $key }}. {{ $sayacTur['title'] }}</td>
+                                        <td>
+                                            {{ \Carbon\Carbon::parse($okuma['okuma_tarihi'])->format('d M Y') }}
+                                        </td>
                                         <td class="has-text-right is-size-6 has-text-weight-bold">
                                             {{ sprintf("%4d", $okuma['okuma_degeri']) }}
                                         </td>
-                                        <td>{{ $okuma['status'] }}</td>
+
+                                        <td>
+                                            @if ($okuma['kayit_id'] > 0)
+                                                <a href="/kayit-gor/{{ $okuma['kayit_id'] }}">{{ $okuma['status'] }}</a>
+                                            @else
+                                                {{ $okuma['status'] }}
+                                            @endif
+                                        </td>
+
                                         <td>
 
                                             @if ($okuma['kayit_id'] < 1)
@@ -89,7 +99,7 @@
                                                 </button>
 
                                                 <button
-                                                    wire:click="bedelEkle({{ $sayacTur['id'] }},{{ $okuma['id'] }},{{ $okuma['sakin_id'] }})"
+                                                    wire:click="bedelGor({{ $sayacTur['id'] }},{{ $okuma['id'] }},{{ $okuma['sakin_id'] }})"
                                                     class="button">
                                                     <span class="icon">
                                                         <i class="fa-solid fa-barcode"></i>
@@ -109,6 +119,17 @@
                                             @endif
                                         </td>
                                     </tr>
+
+
+                                    @if (strlen($okuma['note']) > 0)
+                                        <tr>
+                                            <td colspan="5" class="is-size-7 has-text-grey">
+
+                                                {{ $okuma['note'] }}
+
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
@@ -164,11 +185,22 @@
                     @enderror
                 </div>
 
+
+                <div class="field ">
+                    <label class="label" for="okumaNotu">Ek Bilgi (Varsa)</label>
+                    <div class="control" id="okumaNotu">
+                        <textarea class="textarea" placeholder="Ek bilgi var ise ekleyiniz..." name="okumaNotu"
+                            wire:model.live="okumaNotu" rows="4"></textarea>
+                    </div>
+                </div>
+
+
+
             </section>
 
             <footer class="modal-card-foot">
                 <div class="buttons">
-                    <button class="button is-success" wire:click="okumaKayit({{ $idOkuma }})">Kaydet</button>
+                    <button class="button is-success" wire:click="okumaKayit({{ $idOkuma }})">Okuma Kaydet</button>
                     <button class="button" wire:click="toggleModal('okumaModal')">İptal</button>
                 </div>
             </footer>
@@ -207,8 +239,12 @@
                                 </figure>
                             </div>
                             <div class="media-content">
-                                <p class="title is-4">{{ $bedel['aciklama'] }}</p>
-                                <p class="subtitle is-6">{{ $bedel['birim_bedel'] }} {{ $bedel['unit'] }} / TL</p>
+                                <p class="title is-4">{{ $okumaBedeli ? $okumaBedeli['aciklama'] : '' }}</p>
+                                <p class="subtitle is-6">
+                                    {{ $okumaBedeli ? $okumaBedeli['birim_bedel'] : ''}}
+                                    {{ $okumaBedeli ? $okumaBedeli['unit'] : ''}} /
+                                    TL
+                                </p>
                             </div>
                         </div>
 
@@ -217,12 +253,21 @@
                             <table class="table is-fullwidth">
                                 <tr>
                                     <th>Son Okuma - İlk Okuma</th>
-                                    <td>{{ $bedel['son_okuma'] }} - {{ $bedel['ilk_okuma'] }}</td>
+                                    <td> {{ $okumaBedeli ? $okumaBedeli['son_okuma'] : ''}} -
+                                        {{ $okumaBedeli ? $okumaBedeli['ilk_okuma'] : ''}}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>Okuma Tarihleri</th>
+                                    <td> {{ $okumaBedeli ? $okumaBedeli['son_okuma_tarihi'] : ''}} -
+                                        {{ $okumaBedeli ? $okumaBedeli['ilk_okuma_tarihi'] : ''}}
+                                    </td>
                                 </tr>
 
                                 <tr>
                                     <th>Tutar</th>
-                                    <td>{{ $bedel['tutar'] }} TL</td>
+                                    <td>{{ $okumaBedeli ? $okumaBedeli['tutar'] : ''}} TL</td>
                                 </tr>
                             </table>
 
@@ -234,7 +279,7 @@
 
             <footer class="modal-card-foot">
                 <div class="buttons">
-                    <button class="button is-success" wire:click="okumaKayit({{ $idOkuma }})">Kaydet</button>
+                    <button class="button is-success" wire:click="bedelEkle({{ $idOkuma }})">Bedel Kaydet</button>
                     <button class="button" wire:click="toggleModal('bedelModal')">İptal</button>
                 </div>
             </footer>

@@ -22,6 +22,9 @@ class SayacOkuma extends Component
     public $okumaModal = false;
     public $bedelModal = false;
 
+    public $okumaBedeli = false;
+    public $okumaNotu;
+
 
     public $currentSakin ;
     public $okuma = false;
@@ -161,63 +164,33 @@ class SayacOkuma extends Component
 
     public function okumaKayit($idOkuma = false)
     {
-
-
         if ( !$this->currentSakin ) {
-
             dd('$this->currentSakin yok');
             return;
         }
 
+        $okumaDegerleri['user_id'] = auth()->id();
+        $okumaDegerleri['bina_id'] = $this->current_bina_id;
+        $okumaDegerleri['bedel_id'] = $this->bedel_id;
+        $okumaDegerleri['sakin_id'] = $this->currentSakin->id;
+        $okumaDegerleri['okuma_degeri'] = $this->okumaDegeri;
+        $okumaDegerleri['okuma_tarihi'] = $this->okumaTarihi;
+        $okumaDegerleri['note'] = $this->okumaNotu;
+        $okumaDegerleri['status'] = 'OKUNDU';
 
+        if (Okuma::create($okumaDegerleri)) {
 
-        // $this->validate();
+            $this->toggleModal('okumaModal');
 
-        //         dd('wwww',$this->currentSakin);
+            // Yeniden okumaları yükle
+            $this->getOkumalar();
+            return true;
 
-        //dd($this->bedel);
+        } else {
 
-        $dokum = json_encode([
-            'son_okuma' =>$this->bedel['son_okuma'],
-            'ilk_okuma' => $this->bedel['ilk_okuma'],
-            'birim_bedel' => $this->bedel['birim_bedel'],
-            'unit' => $this->bedel['unit']
-        ]);
-
-
-        // Yeni ALACAK kaydı ekle
-        $alacak['user_id'] = auth()->id();
-        $alacak['bina_id'] = $this->current_bina_id;
-        $alacak['sakin_id'] = $this->currentSakin->id;
-        $alacak['tur'] = 'alacak';
-        $alacak['aciklama'] = $this->bedel['aciklama'];
-        $alacak['donem'] = date('M Y', time());
-        $alacak['son_odeme'] = '';
-        $alacak['dokum'] = $dokum;
-        $alacak['tutar'] = $this->bedel['tutar'];
-        $alacak['status'] = 'KAYIT';
-
-        $kayit = Kayit::create($alacak);
-
-        $okumaGuncelle = [
-            'kayit_id' => $kayit->id,
-        ];
-
-                //dd($alacak,$idOkuma);
-
-
-        // Güncelle
-        $okuma = Okuma::find($idOkuma);
-        $okuma = $okuma->update($okumaGuncelle);
-
-        $this->toggleModal('bedelModal');
-
-
-
-        // Yeniden okumaları yükle
-        $this->getOkumalar();
-
-        return true;
+            dd('Error', $okumaDegerleri);
+            return false;
+        }
     }   
 
 
@@ -243,6 +216,8 @@ class SayacOkuma extends Component
 
         $this->okumaTarihi = $okuma->okuma_tarihi;
         $this->okumaDegeri = $okuma->okuma_degeri;
+        $this->okumaNotu = $okuma->note;
+
 
         $this->toggleModal('okumaModal');
 
@@ -253,79 +228,136 @@ class SayacOkuma extends Component
 
 
 
-    public function bedelEkle($bedel_id,$idOkuma,$idSakin)
+    public function bedelGor($bedel_id,$idOkuma,$idSakin)
     {
 
         $okumaObject = Bedel::find($bedel_id);
 
         $this->idOkuma = $idOkuma;
 
-
         $this->currentSakin = Sakin::find(id: $idSakin);
         $this->toggleModal('bedelModal');
 
         $lastTwo = Okuma::where('sakin_id', '=', $idSakin)
-            ->where('id', '<', $idOkuma)
+            ->where('id', '<=', $idOkuma)
             ->orderBy('okuma_tarihi', 'DESC')
             ->limit(2)
             ->get();
-            // ->toArray();
-
 
             //dd($lastTwo);
 
-        $ilkOkuma = $lastTwo[1]->okuma_degeri;
-        $sonOkuma = $lastTwo[0]->okuma_degeri;
+        if ( count($lastTwo) == 1) {
+            $ilkOkuma = 0;
+            $sonOkuma = $lastTwo[0]->okuma_degeri;
+
+            //dd($ilkOkuma,$sonOkuma);
+
+            $ilkOkumaTarihi = '';
+            $sonOkumaTarihi = $lastTwo[0]->okuma_tarihi;
+
+        } else {
+            $ilkOkuma = $lastTwo[0]->okuma_degeri;
+            $sonOkuma = $lastTwo[1]->okuma_degeri;
+
+            $ilkOkumaTarihi = $lastTwo[0]->okuma_tarihi;
+            $sonOkumaTarihi = $lastTwo[1]->okuma_tarihi;
+        }
+
 
 
         $toplamTuketim = $ilkOkuma - $sonOkuma;
+
 
         $aciklama = $okumaObject->title;
 
         $tutar = $toplamTuketim * $okumaObject->bedel;
 
-
-        $this->bedel = [
-            'user_id' => auth()->id(),
-            'bina_id' => $this->current_bina_id,
-            'sakin_id' => $idSakin,
-            'tur' => 'alacak',
-            'aciklama' => $aciklama,
-            'donem' => '',
-            'son_odeme' => '',
-            'dokum' => '',
-            'tutar' => $tutar,
-            'remarks' => '',
-            'birim_bedel' => $okumaObject->bedel,
-            'ilk_okuma' => $ilkOkuma,
+        $dokum = json_encode([
             'son_okuma' => $sonOkuma,
-            'unit' => $okumaObject->unit,
-            'status' => 'KAYIT'
-        ];
-
-       // dd($this->bedel);
-
+            'ilk_okuma' => $ilkOkuma,
+            'birim_bedel' => $okumaObject['bedel'],
+            'unit' => $okumaObject['unit']
+        ]);
 
 
 
 
+        // Yeni ALACAK kaydı ekle
+        $this->okumaBedeli['ilk_okuma'] = $ilkOkuma;
+        $this->okumaBedeli['son_okuma'] = $sonOkuma;
+        $this->okumaBedeli['ilk_okuma_tarihi'] = $ilkOkumaTarihi;
+        $this->okumaBedeli['son_okuma_tarihi'] = $sonOkumaTarihi;
 
-        // foreach ( $lastTwo as $okuma ) {
+        $this->okumaBedeli['birim_bedel'] = $okumaObject['bedel'];
+        $this->okumaBedeli['unit'] = $okumaObject['unit'];
+
+        $this->okumaBedeli['user_id'] = auth()->id();
+        $this->okumaBedeli['bina_id'] = $this->current_bina_id;
+        $this->okumaBedeli['sakin_id'] = $this->currentSakin->id;
+        $this->okumaBedeli['tur'] = 'alacak';
+        $this->okumaBedeli['aciklama'] = $aciklama;
+        $this->okumaBedeli['donem'] = date('M Y', time());
+        $this->okumaBedeli['son_odeme'] = '';
+        $this->okumaBedeli['dokum'] = $dokum;
+        $this->okumaBedeli['tutar'] = abs($tutar);
+        $this->okumaBedeli['status'] = 'KAYIT';
+
+        //dd($okumaBedeli);
+
+                // $this->toggleModal(idModal: 'bedelGorModal');
 
 
+        // $kayit = Kayit::create($okumaBedeli);
 
-        // }
+        // $okumaGuncelle = [
+        //     'kayit_id' => $kayit->id,
+        // ];
+
+        // // Güncelle
+        // $okuma = Okuma::find($idOkuma);
+        // $okuma = $okuma->update($okumaGuncelle);
 
 
-            //dd([$lastTwo,$idSakin]);
+        // // Yeniden okumaları yükle
+        // $this->getOkumalar();
 
-
-        // Find last 2 okuma;
-
-
+        // return true;
     }
 
 
+    public function bedelEkle($idOkuma)
+    {
+        $this->toggleModal('bedelModal');
+
+
+        unset($this->okumaBedeli['ilk_okuma']);
+        unset($this->okumaBedeli['son_okuma']);
+        unset($this->okumaBedeli['ilk_okuma_tarihi']);
+        unset($this->okumaBedeli['son_okuma_tarihi']);
+
+        unset($this->okumaBedeli['birim_bedel']);
+        unset($this->okumaBedeli['unit']);
+
+
+
+        $kayit = Kayit::create($this->okumaBedeli);
+
+        $okumaGuncelle = [
+            'kayit_id' => $kayit->id,
+            'status' =>'FATURALANDI'
+        ];
+
+        // Güncelle
+        $okuma = Okuma::find($idOkuma);
+        $okuma = $okuma->update($okumaGuncelle);
+
+        $this->okumaBedeli = false;
+
+        // Yeniden okumaları yükle
+        $this->getOkumalar();
+
+        return true;
+    }
 
     public function setActiveSayacTab($idTab) {
 
