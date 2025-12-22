@@ -30,13 +30,13 @@
     {{-- TAB VALUES --}}
     @foreach ($sayacliOkumaTurleri as $sayacTur)
 
-        <div class="{{ $activeSayacTab == $sayacTur['id'] ? '' : 'is-hidden' }} p-6" id="sayacTab{{ $sayacTur['id'] }}">
+        <div class="{{ $activeSayacTab == $sayacTur['id'] ? '' : 'is-hidden' }}" id="sayacTab{{ $sayacTur['id'] }}">
 
             @foreach ($sakinler as $sakin)
 
-                <div class="box mb-4">
+                <div class="box mb-4 has-background-light">
 
-                    <div class="fixed-grid">
+                    <div class="fixed-grid has-1-cols-mobile has-2-cols-tablet is-variable is-6 mb-0">
                         <div class="grid ">
 
                             <div class="cell">
@@ -44,7 +44,7 @@
                                 </h3>
                             </div>
 
-                            <div class="cell has-text-right">
+                            <div class="cell has-text-right has-text-left-mobile">
                                 <button wire:click="yeniOkuma({{ $sayacTur['id'] }},{{ $sakin['id'] }})" class="button is-link">
                                     <span class="icon">
                                         <i class="fa-regular fa-square-plus"></i>
@@ -59,78 +59,81 @@
 
                     @if (count($okumalar[$sayacTur['id']][$sakin['id']]) > 0)
 
-                        <table class="table is-fullwidth is-striped is-hoverable mt-4">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Okuma<br>Tarihi</th>
-                                    <th class="has-text-right" wire:model="okumaDegeri">Okuma<br>Değeri</th>
-                                    <th>Fatura<br>Durumu</th>
-                                    <th>İşlemler</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($okumalar[$sayacTur['id']][$sakin['id']] as $key => $okuma)
+                        <div class="table-container">
+                            <table class="table is-fullwidth is-striped is-hoverable mt-4">
+                                <thead>
                                     <tr>
-                                        <td>{{ count($okumalar[$sayacTur['id']][$sakin['id']]) - $key }}. {{ $sayacTur['title'] }}</td>
-                                        <td>
-                                            {{ \Carbon\Carbon::parse($okuma['okuma_tarihi'])->format('d M Y') }}
-                                        </td>
-                                        <td class="has-text-right is-size-6 has-text-weight-bold">
-                                            {{ sprintf("%4d", $okuma['okuma_degeri']) }}
-                                        </td>
-
-                                        <td>
-                                            @if ($okuma['kayit_id'] > 0)
-                                                <a href="/kayit-gor/{{ $okuma['kayit_id'] }}">{{ $okuma['status'] }}</a>
-                                            @else
-                                                {{ $okuma['status'] }}
-                                            @endif
-                                        </td>
-
-                                        <td>
-
-                                            @if ($okuma['status'] == 'OKUNDU' && $okuma['kayit_id'] < 1)
-
-                                                <button class="button" wire:click="okumaDuzenle({{ $okuma['id'] }})">
-                                                    <span class="icon is-small">
-                                                        <x-icon icon="edit" fill="{{config(key: 'constants.icons.color.active')}}" />
-                                                    </span>
-                                                </button>
-
-                                                <button
-                                                    wire:click="bedelGor({{ $sayacTur['id'] }},{{ $okuma['id'] }},{{ $okuma['sakin_id'] }})"
-                                                    class="button">
-                                                    <span class="icon">
-                                                        <i class="fa-solid fa-barcode"></i>
-                                                    </span>
-                                                    <span>Bedel</span>
-                                                </button>
-
-                                            @else
-
-                                                <a href="/kayit-gor/{{ $okuma['kayit_id'] }}" class="button"
-                                                    wire:click="okumaDuzenle({{ $okuma['id'] }})">
-                                                    <span class="icon is-small">
-                                                        <x-icon icon="eye" fill="{{config(key: 'constants.icons.color.active')}}" />
-                                                    </span>
-                                                </a>
-
-                                            @endif
-                                        </td>
+                                        <th>#</th>
+                                        <th>Okuma<br>Tarihi</th>
+                                        <th class="has-text-right" wire:model="okumaDegeri">Okuma<br>Değeri</th>
+                                        <th>Fatura<br>Durumu</th>
+                                        <th>İşlemler</th>
                                     </tr>
-
-
-                                    @if (strlen($okuma['note']) > 0)
+                                </thead>
+                                <tbody>
+                                    @foreach ($okumalar[$sayacTur['id']][$sakin['id']] as $key => $okuma)
                                         <tr>
-                                            <td colspan="5" class="is-size-7 has-text-grey">
-                                                {{ $okuma['note'] }}
+                                            <td>{{ count($okumalar[$sayacTur['id']][$sakin['id']]) - $key }}. {{ $sayacTur['title'] }}
+                                            </td>
+                                            <td>
+                                                {{ \Carbon\Carbon::parse($okuma['okuma_tarihi'])->format('d M Y') }}
+                                            </td>
+                                            <td class="has-text-right is-size-6 has-text-weight-bold">
+                                                {{ sprintf("%4d", $okuma['okuma_degeri']) }}
+                                            </td>
+
+                                            <td>
+                                                @if ($okuma['kayit_id'] > 0)
+                                                    <a href="/kayit-gor/{{ $okuma['kayit_id'] }}">{{ $okuma['status'] }}</a>
+                                                @else
+                                                    {{ $okuma['status'] }}
+                                                @endif
+                                            </td>
+
+                                            <td>
+
+                                                @if ($okuma['status'] == 'OKUNDU' && $okuma['kayit_id'] < 1)
+
+                                                    <button class="button" wire:click="okumaDuzenle({{ $okuma['id'] }})">
+                                                        <span class="icon is-small">
+                                                            <x-icon icon="edit" fill="{{config(key: 'constants.icons.color.active')}}" />
+                                                        </span>
+                                                    </button>
+
+                                                    <button
+                                                        wire:click="bedelGor({{ $sayacTur['id'] }},{{ $okuma['id'] }},{{ $okuma['sakin_id'] }})"
+                                                        class="button">
+                                                        <span class="icon">
+                                                            <i class="fa-solid fa-barcode"></i>
+                                                        </span>
+                                                        <span>Bedel</span>
+                                                    </button>
+
+                                                @else
+
+                                                    <a href="/kayit-gor/{{ $okuma['kayit_id'] }}" class="button"
+                                                        wire:click="okumaDuzenle({{ $okuma['id'] }})">
+                                                        <span class="icon is-small">
+                                                            <x-icon icon="eye" fill="{{config(key: 'constants.icons.color.active')}}" />
+                                                        </span>
+                                                    </a>
+
+                                                @endif
                                             </td>
                                         </tr>
-                                    @endif
-                                @endforeach
-                            </tbody>
-                        </table>
+
+
+                                        @if (strlen($okuma['note']) > 0)
+                                            <tr>
+                                                <td colspan="5" class="is-size-7 has-text-grey">
+                                                    {{ $okuma['note'] }}
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
 
                     @endif
 
