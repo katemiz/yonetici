@@ -5,8 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     0,
   )
 
-  console.log('ruuuuuuu')
-
   // Add a click event on each of them
   $navbarBurgers.forEach((el) => {
     el.addEventListener('click', () => {

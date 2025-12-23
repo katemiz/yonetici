@@ -10,6 +10,7 @@ use App\Models\Kayit;
 use Livewire\Component;
 // use Livewire\Attributes\Rule;
 
+
 class SayacOkuma extends Component
 {
 
@@ -68,6 +69,10 @@ class SayacOkuma extends Component
 
     public function mount ()
     {
+        if (!session('bina_id')) {
+            return redirect()->route('binalar');
+        }
+
         $this->action = request()->route('action');
 
         if ( empty(session()->get(key: 'bina_id'))) {
@@ -253,15 +258,15 @@ class SayacOkuma extends Component
             //dd($lastTwo);
 
         if ( count($lastTwo) == 1) {
+
             $ilkOkuma = 0;
             $sonOkuma = $lastTwo[0]->okuma_degeri;
-
-            //dd($ilkOkuma,$sonOkuma);
 
             $ilkOkumaTarihi = '';
             $sonOkumaTarihi = $lastTwo[0]->okuma_tarihi;
 
         } else {
+
             $ilkOkuma = $lastTwo[0]->okuma_degeri;
             $sonOkuma = $lastTwo[1]->okuma_degeri;
 
@@ -269,6 +274,7 @@ class SayacOkuma extends Component
             $sonOkumaTarihi = $lastTwo[1]->okuma_tarihi;
         }
 
+        //dd(vars: [$ilkOkuma,$sonOkuma]);
 
 
         $toplamTuketim = $ilkOkuma - $sonOkuma;
@@ -370,5 +376,8 @@ class SayacOkuma extends Component
         $this->activeSayacTab  = $idTab;
 
     }
+
+
+
 
 }
