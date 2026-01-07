@@ -7,10 +7,12 @@ use App\Models\Kayit;
 use App\Models\Sakin;
 use App\Models\User;
 use Carbon\Carbon;
+use Hamcrest\Type\IsNumeric;
 use Illuminate\Http\Request;
 use Elibyy\TCPDF\Facades\TCPDF;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PDFController extends Controller
 {
@@ -374,10 +376,31 @@ class PDFController extends Controller
             $valign = 'M'
         );
 
+
+
+        // DÖNEM
+        if ($this->kayit) {
+
+            if (Str::contains($this->kayit->donem, '-')) {
+                $donem = explode('-', $this->kayit->donem)[2];
+            } else {
+                $donem = $this->kayit->donem;
+            }
+
+        } else {
+            $donem = '';
+        }
+
+
+
+
+
+
+
         $pdf::MultiCell(
             $w = 50,
             $h = 6,
-            $txt = $this->kayit ? explode('-', $this->kayit->donem)[2]: '-',
+            $txt = $donem,
             $border = 0,
             $align = 'L',
             $fill = 0,
@@ -395,10 +418,7 @@ class PDFController extends Controller
         $pdf::MultiCell(
             $w = 50,
             $h = 6,
-            $txt = $this->kayit ? 
-                explode('-', $this->kayit->donem)[1] .
-                '/' .
-                explode('-', $this->kayit->donem)[0] :'-',
+            $txt = '',
             $border = 0,
             $align = 'R',
             $fill = 1,
@@ -573,6 +593,12 @@ class PDFController extends Controller
 
         if ($this->kayit ) {
             foreach (json_decode($this->kayit->dokum) as $title => $deger) {
+
+                if ( is_numeric($deger)) {
+                    $deger = number_format($deger, 2, ',', ' ');
+                } 
+
+
                 $pdf::MultiCell(
                     $w = $title_w,
                     $h = 6,
@@ -594,7 +620,7 @@ class PDFController extends Controller
                 $pdf::MultiCell(
                     $w = 20,
                     $h = 6,
-                    $txt = number_format($deger, 2, ',', ' '),
+                    $txt = $deger,
                     $border = 'LB',
                     $align = 'R',
                     $fill = 0,
