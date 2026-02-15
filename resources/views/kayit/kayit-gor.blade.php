@@ -130,7 +130,7 @@
 
             <tr>
                 <th>Diğer Bilgiler</th>
-                <td>{{ $kayit['remarks'] }}</td>
+                <td>{!! $kayit['remarks'] !!}</td>
             </tr>
 
             <tr>
