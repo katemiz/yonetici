@@ -39,13 +39,17 @@
                 </td>
             </tr>
 
-            <tr>
-                <th>Yerleşen Bilgileri</th>
-                <td>
-                    {{ $sakinler[$kayit['sakin_id']]['name'] }} {{ $sakinler[$kayit['sakin_id']]['lastname'] }}<br>[
-                    Kapı No {{ $sakinler[$kayit['sakin_id']]['door_no'] }} ]
-                </td>
-            </tr>
+            @if ($kayit['tur'] != 'gider')
+
+                <tr>
+                    <th>Yerleşen Bilgileri</th>
+                    <td>
+                        {{ $sakinler[$kayit['sakin_id']]['name'] }} {{ $sakinler[$kayit['sakin_id']]['lastname'] }}<br>[
+                        Kapı No {{ $sakinler[$kayit['sakin_id']]['door_no'] }} ]
+                    </td>
+                </tr>
+
+            @endif
 
             <tr>
                 <th>Açıklama</th>
