@@ -22,7 +22,8 @@ class PDFController extends Controller
     public $borclu;
     public $sakinler;
 
-    public function initialize() {
+    public function initialize()
+    {
 
         if (!session('bina_id')) {
             return redirect()->route('binalar');
@@ -59,16 +60,16 @@ class PDFController extends Controller
      * @return response()
      */
 
-     public function dolumakbuz(Request $request)
-     {
+    public function dolumakbuz(Request $request)
+    {
         $this->initialize();
         $this->getData(request('record'));
-        $this->preparePdfFile(request('record'));  
-     }
+        $this->preparePdfFile(request('record'));
+    }
 
 
-     public function bosmakbuz()
-     {
+    public function bosmakbuz()
+    {
         $this->initialize();
 
         //$this->kayit = Kayit::find(393);
@@ -84,7 +85,7 @@ class PDFController extends Controller
 
         //dd($this->kayit);
 
-        
+
 
 
         $pdf = new TCPDF();
@@ -93,25 +94,26 @@ class PDFController extends Controller
 
 
         $pdf = $this->prepareSinglePage($pdf);
-        
+
 
         return response()->make($pdf::Output('bosmakbuz.pdf', 'I'), 200, [
             'Content-Type' => 'application/pdf',
         ]);
-     }
+    }
 
 
 
 
 
-    public function aylikaidatlar(Request $request) {
+    public function aylikaidatlar(Request $request)
+    {
 
         $this->initialize();
 
-        $son_kayitlar = Kayit::where('bina_id',$this->bina->id)
-        ->whereNotNull('dokum')
-        ->orderBy('id','desc')
-        ->limit(count($this->bina->sakinler))->get();
+        $son_kayitlar = Kayit::where('bina_id', $this->bina->id)
+            ->whereNotNull('dokum')
+            ->orderBy('id', 'desc')
+            ->limit(count($this->bina->sakinler))->get();
 
         $dizin = [];
 
@@ -123,7 +125,8 @@ class PDFController extends Controller
     }
 
 
-    public function preparePdfFile($recordId) {
+    public function preparePdfFile($recordId)
+    {
 
         $pdf = new TCPDF();
 
@@ -168,7 +171,7 @@ class PDFController extends Controller
 
         // ICON
         $pdf::ImageSVG(
-            $file = '/images/favicon.svg',
+            $file = public_path('images/favicon.svg'),
             $x = 13,
             $y = 13,
             $w = '14',
@@ -522,9 +525,9 @@ class PDFController extends Controller
             $w = 95,
             $h = 14,
             $txt =
-                $this->yonetici->name .
-                ' ' .
-                strtoupper($this->yonetici->lastname),
+            $this->yonetici->name .
+            ' ' .
+            strtoupper($this->yonetici->lastname),
             $border = 0,
             $align = 'C',
             $fill = 1,
@@ -591,12 +594,12 @@ class PDFController extends Controller
 
         $pdf::SetFont('dejavusans', '', 6);
 
-        if ($this->kayit ) {
+        if ($this->kayit) {
             foreach (json_decode($this->kayit->dokum) as $title => $deger) {
 
-                if ( is_numeric($deger)) {
+                if (is_numeric($deger)) {
                     $deger = number_format($deger, 2, ',', ' ');
-                } 
+                }
 
 
                 $pdf::MultiCell(
@@ -637,8 +640,8 @@ class PDFController extends Controller
 
                 $uz = $uz + 6;
             }
-        } 
-        
+        }
+
         if ($this->kayit) {
 
             $pdf::MultiCell(
@@ -1093,7 +1096,7 @@ class PDFController extends Controller
             if ($number < 1) {
                 return "sıfır";
             }
-    
+
             return $this->toBirler($number);
         }
 
@@ -1123,26 +1126,28 @@ class PDFController extends Controller
     }
 
 
-    public function toBirler($number) {
+    public function toBirler($number)
+    {
 
         $birler = [
-                0 => '',
-                1 => 'bir',
-                2 => 'iki',
-                3 => 'üç',
-                4 => 'dört',
-                5 => 'beş',
-                6 => 'altı',
-                7 => 'yedi',
-                8 => 'sekiz',
-                9 => 'dokuz',
+            0 => '',
+            1 => 'bir',
+            2 => 'iki',
+            3 => 'üç',
+            4 => 'dört',
+            5 => 'beş',
+            6 => 'altı',
+            7 => 'yedi',
+            8 => 'sekiz',
+            9 => 'dokuz',
         ];
 
         return $birler[$number];
     }
 
 
-    public function toOnlar($number) {
+    public function toOnlar($number)
+    {
 
         $onlar = [
             1 => 'on',
@@ -1160,7 +1165,7 @@ class PDFController extends Controller
             return null;
         }
 
-        $s[] = $onlar[substr($number, 0, 1)] ;
+        $s[] = $onlar[substr($number, 0, 1)];
 
         if (substr($number, 1, 1) > 0) {
             $s[] = $this->toBirler(substr($number, 1, 1));
@@ -1170,7 +1175,8 @@ class PDFController extends Controller
     }
 
 
-    public function toYuzler($number) {
+    public function toYuzler($number)
+    {
 
         $yuzler = [
             1 => 'yüz',
@@ -1184,7 +1190,7 @@ class PDFController extends Controller
             9 => 'dokuz yüz',
         ];
 
-        $number = ltrim($number, "0"); 
+        $number = ltrim($number, "0");
 
         if ($number > 0 && $number < 10) {
             return $this->toBirler($number);
@@ -1195,7 +1201,7 @@ class PDFController extends Controller
         }
 
         if ($number > 0) {
-            $s[] = $yuzler[substr($number, 0, 1)] ;
+            $s[] = $yuzler[substr($number, 0, 1)];
         } else {
             return null;
         }
@@ -1212,7 +1218,8 @@ class PDFController extends Controller
     }
 
 
-    public function toBinler($number) {
+    public function toBinler($number)
+    {
 
         $binler = [
             1 => 'bin',
@@ -1226,7 +1233,7 @@ class PDFController extends Controller
             9 => 'dokuz bin',
         ];
 
-        $s[] = $binler[substr($number, 0, 1)] ;
+        $s[] = $binler[substr($number, 0, 1)];
 
         if (substr($number, 1) > 0) {
             $s[] = $this->toYuzler(substr($number, 1));
@@ -1236,7 +1243,8 @@ class PDFController extends Controller
     }
 
 
-    public function toOnbinler($number) {
+    public function toOnbinler($number)
+    {
 
         $s[] = $this->toOnlar(substr($number, 0, 2));
         $s[] = $this->toYuzler(substr($number, 2));
@@ -1245,7 +1253,8 @@ class PDFController extends Controller
     }
 
 
-    public function toYuzbinler($number) {
+    public function toYuzbinler($number)
+    {
 
         $s[] = $this->toYuzler(substr($number, 0, 3));
         $s[] = $this->toYuzler(substr($number, 3));
@@ -1254,9 +1263,10 @@ class PDFController extends Controller
     }
 
 
-    public function toMilyonlar($number) {
+    public function toMilyonlar($number)
+    {
 
-        $s[] = $this->toYuzler(substr($number, 0,-6));
+        $s[] = $this->toYuzler(substr($number, 0, -6));
         $s[] = $this->toYuzbinler(substr($number, -6));
 
         return trim(implode(' milyon ', $s));

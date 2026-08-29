@@ -99,9 +99,7 @@
                     <div class="navbar-item has-dropdown is-hoverable">
 
                         <p class="navbar-link">
-                            <span class="icon">
-                                <x-icon icon="user" fill="{{config('constants.icons.color.light')}}" />
-                            </span>
+
                             <span class="mx-3 has-text-right">
                                 {{ Auth::user()->name }} {{ Auth::user()->lastname }}<br>
                                 <span class="block  is-size-7">{{session('selected_bina')}}</span>
@@ -121,7 +119,7 @@
 
                                 <a :href="route('logout')" class="navbar-item"
                                     onclick="event.preventDefault();
-                                                                                                                                                                                                                                                this.closest('form').submit();">
+                                                                                                                                                                                                                                                    this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </a>
                             </form>

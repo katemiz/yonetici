@@ -1,5 +1,14 @@
 <?php
 
+
+if (!defined('K_PATH_FONTS')) {
+    define(
+        'K_PATH_FONTS',
+        dirname(__DIR__) . '/vendor/tecnickcom/tc-lib-pdf-font/target/fonts'
+    );
+}
+
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
