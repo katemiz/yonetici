@@ -846,7 +846,7 @@ class PDFController extends Controller
 
         // ICON
         $pdf::ImageSVG(
-            $file = '/images/kapak.svg',
+            $file = public_path('images/kapak.svg'),
             $x = 50,
             $y = 60,
             $w = '110',
