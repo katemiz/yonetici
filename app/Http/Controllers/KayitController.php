@@ -533,7 +533,7 @@ class KayitController extends Controller
     public function kayitGor(int $id)
     {
         $kayit = Kayit::query()
-            ->with(['sakin', 'dosyalar', 'media'])
+            ->with(['sakin', 'media'])
             ->where('bina_id', $this->bina->id)
             ->findOrFail($id);
 
