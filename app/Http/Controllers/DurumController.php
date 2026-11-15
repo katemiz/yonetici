@@ -56,7 +56,7 @@ class DurumController extends Controller
 
         $search = trim((string) $request->query('search', ''));
         $query = Kayit::query()
-            ->with(['sakin', 'dosyalar', 'media'])
+            ->with(['sakin', 'media'])
             ->where('kayitlar.bina_id', $bina->id)
             ->where('kayitlar.tur', 'alacak')
             ->leftJoin('users', 'kayitlar.sakin_id', '=', 'users.id')
@@ -81,14 +81,11 @@ class DurumController extends Controller
                 'description' => $kayit->aciklama,
                 'amount' => number_format((float) $kayit->tutar, 2, ',', ' '),
                 'created_at' => $kayit->created_at?->format('d-m-Y H:i:s'),
-                'files' => $kayit->dosyalar->map(fn ($file) => [
-                    'id' => $file->id,
-                    'name' => $file->filename,
-                ])->concat($kayit->getMedia('alacak-attachments')->map(fn ($media) => [
+                'files' => $kayit->getMedia('alacak-attachments')->map(fn ($media) => [
                     'id' => $media->id,
                     'name' => $media->file_name,
                     'url' => "/kayit-media-gor/{$kayit->id}/{$media->id}",
-                ]))->values(),
+                ])->values(),
             ]);
 
         return Inertia::render('Alacaklar', [
@@ -128,7 +125,7 @@ class DurumController extends Controller
 
         $search = trim((string) $request->query('search', ''));
         $query = Kayit::query()
-            ->with(['sakin', 'dosyalar', 'media'])
+            ->with(['sakin', 'media'])
             ->where('kayitlar.bina_id', $bina->id)
             ->where('kayitlar.tur', 'gelir')
             ->leftJoin('users', 'kayitlar.sakin_id', '=', 'users.id')
@@ -152,14 +149,11 @@ class DurumController extends Controller
                 'description' => $kayit->aciklama,
                 'amount' => number_format((float) $kayit->tutar, 2, ',', ' '),
                 'created_at' => $kayit->created_at,
-                'files' => $kayit->dosyalar->map(fn ($file) => [
-                    'id' => $file->id,
-                    'name' => $file->filename,
-                ])->concat($kayit->getMedia('income-attachments')->map(fn ($media) => [
+                'files' => $kayit->getMedia('income-attachments')->map(fn ($media) => [
                     'id' => $media->id,
                     'name' => $media->file_name,
                     'url' => "/kayit-media-gor/{$kayit->id}/{$media->id}",
-                ]))->values(),
+                ])->values(),
             ]);
 
         return Inertia::render('Gelirler', [
@@ -183,7 +177,7 @@ class DurumController extends Controller
 
         $search = trim((string) $request->query('search', ''));
         $query = Kayit::query()
-            ->with(['dosyalar', 'media'])
+            ->with(['media'])
             ->where('bina_id', $bina->id)
             ->where('tur', 'gider')
             ->orderByDesc('created_at');
@@ -203,14 +197,11 @@ class DurumController extends Controller
                 'description' => $kayit->aciklama,
                 'amount' => number_format((float) $kayit->tutar, 2, ',', ' '),
                 'due_date' => $kayit->son_odeme,
-                'files' => $kayit->dosyalar->map(fn ($file) => [
-                    'id' => $file->id,
-                    'name' => $file->filename,
-                ])->concat($kayit->getMedia('expense-attachments')->map(fn ($media) => [
+                'files' => $kayit->getMedia('expense-attachments')->map(fn ($media) => [
                     'id' => $media->id,
                     'name' => $media->file_name,
                     'url' => "/kayit-media-gor/{$kayit->id}/{$media->id}",
-                ]))->values(),
+                ])->values(),
             ]);
 
         return Inertia::render('Giderler', [
@@ -233,7 +224,7 @@ class DurumController extends Controller
 
         $search = trim((string) $request->query('search', ''));
         $query = Kayit::query()
-            ->with(['dosyalar', 'media'])
+            ->with(['media'])
             ->where('bina_id', $bina->id)
             ->where('tur', 'verecek')
             ->orderBy('created_at');
@@ -253,14 +244,11 @@ class DurumController extends Controller
                 'description' => $kayit->aciklama,
                 'amount' => number_format((float) $kayit->tutar, 2, ',', ' '),
                 'due_date' => $kayit->son_odeme,
-                'files' => $kayit->dosyalar->map(fn ($file) => [
-                    'id' => $file->id,
-                    'name' => $file->filename,
-                ])->concat($kayit->getMedia('payable-attachments')->map(fn ($media) => [
+                'files' => $kayit->getMedia('payable-attachments')->map(fn ($media) => [
                     'id' => $media->id,
                     'name' => $media->file_name,
                     'url' => "/kayit-media-gor/{$kayit->id}/{$media->id}",
-                ]))->values(),
+                ])->values(),
             ]);
 
         return Inertia::render('Verecekler', [

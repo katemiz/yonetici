@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Kayit;
 use App\Models\Bedel;
 use App\Models\Bina;
-use App\Models\Dosya;
 use App\Models\Okuma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
@@ -228,7 +226,7 @@ class KayitController extends Controller
                 $props['dokum'] = json_encode($this->sabit_dokumu[$sakin->id]);
 
                 $kayit = Kayit::create($props);
-                $this->addFiles($req, $kayit->id);
+                $this->storeRecordMedia($req, $kayit);
             }
 
             return redirect()->route('durum.receivables');
@@ -394,8 +392,6 @@ class KayitController extends Controller
         $kayit->save();
         if (in_array($tur, ['alacak', 'gelir', 'gider', 'fatura'], true)) {
             $this->storeRecordMedia($request, $kayit);
-        } else {
-            $this->addFiles($request, $kayit->id);
         }
 
         $statusRoute = match ($tur) {
@@ -489,24 +485,6 @@ class KayitController extends Controller
         return true;
     }
 
-    public function addFiles($req, $id)
-    {
-
-        if ($req->has('dosyalar')) {
-            foreach ($req->file('dosyalar') as $dosya) {
-                if (strlen($dosya->getMimeType()) > 32) {
-                    $filename = '/usr' . Auth::id() . '/file/other';
-                } else {
-                    $filename =
-                        '/usr' . Auth::id() . '/' . $dosya->getMimeType();
-                }
-
-                $saved_dir = Storage::disk('local')->put($filename, $dosya);
-                $this->saveRecord($dosya, $id, $saved_dir);
-            }
-        }
-    }
-
     private function storeRecordMedia(Request $request, Kayit $kayit): void
     {
         $collection = match ($kayit->tur) {
@@ -524,7 +502,7 @@ class KayitController extends Controller
 
     private function recordFiles(Kayit $kayit): array
     {
-        $kayit->loadMissing(['dosyalar', 'media']);
+        $kayit->loadMissing(['media']);
         $collection = match ($kayit->tur) {
             'alacak' => 'alacak-attachments',
             'gelir' => 'income-attachments',
@@ -532,20 +510,6 @@ class KayitController extends Controller
             'verecek' => 'payable-attachments',
             default => abort(404),
         };
-
-        $legacyFiles = $kayit->dosyalar->map(function (Dosya $file) use ($kayit) {
-            $path = Storage::disk('local')->path($file->stored_as);
-            $exists = is_file($path);
-
-            return [
-                'id' => $file->id,
-                'name' => $file->filename,
-                'url' => "/kayit-dosya-gor/{$file->id}",
-                'deleteUrl' => "/kayit-dosya-delete/{$kayit->id}/{$file->id}",
-                'mime' => $exists ? mime_content_type($path) : '',
-                'size' => $exists ? $this->formatFileSize(filesize($path)) : '',
-            ];
-        });
 
         $mediaFiles = $collection ? $kayit->getMedia($collection)->map(fn ($media) => [
             'id' => $media->id,
@@ -556,7 +520,7 @@ class KayitController extends Controller
             'size' => $this->formatFileSize($media->size),
         ]) : collect();
 
-        return $legacyFiles->concat($mediaFiles)->values()->all();
+        return $mediaFiles->values()->all();
     }
 
     private function formatFileSize(int $bytes): string
@@ -565,36 +529,6 @@ class KayitController extends Controller
             ? "{$bytes} B"
             : number_format($bytes / 1024, 2) . ' KB';
     }
-
-    public function dosyaEkle(Request $request)
-    {
-        $this->addFiles($request, request('id'));
-
-        $statusRoute = match (request('tur')) {
-            'gelirler' => 'durum.incomes',
-            'giderler' => 'durum.expenses',
-            'verecekler' => 'durum.payables',
-            'alacaklar' => 'durum.receivables',
-            default => null,
-        };
-
-        return $statusRoute
-            ? redirect()->route($statusRoute)
-            : redirect()->route('durum', ['tur' => request('tur')]);
-    }
-
-    public function saveRecord($dosya, $kayit_id, $saved_dir)
-    {
-        $dosya_data = [
-            'kayit_id' => $kayit_id,
-            'filename' => $dosya->getClientOriginalName(),
-            'stored_as' => $saved_dir,
-        ];
-
-        Dosya::create($dosya_data);
-    }
-
-
 
     public function kayitGor(int $id)
     {

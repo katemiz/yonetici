@@ -117,8 +117,7 @@
                         <td class="has-text-left">
                             {#each record.files as file}
                                 <a
-                                    href={file.url ??
-                                        `/kayit-dosya-gor/${file.id}`}
+                                    href={file.url}
                                     class="icon-text file-link"
                                 >
                                     <FileText size={18} />

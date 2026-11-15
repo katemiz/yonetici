@@ -115,8 +115,7 @@
                                         <td>
                                             {#each record.files as file}
                                                 <a
-                                                    href={file.url ??
-                                                        `/kayit-dosya-gor/${file.id}`}
+                                                    href={file.url}
                                                     class="mr-2"
                                                     title={file.name}
                                                 >
@@ -155,7 +154,7 @@
                 </header>
                 <form
                     method="POST"
-                    action={`/kayit-dosya-add/${selectedRecord}/giderler`}
+                    action={`/kayit-media-add/${selectedRecord}/giderler`}
                     enctype="multipart/form-data"
                 >
                     <input type="hidden" name="_token" value={csrfToken} />

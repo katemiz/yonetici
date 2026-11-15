@@ -54,7 +54,7 @@ class ResidentStatusController extends Controller
             $resident = $this->residentForRequest($request, $building);
             $search = trim((string) $request->query('search', ''));
             $query = Kayit::query()
-                ->with(['sakin', 'dosyalar'])
+                ->with(['sakin', 'media'])
                 ->where('kayitlar.bina_id', $building->id)
                 ->where('kayitlar.tur', $type)
                 ->leftJoin('users', 'kayitlar.sakin_id', '=', 'users.id')
@@ -95,7 +95,7 @@ class ResidentStatusController extends Controller
         if ($section === 'giderler') {
             $search = trim((string) $request->query('search', ''));
             $query = Kayit::query()
-                ->with('dosyalar')
+                ->with(['media'])
                 ->where('bina_id', $building->id)
                 ->where('tur', $type)
                 ->orderByDesc('created_at');

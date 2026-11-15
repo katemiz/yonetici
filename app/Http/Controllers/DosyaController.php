@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dosya;
 use App\Models\Bina;
 use App\Models\Kayit;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class DosyaController extends Controller
@@ -36,24 +35,6 @@ class DosyaController extends Controller
         return back();
     }
 
-    public function deleteLegacyRecordFile(int $kayitId, int $dosyaId)
-    {
-        $kayit = Kayit::query()
-            ->whereIn('tur', ['alacak', 'gelir', 'gider', 'verecek'])
-            ->findOrFail($kayitId);
-
-        abort_unless(
-            Bina::query()->accessibleTo(Auth::user())->whereKey($kayit->bina_id)->exists(),
-            404,
-        );
-
-        $file = $kayit->dosyalar()->findOrFail($dosyaId);
-        Storage::disk('local')->delete($file->stored_as);
-        $file->delete();
-
-        return back();
-    }
-
     public function media(int $kayitId, int $mediaId)
     {
         $kayit = Kayit::query()->findOrFail($kayitId);
@@ -76,39 +57,37 @@ class DosyaController extends Controller
         return response()->download($media->getPath(), $media->file_name);
     }
 
-    public function dosya()
+    public function mediaAdd(Request $request, int $id)
     {
-        $d = Dosya::find(request('id'));
+        $kayit = Kayit::query()->findOrFail($id);
 
-        if (!$this->checkPermission($d->kayit_id)) {
-            abort(404, 'No permission!');
+        $collection = match ($kayit->tur) {
+            'alacak' => 'alacak-attachments',
+            'gelir' => 'income-attachments',
+            'gider' => 'expense-attachments',
+            'verecek' => 'payable-attachments',
+            default => abort(404),
+        };
+
+        abort_unless(Bina::query()->accessibleTo(Auth::user())->whereKey($kayit->bina_id)->exists(), 404);
+
+        $request->validate([
+            'dosyalar' => ['sometimes', 'array'],
+            'dosyalar.*' => ['file', 'max:10240'],
+        ]);
+
+        foreach ($request->file('dosyalar', []) as $file) {
+            $kayit->addMedia($file)->toMediaCollection($collection);
         }
 
-        $dosya = Storage::path($d->stored_as);
-
-        if (file_exists($dosya)) {
-            $headers = [
-                'Content-Type' => $d->mimetype,
-            ];
-
-            return response()->download(
-                $dosya,
-                $d->filename,
-                $headers,
-                'inline'
-            );
-        } else {
-            abort(404, 'File not found!');
-        }
-    }
-
-    public function checkPermission($kayit_id)
-    {
-        $record = Kayit::findOrFail($kayit_id);
-
-        return Bina::query()
-            ->accessibleTo(Auth::user())
-            ->whereKey($record->bina_id)
-            ->exists();
+        return redirect()->route(
+            match ($kayit->tur) {
+                'gelir' => 'durum.incomes',
+                'gider' => 'durum.expenses',
+                'verecek' => 'durum.payables',
+                'alacak' => 'durum.receivables',
+                default => abort(404),
+            }
+        );
     }
 }

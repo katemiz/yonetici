@@ -117,13 +117,11 @@ Route::middleware(['auth', 'active.manager'])->group(function () {
     Route::post('/kayit-update/{tur}/{id}', [KayitController::class, 'kayitUpdate']);
     Route::get('/kayit-gor/{id}', [KayitController::class, 'kayitGor']);
 
-    Route::post('/kayit-dosya-add/{id}/{tur}', [
-        KayitController::class,
-        'dosyaEkle',
+    Route::post('/kayit-media-add/{id}/{tur}', [
+        DosyaController::class,
+        'mediaAdd',
     ]);
 
-    Route::get('/kayit-dosya-gor/{id}', [DosyaController::class, 'dosya']);
-    Route::delete('/kayit-dosya-delete/{kayitId}/{dosyaId}', [DosyaController::class, 'deleteLegacyRecordFile']);
     Route::get('/kayit-media-gor/{kayitId}/{mediaId}', [DosyaController::class, 'media']);
     Route::delete('/media-delete/{mediaId}', [DosyaController::class, 'deleteMedia']);
     Route::get('/select-active/{id}', [BinaController::class, 'selectActive']);

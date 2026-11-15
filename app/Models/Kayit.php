@@ -30,11 +30,6 @@ class Kayit extends Model implements HasMedia
         $this->addMediaCollection('payable-attachments')->useDisk('private_media');
     }
 
-    public function dosyalar()
-    {
-        return $this->hasMany(Dosya::class);
-    }
-
     public function sakin()
     {
         return $this->belongsTo(User::class);
