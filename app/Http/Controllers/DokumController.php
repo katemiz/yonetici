@@ -103,18 +103,6 @@ class DokumController extends Controller
         ]);
     }
 
-    public function sayac(Request $request)
-    {
-        return view('kayit.okumalar-gor', [
-            'notification' => false,
-            'bina' => $this->bina,
-            'sakinler' => $this->sakinler,
-            'ozet' => $this->ozet(),
-            'gelirler' => $this->gelirler(),
-            'giderler' => $this->giderler(),
-        ]);
-    }
-
     public function makbuz(Request $request)
     {
         $recordId = $request->route('record');

@@ -36,7 +36,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('resident')->group(function () {
     Route::get('resident-dashboard', function (Illuminate\Http\Request $request) {
-        $resident = \App\Models\Sakin::findOrFail($request->session()->get('resident_id'));
+        $resident = \App\Models\User::findOrFail($request->session()->get('resident_id'));
         $building = \App\Models\Bina::findOrFail($request->session()->get('resident_bina_id'));
 
         abort_unless($resident->bina_id === $building->id && $resident->is_active, 403);

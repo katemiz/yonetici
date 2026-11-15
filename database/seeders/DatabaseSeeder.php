@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Bina;
 use App\Models\Kayit;
 use App\Models\Okuma;
-use App\Models\Sakin;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'city' => 6,
         ]);
 
-        Sakin::create([
+        User::create([
             'user_id' => 1,
             'bina_id' => 1,
             'name' => 'Nafiye',
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
             'giris_tarihi' => '2000-01-01',
         ]);
 
-        Sakin::create([
+        User::create([
             'user_id' => 1,
             'bina_id' => 1,
             'name' => 'Kılıç Ali',
@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
             'giris_tarihi' => '2005-01-01',
         ]);
 
-        Sakin::create([
+        User::create([
             'user_id' => 1,
             'bina_id' => 1,
             'name' => 'Muhammed Şeref',
@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
             'giris_tarihi' => '2021-01-01',
         ]);
 
-        Sakin::create([
+        User::create([
             'user_id' => 1,
             'bina_id' => 1,
             'name' => 'Cemil',
@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder
             'giris_tarihi' => '2000-01-01',
         ]);
 
-        Sakin::create([
+        User::create([
             'user_id' => 1,
             'bina_id' => 1,
             'name' => 'Celal',
@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
             'giris_tarihi' => '2000-01-01',
         ]);
 
-        Sakin::create([
+        User::create([
             'user_id' => 1,
             'bina_id' => 1,
             'name' => 'Recai',
@@ -105,7 +105,7 @@ class DatabaseSeeder extends Seeder
             'giris_tarihi' => '2000-01-01',
         ]);
 
-        Sakin::create([
+        User::create([
             'user_id' => 1,
             'bina_id' => 1,
             'name' => 'Ahmet',
@@ -117,7 +117,7 @@ class DatabaseSeeder extends Seeder
             'giris_tarihi' => '2000-01-01',
         ]);
 
-        Sakin::create([
+        User::create([
             'user_id' => 1,
             'bina_id' => 1,
             'name' => 'Ali',

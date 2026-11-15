@@ -10,9 +10,6 @@ use App\Http\Controllers\KayitController;
 use App\Http\Controllers\OkumaController;
 use App\Http\Controllers\SayacOkumaController;
 use App\Http\Controllers\SakinController;
-use App\Http\Livewire\DurumList;
-use App\Http\Livewire\OkumaList;
-use App\Http\Livewire\KararList;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -137,11 +134,8 @@ Route::middleware(['auth', 'active.manager'])->group(function () {
     Route::get('/durum/giderler', [DurumController::class, 'expenses'])->name('durum.expenses');
     Route::get('/durum/verecekler', [DurumController::class, 'payables'])->name('durum.payables');
     Route::post('/durum/verecekler/{id}/paid', [DurumController::class, 'markPayablePaid']);
-    Route::get('/durum/{tur}', DurumList::class)->name('durum');
     Route::get('/dokum', [DokumController::class, 'dokum'])->name('dokum');
     //Route::get('/dokum', [PDFController::class, 'dokum']);
-    Route::get('/sayaclar', OkumaList::class);
-    Route::get('/karar/{id?}', KararList::class);
 
     Route::get('/help', fn () => Inertia::render('Help'));
 

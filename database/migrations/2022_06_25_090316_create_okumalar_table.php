@@ -1,7 +1,6 @@
 <?php
 use App\Models\Bedel;
 use App\Models\Bina;
-use App\Models\Sakin;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,7 +20,7 @@ return new class extends Migration {
             $table->foreignIdFor(Bina::class);
             $table->foreignIdFor(Bedel::class);
 
-            $table->foreignIdFor(Sakin::class);
+            $table->foreignId('sakin_id')->nullable()->constrained('users')->nullOnDelete();
             $table->float('okuma_degeri', 12, 2);
             $table->string('okuma_tarihi')->nullable();
             $table->text('note')->nullable();

@@ -51,11 +51,5 @@ function swalConfirm(type, binaid, id) {
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
     confirmButtonText: cbutton,
-  }).then((result) => {
-    if (result.isConfirmed) {
-      window.livewire.emit('delete', type, binaid, id)
-    } else {
-      return false
-    }
   })
 }

@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Bina;
-use App\Models\Sakin;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,7 +18,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Bina::class);
-            $table->foreignIdFor(Sakin::class)->nullable();
+            $table->foreignId('sakin_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('tur');
             $table->string('aciklama');
             $table->string('donem')->nullable();
