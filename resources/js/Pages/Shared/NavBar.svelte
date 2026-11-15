@@ -127,18 +127,6 @@
                             <a href="/kayit-form/aidat" class="navbar-item"
                                 >Toplu Aidat Kaydı</a
                             >
-                            <a href="/kayit-form/alacak" class="navbar-item"
-                                >Alacak Kaydı</a
-                            >
-                            <a href="/kayit-form/fatura" class="navbar-item"
-                                >Fatura Kaydı</a
-                            >
-                            <a href="/kayit-form/gelir" class="navbar-item"
-                                >Gelir Kaydı</a
-                            >
-                            <a href="/kayit-form/gider" class="navbar-item"
-                                >Gider Kaydı</a
-                            >
                             <a href="/sayac-okuma" class="navbar-item"
                                 >Sayaç Okumaları</a
                             >
