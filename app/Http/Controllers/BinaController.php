@@ -152,6 +152,8 @@ class BinaController extends Controller
         return Inertia::render('Welcome', [
             'bina_sayisi' => $binalarim->count(),
             'bina' => $bina?->loadCount(['sakinler', 'kalemler', 'bedeller']),
+            'selected_bina' => $bina?->name ?? null,
+            'selected_bina_id' => $bina?->id ?? null,
         ]);
     }
 
